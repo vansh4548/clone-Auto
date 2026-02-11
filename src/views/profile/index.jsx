@@ -1,16 +1,17 @@
 import React from "react";
 // import { useOrder } from "../../context/ApiContext";
 import { User, Mail, Phone, Car } from "lucide-react";
-
+import useAuthStore from "../../store/authStore";
 const Profile = () => {
-  // const { userInfo } = useOrder();
+  
+  const { checkSession, session, loading } = useAuthStore();
 
-  const userInfo = {
-    name: "John Doe",
-    email: "",
-  };
+  // const userInfo = {
+  //   name: "John Doe",
+  //   email: "",
+  // };
 
-  if (!userInfo) {
+  if (!session?.authenticated ) {
     return (
       <div className="section-xl flex items-center justify-center min-h-screen">
         <p>Please log in to view your profile.</p>
@@ -26,11 +27,11 @@ const Profile = () => {
           <div className="px-8 pb-8">
             <div className="relative -mt-12 mb-6">
               <div className="w-24 h-24 bg-black border-4 border-white rounded-2xl flex items-center justify-center text-white text-3xl font-bold">
-                {userInfo.name?.charAt(0)}
+                {session.user.name?.charAt(0)}
               </div>
             </div>
 
-            <h2 className="text-3xl font-black mb-1">{userInfo.name}</h2>
+            <h2 className="text-3xl font-black mb-1">{session.user.name}</h2>
             <p className="text-gray-500 mb-8">
               Customer since {new Date().getFullYear()}
             </p>
@@ -42,7 +43,7 @@ const Profile = () => {
                   <p className="text-xs text-gray-400 uppercase font-bold">
                     Email Address
                   </p>
-                  <p className="font-semibold">{userInfo.email}</p>
+                  <p className="font-semibold">{session.user.email}</p>
                 </div>
               </div>
 
@@ -53,12 +54,12 @@ const Profile = () => {
                     Phone Number
                   </p>
                   <p className="font-semibold">
-                    {userInfo.phone || "Not provided"}
+                    {session.user.phone || "Not provided"}
                   </p>
                 </div>
               </div>
 
-              {userInfo.carDetails && (
+              {session.user.carDetails && (
                 <div className="mt-4">
                   <h4 className="font-bold mb-3 flex items-center gap-2">
                     <Car size={18} /> Registered Vehicle
@@ -66,14 +67,14 @@ const Profile = () => {
                   <div className="p-6 border border-gray-100 rounded-2xl flex justify-between items-center">
                     <div>
                       <p className="text-lg font-bold">
-                        {userInfo.carDetails.brand} {userInfo.carDetails.model}
+                        {session.user.carDetails.brand} {session.user.carDetails.model}
                       </p>
                       <p className="text-sm text-gray-500">
-                        {userInfo.carDetails.gas} Engine
+                        {session.user.carDetails.gas} Engine
                       </p>
                     </div>
                     <img
-                      src={userInfo.carDetails.logo}
+                      src={session.user.carDetails.logo}
                       alt="brand"
                       className="h-10 w-10 object-contain"
                     />

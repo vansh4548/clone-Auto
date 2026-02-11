@@ -1,12 +1,7 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  ChevronLeft,
-  ChevronRight,
-  Check,
-  Quote,
-  Car,
-} from "lucide-react";
+import { useEffect } from "react";
+import { ChevronLeft, ChevronRight, Check, Quote, Car } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 import Modal from "../../components/Modal";
@@ -29,6 +24,7 @@ import EvangelineLee from "../../assets/images/evangeline-lee.webp";
 import TestimonialBg from "../../assets/images/testimonial-bg.webp";
 import Hero from "../../assets/images/hero.png";
 import HeroLight from "../../assets/images/hero-light2.png";
+import { getPackages } from "../../utils/api/packageApi"; 
 const Home = () => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -36,6 +32,24 @@ const Home = () => {
   const nextRef = useRef(null);
   const testimonialPrevRef = useRef(null);
   const testimonialNextRef = useRef(null);
+
+ const [packages, setPackages] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchPlans = async () => {
+      try {
+        setLoading(true);
+        const data = await getPackages(); 
+        setPackages(data);
+      } catch (error) {
+        console.error("Failed to load plans", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchPlans();
+  }, []);
 
   const slides = [
     {
@@ -143,47 +157,48 @@ const Home = () => {
       img: ArianaGreen,
     },
   ];
- const pricingData = [
-  {
-    id: 1,
-    title: "Basic Care Package",
-    price: "120,000",
-    features: [
-      "Oil & filter change",
-      "Battery check",
-      "Tyre pressure & rotation",
-      "Brake inspection"
-    ],
-    recommendation: "Recommended every 3000 to 5000 km.",
-    isFeatured: false,
-  },
-  {
-    id: 2,
-    title: "Standard Service Package",
-    price: "150,000",
-    features: [
-      "All Basic Care inclusions",
-      "Engine diagnostics",
-      "Suspension & steering check",
-      "Air filter replacement"
-    ],
-    recommendation: "Recommended every 10,000 km",
-    isFeatured: true, // This triggers the 'featured' CSS classes
-  },
-  {
-    id: 3,
-    title: "Comprehensive Service Package",
-    price: "200,000",
-    features: [
-      "All Standard inclusions",
-      "AC & heating inspection",
-      "Exhaust system check",
-      "Full safety inspection"
-    ],
-    recommendation: "Recommended every 20,000 km or before long trips",
-    isFeatured: false,
-  },
-];
+
+  const pricingData = [
+    {
+      id: 1,
+      title: "Basic Care Package",
+      price: "120,000",
+      features: [
+        "Oil & filter change",
+        "Battery check",
+        "Tyre pressure & rotation",
+        "Brake inspection",
+      ],
+      recommendation: "Recommended every 3000 to 5000 km.",
+      isFeatured: false,
+    },
+    {
+      id: 2,
+      title: "Standard Service Package",
+      price: "150,000",
+      features: [
+        "All Basic Care inclusions",
+        "Engine diagnostics",
+        "Suspension & steering check",
+        "Air filter replacement",
+      ],
+      recommendation: "Recommended every 10,000 km",
+      isFeatured: true, // This triggers the 'featured' CSS classes
+    },
+    {
+      id: 3,
+      title: "Comprehensive Service Package",
+      price: "200,000",
+      features: [
+        "All Standard inclusions",
+        "AC & heating inspection",
+        "Exhaust system check",
+        "Full safety inspection",
+      ],
+      recommendation: "Recommended every 20,000 km or before long trips",
+      isFeatured: false,
+    },
+  ];
 
   return (
     <>
@@ -216,26 +231,23 @@ const Home = () => {
             </div>
           </div>
 
-         <div className="w-full md:w-1/2 mb-8 md:mb-0">
-  <div className="relative group">
-    {/* Normal image */}
-    <img
-      src={Hero}
-      alt="Hero"
-      className="w-full h-auto rounded-lg shadow-lg transition-opacity duration-300 group-hover:opacity-0"
-    />
-
-    {/* Hover image */}
-    <img
-      src={HeroLight}
-      alt="Hero Light"
-      className="w-full h-auto rounded-lg shadow-lg absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-    />
-  </div>
-</div>
+          <div className="w-full md:w-1/2 mb-8 md:mb-0">
+            <div className="relative group">
+              <img
+                src={Hero}
+                alt="Hero"
+                className="w-full h-auto rounded-lg shadow-lg transition-opacity duration-300 group-hover:opacity-0"
+              />
+              <img
+                src={HeroLight}
+                alt="Hero Light"
+                className="w-full h-auto rounded-lg shadow-lg absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+              />
+            </div>
+          </div>
         </div>
       </section>
- 
+
       {/* Why choose us */}
       <section className="section-xl about-sec-two">
         <div className="lg:container mx-auto lg:px-4 px-2 pbmit-col-stretched-yes pbmit-col-left">
@@ -400,94 +412,116 @@ const Home = () => {
       </section>
 
       {/* About Us */}
-     <section className="section-xl overflow-hidden">
-  <div className="lg:container mx-auto lg:px-4 px-2">
-
-    <div className="flex flex-col xl:flex-row gap-6 xl:gap-10 mb-10">
-      <div className="w-full xl:w-1/2">
-        <div className="pbmit-heading-subheading animation-style4 text-left">
-          <h4 className="pbmit-subtitle"> About Us </h4>
-          <h2 className="text-[28px] md:text-[40px] font-bold leading-tight">
-            Top-quality craftsmanship with hands-on care tried and true.
-          </h2>
-        </div>
-      </div>
-      <div className="w-full xl:w-1/2">
-        <p className="pbmit-text-editor text-[15px] leading-relaxed opacity-80 mb-4">
-<b>At Auto Wrench Ltd,</b> we are more than just an auto garage – we are your trusted car
-care partner in Ungindoni, Kigamboni. With a team of skilled mechanics and
-technicians, we specialize in keeping your vehicle safe, reliable, and performing at
-its best.        </p>
-        <p className="pbmit-text-editor text-[15px] leading-relaxed opacity-80">
-Our mission is to provide top-quality automotive services with honesty,
-transparency, and a customer-first approach. Whether it’s a quick oil change, a
-complex engine repair, or a complete vehicle inspection, we handle every job with
-precision and care.        </p>
-      </div>
-    </div>
-
-    <div className="flex flex-wrap lg:flex-nowrap pbmit-column-three gap-6">
-      
-      {/* Box 1 */}
-      <article className="pbmit-static-box-style-1 w-full md:w-[calc(50%-12px)] lg:w-1/3">
-        <div className="pbminfotech-post-item">
-          <div className="pbmit-img-wrapper relative group overflow-hidden rounded-[30px]">
-            <img src={ExperiencedStaff} alt="Experienced Staff" className="w-full h-auto transition-transform duration-500 group-hover:scale-105" />
-            <div className="pbmit-title-wrapper absolute bottom-0 left-0 right-0 p-5 bg-white mx-auto w-fit rounded-t-[25px]">
-              <div className="pbmit-title-inner">
-                <h2 className="pbmit-staticbox-title text-[18px] font-bold">
-                  <a href="#" className="flex items-center gap-2">
-                    <span className="pbmit-button-text"> Experienced Staff </span>
-                    <i className="pbmit-base-icon-black-arrow-1 text-[12px]" />
-                  </a>
+      <section className="section-xl overflow-hidden">
+        <div className="lg:container mx-auto lg:px-4 px-2">
+          <div className="flex flex-col xl:flex-row gap-6 xl:gap-10 mb-10">
+            <div className="w-full xl:w-1/2">
+              <div className="pbmit-heading-subheading animation-style4 text-left">
+                <h4 className="pbmit-subtitle"> About Us </h4>
+                <h2 className="text-[28px] md:text-[40px] font-bold leading-tight">
+                  Top-quality craftsmanship with hands-on care tried and true.
                 </h2>
               </div>
             </div>
-          </div>
-        </div>
-      </article>
-
-      {/* Box 2 */}
-      <article className="pbmit-static-box-style-1 w-full md:w-[calc(50%-12px)] lg:w-1/3">
-        <div className="pbminfotech-post-item">
-          <div className="pbmit-img-wrapper relative group overflow-hidden rounded-[30px]">
-            <img src={QualityProducts} alt="Quality Products" className="w-full h-auto transition-transform duration-500 group-hover:scale-105" />
-            <div className="pbmit-title-wrapper absolute bottom-0 left-0 right-0 p-5 bg-white mx-auto w-fit rounded-t-[25px]">
-              <div className="pbmit-title-inner">
-                <h2 className="pbmit-staticbox-title text-[18px] font-bold">
-                  <a href="#" className="flex items-center gap-2">
-                    <span className="pbmit-button-text"> Quality Products </span>
-                    <i className="pbmit-base-icon-black-arrow-1 text-[12px]" />
-                  </a>
-                </h2>
-              </div>
+            <div className="w-full xl:w-1/2">
+              <p className="pbmit-text-editor text-[15px] leading-relaxed opacity-80 mb-4">
+                <b>At Auto Wrench Ltd,</b> we are more than just an auto garage
+                – we are your trusted car care partner in Ungindoni, Kigamboni.
+                With a team of skilled mechanics and technicians, we specialize
+                in keeping your vehicle safe, reliable, and performing at its
+                best.{" "}
+              </p>
+              <p className="pbmit-text-editor text-[15px] leading-relaxed opacity-80">
+                Our mission is to provide top-quality automotive services with
+                honesty, transparency, and a customer-first approach. Whether
+                it’s a quick oil change, a complex engine repair, or a complete
+                vehicle inspection, we handle every job with precision and
+                care.{" "}
+              </p>
             </div>
           </div>
-        </div>
-      </article>
 
-      {/* Box 3 */}
-      <article className="pbmit-static-box-style-1 w-full md:w-full lg:w-1/3">
-        <div className="pbminfotech-post-item">
-          <div className="pbmit-img-wrapper relative group overflow-hidden rounded-[30px]">
-            <img src={ModernEquipment} alt="Modern Equipment" className="w-full h-auto transition-transform duration-500 group-hover:scale-105" />
-            <div className="pbmit-title-wrapper absolute bottom-0 left-0 right-0 p-5 bg-white mx-auto w-fit rounded-t-[25px]">
-              <div className="pbmit-title-inner">
-                <h2 className="pbmit-staticbox-title text-[18px] font-bold">
-                  <a href="#" className="flex items-center gap-2">
-                    <span className="pbmit-button-text"> Modern Equipment </span>
-                    <i className="pbmit-base-icon-black-arrow-1 text-[12px]" />
-                  </a>
-                </h2>
+          <div className="flex flex-wrap lg:flex-nowrap pbmit-column-three gap-6">
+            {/* Box 1 */}
+            <article className="pbmit-static-box-style-1 w-full md:w-[calc(50%-12px)] lg:w-1/3">
+              <div className="pbminfotech-post-item">
+                <div className="pbmit-img-wrapper relative group overflow-hidden rounded-[30px]">
+                  <img
+                    src={ExperiencedStaff}
+                    alt="Experienced Staff"
+                    className="w-full h-auto transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="pbmit-title-wrapper absolute bottom-0 left-0 right-0 p-5 bg-white mx-auto w-fit rounded-t-[25px]">
+                    <div className="pbmit-title-inner">
+                      <h2 className="pbmit-staticbox-title text-[18px] font-bold">
+                        <a href="#" className="flex items-center gap-2">
+                          <span className="pbmit-button-text">
+                            {" "}
+                            Experienced Staff{" "}
+                          </span>
+                          <i className="pbmit-base-icon-black-arrow-1 text-[12px]" />
+                        </a>
+                      </h2>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
+            </article>
+
+            {/* Box 2 */}
+            <article className="pbmit-static-box-style-1 w-full md:w-[calc(50%-12px)] lg:w-1/3">
+              <div className="pbminfotech-post-item">
+                <div className="pbmit-img-wrapper relative group overflow-hidden rounded-[30px]">
+                  <img
+                    src={QualityProducts}
+                    alt="Quality Products"
+                    className="w-full h-auto transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="pbmit-title-wrapper absolute bottom-0 left-0 right-0 p-5 bg-white mx-auto w-fit rounded-t-[25px]">
+                    <div className="pbmit-title-inner">
+                      <h2 className="pbmit-staticbox-title text-[18px] font-bold">
+                        <a href="#" className="flex items-center gap-2">
+                          <span className="pbmit-button-text">
+                            {" "}
+                            Quality Products{" "}
+                          </span>
+                          <i className="pbmit-base-icon-black-arrow-1 text-[12px]" />
+                        </a>
+                      </h2>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            {/* Box 3 */}
+            <article className="pbmit-static-box-style-1 w-full md:w-full lg:w-1/3">
+              <div className="pbminfotech-post-item">
+                <div className="pbmit-img-wrapper relative group overflow-hidden rounded-[30px]">
+                  <img
+                    src={ModernEquipment}
+                    alt="Modern Equipment"
+                    className="w-full h-auto transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="pbmit-title-wrapper absolute bottom-0 left-0 right-0 p-5 bg-white mx-auto w-fit rounded-t-[25px]">
+                    <div className="pbmit-title-inner">
+                      <h2 className="pbmit-staticbox-title text-[18px] font-bold">
+                        <a href="#" className="flex items-center gap-2">
+                          <span className="pbmit-button-text">
+                            {" "}
+                            Modern Equipment{" "}
+                          </span>
+                          <i className="pbmit-base-icon-black-arrow-1 text-[12px]" />
+                        </a>
+                      </h2>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
           </div>
         </div>
-      </article>
-
-    </div>
-  </div>
-</section>
+      </section>
 
       {/* Our Services */}
       <section className="section-lg-1 max-w-full overflow-hidden">
@@ -648,86 +682,91 @@ precision and care.        </p>
         </div>
       </section>
 
-{/* Pricing */}
-<section className="pricing-two-bg section-xl">
-  <div className="lg:container mx-auto lg:px-4 px-2">
-    <div className="lg:flex gap-15">
-      <div className="w-full xl:w-1/3">
-        <div className="pbmit-heading-subheading animation-style2">
-          <h4 className="pbmit-subtitle"> Pricing Table </h4>
-          <h2 className="pbmit-title">
-            The best <span className="pbmit-global-color">pricing</span> to help you!
-          </h2>
-          <div className="pbmit-heading-desc">
-            We use the most reliable methods to locate issues and correct
-            them to ensure your car is in top condition also check the
-            lights and system
-          </div>
-        </div>
-      </div>
-
-      <div className="w-full xl:w-2/3">
-        <div className="pbminfotech-ele-ptable-style-3">
-          <div className="pbmit-ptable-cols flex flex-wrap">
-            {pricingData.map((item) => (
-              <div
-                key={item.id}
-                className={`pbmit-ptable-col w-full md:w-1/2 lg:w-1/3 ${
-                  item.isFeatured ? "pbmit-pricing-table-featured-col" : ""
-                }`}
-              >
-                <div className="pbmit-pricing-table-box">
-                  <div className="pbmit-feature-wrap">
-                    {/* Only show featured ribbon/wrapper if isFeatured is true */}
-                    {item.isFeatured && <div className="pbmit-ptablebox-featured-w" />}
-                  </div>
-                  
-                  <div className="pbmit-pricing-table-inner">
-                    <div className="pbmit-head-wrap">
-                      <h3 className="pbminfotech-ptable-heading">{item.title}</h3>
-                      <div className="pbmit-price-wrapper">
-                        <div className="pbmit-ptable-price-w">
-                          <div className="pbminfotech-ptable-symbol">TZS</div>
-                          <div className="pbminfotech-ptable-price">{item.price}</div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="pbmit-ptable-lines">
-                      {item.features.map((feature, index) => (
-                        <div key={index} className="pbmit-ptable-line">
-                          <Check
-                            className="ti-check inline mr-2"
-                            size={22}
-                            strokeWidth={1.5}
-                          />
-                          {feature}
-                        </div>
-                      ))}
-                      <div className="pbmit-ptable-recommendation mt-4 inline-block rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600">
-                            {/* Recommended every 5,000 km */}
-                            {item.recommendation}
-                          </div>
-                      {/* <h6 className={item.isFeatured ? "text-sp" : ""}>
-                        {item.recommendation}
-                      </h6> */}
-                    </div>
-                  </div>
-
-                  <div className="pbmit-price-btn">
-                    <a href="#" className="pbmit-button">
-                      <span className="pbmit-button-text">Book Now</span>
-                    </a>
-                  </div>
+      {/* Pricing */}
+      <section className="pricing-two-bg section-xl">
+        <div className="lg:container mx-auto lg:px-4 px-2">
+          <div className="lg:flex gap-15">
+            <div className="w-full xl:w-1/3">
+              <div className="pbmit-heading-subheading animation-style2">
+                <h4 className="pbmit-subtitle"> Pricing Table </h4>
+                <h2 className="pbmit-title">
+                  The best <span className="pbmit-global-color">pricing</span> to help you!
+                </h2>
+                <div className="pbmit-heading-desc">
+                  We use the most reliable methods to locate issues and correct
+                  them to ensure your car is in top condition also check the
+                  lights and system
                 </div>
               </div>
-            ))}
+            </div>
+      
+            <div className="w-full xl:w-2/3">
+              <div className="pbminfotech-ele-ptable-style-3">
+                <div className="pbmit-ptable-cols flex flex-wrap">
+                  {loading ? (
+                    <div className="w-full text-center py-10 font-bold uppercase tracking-widest">
+                        Loading Services...
+                    </div>
+                  ) : (
+                    packages.map((item) => (
+                      <div
+                        key={item._id || item.name}
+                        className={`pbmit-ptable-col w-full md:w-1/2 lg:w-1/3 ${
+                          item.name === "Standard Service Package" ? "pbmit-pricing-table-featured-col" : ""
+                        }`}
+                      >
+                        <div className="pbmit-pricing-table-box">
+                          <div className="pbmit-feature-wrap">
+                            {item.name === "Standard Service Package" && <div className="pbmit-ptablebox-featured-w" />}
+                          </div>
+                          
+                          <div className="pbmit-pricing-table-inner">
+                            <div className="pbmit-head-wrap">
+                              <h3 className="pbminfotech-ptable-heading">{item.name}</h3>
+                              <div className="pbmit-price-wrapper">
+                                <div className="pbmit-ptable-price-w">
+                                  <div className="pbminfotech-ptable-symbol">TZS</div>
+                                  <div className="pbminfotech-ptable-price">
+                                    {Number(item.price).toLocaleString()}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+        
+                            <div className="pbmit-ptable-lines">
+                              {item.features && item.features.map((feature, index) => (
+                                <div key={index} className="pbmit-ptable-line">
+                                  <Check
+                                    className="ti-check inline mr-2"
+                                    size={22}
+                                    strokeWidth={1.5}
+                                  />
+                                  {feature}
+                                </div>
+                              ))}
+                              {item.note && (
+                                <div className="pbmit-ptable-recommendation mt-4 inline-block rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600">
+                                  {item.note}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+        
+                          <div className="pbmit-price-btn">
+                            <a href="#" className="pbmit-button">
+                              <span className="pbmit-button-text">Book Now</span>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    ))
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
+      </section>
 
       {/* How It Works */}
       <section className="section-xl ihbox-three-bg pbmit-bg-color-light">
@@ -948,15 +987,13 @@ precision and care.        </p>
       </section>
 
       <Modal
-  isOpen={isModalOpen}
-  onClose={() => setIsModalOpen(false)}
-  onSubmit={(data) => {
-    setIsModalOpen(false);
-    // setUserInfo(data);
-    
-    navigate("/packages"); 
-  }}
-/>
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSubmit={(data) => {
+          setIsModalOpen(false);
+          navigate("/packages");
+        }}
+      />
     </>
   );
 };

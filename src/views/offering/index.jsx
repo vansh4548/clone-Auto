@@ -9,16 +9,15 @@ import ExperiencedStaff from "../../assets/images/experienced-staff.webp";
 import QualityProducts from "../../assets/images/quality-staff.webp";
 
 const Offering = () => {
-  // State for API data
+
   const [packages, setPackages] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Fetch plans from API on mount
   useEffect(() => {
     const fetchPlans = async () => {
       try {
         setLoading(true);
-        const data = await getPackages(); // Fetches from http://168.231.116.54:8000/plan/
+        const data = await getPackages(); 
         setPackages(data);
       } catch (error) {
         console.error("Failed to load plans", error);

@@ -1,19 +1,24 @@
 import axiosInstance from "../api";
 
-export const addCar = async (carData) => {
-  try {
-    const response = await axiosInstance.post("/user/car", carData);
+// This adds a car to the USER'S garage
+export const addCar = async (payload) => {
+    const response = await axiosInstance.post("/user/car", payload);
     return response.data;
-  } catch (error) {
-    return error;
-  }
 };
 
-export const getCars = async () => {
-  try {
+
+export const getMasterCars = async () => {
     const response = await axiosInstance.get("/cars/");
     return response.data;
-  } catch (error) {
-    return error;
-  }
+};
+
+// This fetches the user's specific garage
+export const getUserGarage = async () => {
+    const response = await axiosInstance.get("/user/car"); 
+    return response.data;
+};
+
+export const deleteCar=async()=>{
+    const response=await axiosInstance.delete("/user/car/");
+    return response.data;
 };

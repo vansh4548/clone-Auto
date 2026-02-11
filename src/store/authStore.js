@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import {  checkSession } from "../utils/api/userApi"; //
+import {  checkSession, logoutUser } from "../utils/api/userApi"; //
  
 const useAuthStore = create((set) => ({
   session: [],
@@ -21,11 +21,28 @@ const useAuthStore = create((set) => ({
     set({ loading: true, error: null });
     try {
       const res = await checkSession();
-      set({ session: res?.data, loading: false });
+      
+      set({ session: res, loading: false });
     } catch (error) {
       set({ error: error.message, loading: false });
     }
   },
+
+ logout: async () => {
+    try {
+      await logoutUser(); 
+    } catch (error) {
+      console.error("Faild", error);
+    } finally {
+      set({ 
+        session: { authenticated: false, user: null },
+        loading: false 
+      });
+    }
+  },
+
+  
+
 }));
 
 export default useAuthStore;

@@ -39,6 +39,7 @@ export const logoutUser = async () => {
         throw error;
     }
 };
+
 export const checkSession = async () => {
     try {
         const response = await axiosInstance.get("/user/session/"); 
