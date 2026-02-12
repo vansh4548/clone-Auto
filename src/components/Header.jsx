@@ -77,7 +77,7 @@ const Header = () => {
                     className="pbmit-btn pbmit-btn-global"
                   >
                     <span className="pbmit-button-content-wrapper">
-                      <span className="pbmit-button-text">Login</span>
+                      <span className="pbmit-button-text">Get Started</span>
                     </span>
                   </button>
                 </div>
@@ -99,8 +99,8 @@ const Header = () => {
                     </button>
 
                     {showDropdown && (
-                      <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl py-2 z-50 overflow-hidden">
-                        <div className="border-t border-gray-100 my-1"></div>
+                      <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl  z-50 overflow-hidden">
+                        <div className=" border-gray-100 my-1"></div>
                         <button
                          onClick={handleLogout}
                           className="w-full text-left px-4 py-2 text-red-600 hover:bg-red-50 font-semibold"

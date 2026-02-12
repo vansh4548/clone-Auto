@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Search, Plus, Car, Fuel, CheckCircle2, X, Loader2, ChevronLeft } from "lucide-react";
+import { Search, Plus, Car, Fuel, CheckCircle2, X, Loader2, ChevronLeft, Trash2 } from "lucide-react";  
+import toast, { Toaster } from "react-hot-toast";
 import * as carApi from "../../utils/api/carApi";
+
 
 export default function Cars() {
 
@@ -9,12 +11,13 @@ export default function Cars() {
 
   const [showForm, setShowForm] = useState(false);
   const [masterCarList, setMasterCarList] = useState([]); 
-  const [overlayStep, setOverlayStep] = useState(null); 
+  const [overlayStep, setOverlayStep] = useState(null);   
   const [search, setSearch] = useState("");
   const [selectedBrand, setSelectedBrand] = useState(null);
   const [selectedModel, setSelectedModel] = useState(null);
   const [isPrimary, setIsPrimary] = useState(false);
   const [formSubmitting, setFormSubmitting] = useState(false);
+  
   useEffect(() => {
     fetchGarage();
   }, []);
@@ -26,6 +29,7 @@ export default function Cars() {
       setGarageData(Array.isArray(data) ? data : []);
     } catch (error) {
       console.error("Failed to load garage");
+      toast.error("Failed to load garage data");
     } finally {
       setLoading(false);
     }
@@ -39,6 +43,7 @@ export default function Cars() {
       setMasterCarList(Array.isArray(data) ? data : []);
     } catch (error) {
       console.error("Failed to load master car list");
+      toast.error("Could not fetch car list from server");
     }
   };
 
@@ -55,14 +60,30 @@ export default function Cars() {
         isPrimary,
       };
 
-      const savedCar = await carApi.addCar(payload);
+      await carApi.addCar(payload);
+      toast.success(`${selectedBrand.brandName} added to your garage!`);
       fetchGarage()
       setShowForm(false);
       resetSelection();
     } catch (err) {
-      alert("Failed to add car to garage");
+      toast.error("Failed to add car to garage");
     } finally {
       setFormSubmitting(false);
+    }
+  };
+
+  const handleDelete = async (carId) => {
+    if (!window.confirm(`Are you sure you want to remove the Car from your garage?`)) return;
+    try {
+      setLoading(true);
+      await carApi.deleteUserCar(carId);
+      toast.success(`Car removed successfully`);
+      fetchGarage();
+    } catch (error) {
+      toast.error("Failed to delete vehicle");
+      console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -80,8 +101,9 @@ export default function Cars() {
 
   return (
     <div className="bg-gray-50/50 min-h-screen pb-20">
+      
       <div className="container mx-auto px-4 pt-10 max-w-5xl">
-        {/* Header */}
+   
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-10 gap-4">
           <div className="space-y-1">
             <h2 className="text-3xl font-black text-gray-900 uppercase">My Garage</h2>
@@ -111,8 +133,16 @@ export default function Cars() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {garageData.map((car) => (
+            {garageData.map((car,index) => (
               <div key={car._id} className={`group relative p-8 rounded-[2rem] border transition-all ${car.isPrimary ? "bg-white border-[#b4aa12] shadow-lg" : "bg-white border-gray-100"}`}>
+
+                <button 
+                  onClick={() => handleDelete(index)}
+                  className="absolute bottom-6 right-6 p-2 text-gray-300 hover:text-red-500 transition-colors"
+                >
+                  <Trash2 size={18} />
+                </button>
+
                 {car.isPrimary && (
                   <div className="absolute top-6 right-6 bg-[#b4aa12] text-white text-[9px] font-black px-3 py-1 rounded-full uppercase">
                     <CheckCircle2 className="inline mr-1" size={10} /> Primary
@@ -136,7 +166,7 @@ export default function Cars() {
 
       {showForm && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 px-4" onClick={() => setShowForm(false)}>
-          <div className="bg-white rounded-[2.5rem] shadow-2xl w-full max-w-lg p-8 relative" onClick={(e) => e.stopPropagation()}>
+          <div className="bg-white rounded-2xl shadow-lg w-full max-w-lg p-6 sm:p-10 relative overflow-y-auto max-h-[90vh] relative" onClick={(e) => e.stopPropagation()}>
             <button onClick={() => setShowForm(false)} className="absolute top-6 right-6 text-gray-400 hover:text-black">
               <X size={24} />
             </button>

@@ -1,10 +1,12 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 import { ChevronLeft, ChevronRight, Check, Quote, Car } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
+
 import Modal from "../../components/Modal";
+import useAuthStore from "../../store/authStore";
+
 import "swiper/css";
 import "swiper/css/navigation";
 import "../../assets/css/process.css";
@@ -24,23 +26,27 @@ import EvangelineLee from "../../assets/images/evangeline-lee.webp";
 import TestimonialBg from "../../assets/images/testimonial-bg.webp";
 import Hero from "../../assets/images/hero.png";
 import HeroLight from "../../assets/images/hero-light2.png";
-import { getPackages } from "../../utils/api/packageApi"; 
+
+import { getPackages } from "../../utils/api/packageApi";
+
 const Home = () => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [packages, setPackages] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   const testimonialPrevRef = useRef(null);
   const testimonialNextRef = useRef(null);
 
- const [packages, setPackages] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { authenticated } = useAuthStore();
 
   useEffect(() => {
     const fetchPlans = async () => {
       try {
         setLoading(true);
-        const data = await getPackages(); 
+        const data = await getPackages();
         setPackages(data);
       } catch (error) {
         console.error("Failed to load plans", error);
@@ -48,8 +54,17 @@ const Home = () => {
         setLoading(false);
       }
     };
+
     fetchPlans();
   }, []);
+
+  const handleBookingAction = () => {
+  if (authenticated) {
+    navigate("/profile"); 
+  } else {
+    setIsModalOpen(true);
+  }
+};
 
   const slides = [
     {
@@ -135,7 +150,7 @@ const Home = () => {
   ];
 
   const testimonials = [
-    {
+{
       id: 1,
       name: "Evangeline Lee",
       role: "Satisfied Client",
@@ -148,55 +163,13 @@ const Home = () => {
       role: "Customer",
       text: "I would recommend practitioners at this center to everyone! They are great to work with and are excellent trainers. Thank you all!",
       img: AdelineWood,
-    },
-    {
+    },{
       id: 3,
       name: "Ariana Green",
       role: "Manager",
-      text: "I would recommend practitioners at this center to everyone! They are great to work with and are excellent trainers. Thank you all!",
+      text:
+        "I would recommend practitioners at this center to everyone! They are great to work with and are excellent trainers. Thank you all!",
       img: ArianaGreen,
-    },
-  ];
-
-  const pricingData = [
-    {
-      id: 1,
-      title: "Basic Care Package",
-      price: "120,000",
-      features: [
-        "Oil & filter change",
-        "Battery check",
-        "Tyre pressure & rotation",
-        "Brake inspection",
-      ],
-      recommendation: "Recommended every 3000 to 5000 km.",
-      isFeatured: false,
-    },
-    {
-      id: 2,
-      title: "Standard Service Package",
-      price: "150,000",
-      features: [
-        "All Basic Care inclusions",
-        "Engine diagnostics",
-        "Suspension & steering check",
-        "Air filter replacement",
-      ],
-      recommendation: "Recommended every 10,000 km",
-      isFeatured: true, // This triggers the 'featured' CSS classes
-    },
-    {
-      id: 3,
-      title: "Comprehensive Service Package",
-      price: "200,000",
-      features: [
-        "All Standard inclusions",
-        "AC & heating inspection",
-        "Exhaust system check",
-        "Full safety inspection",
-      ],
-      recommendation: "Recommended every 20,000 km or before long trips",
-      isFeatured: false,
     },
   ];
 
@@ -207,25 +180,27 @@ const Home = () => {
         <div className="lg:flex lg:px-18 px-2 md:flex-row items-center md:justify-between gap-x-15">
           <div className="md:w-1/2 text-center md:text-left">
             <div className="pbmit-heading-subheading animation-style4">
-              <h4 className="pbmit-subtitle"> Auto Wrench </h4>
+              <h4 className="pbmit-subtitle">Auto Wrench</h4>
               <h2 className="pbmit-title pb-4 hero-title">
                 Welcome to Auto Wrench Ltd – Your Trusted Garage in Kigamboni.
               </h2>
               <p className="pbmit-text-editor hero-des">
-                At Auto Wrench Ltd, we keep your car running safely, smoothly,
-                and reliably. From quick routine maintenance to full mechanical
+                At Auto Wrench Ltd, we keep your car running safely, smoothly, and
+                reliably. From quick routine maintenance to full mechanical
                 repairs, our expert team in Ungindoni, Kigamboni is here to
-                provide professional, affordable, and honest auto care
+                provide professional, affordable, and honest auto care.
               </p>
             </div>
 
             <div className="flex justify-center md:justify-start gap-4">
               <button
-                onClick={() => setIsModalOpen(true)}
+                onClick={handleBookingAction}
                 className="pbmit-btn inline-flex items-center cursor-pointer"
               >
                 <span className="pbmit-button-content-wrapper flex items-center">
-                  <span className="pbmit-button-text">Book Appointment</span>
+                  <span className="pbmit-button-text">
+                    {authenticated ? "Order Now" : "Book Car Service"}
+                  </span>
                 </span>
               </button>
             </div>
@@ -247,8 +222,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-
-      {/* Why choose us */}
+{/* Why choose us */}
       <section className="section-xl about-sec-two">
         <div className="lg:container mx-auto lg:px-4 px-2 pbmit-col-stretched-yes pbmit-col-left">
           <div className="flex gap-x-20 whychoose">
@@ -985,11 +959,11 @@ const Home = () => {
           </div>
         </div>
       </section>
-
-      <Modal
+      
+            <Modal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        onSubmit={(data) => {
+        onSubmit={() => {
           setIsModalOpen(false);
           navigate("/packages");
         }}

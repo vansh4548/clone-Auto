@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import toast, { Toaster } from "react-hot-toast"; // Added
+import toast, { Toaster } from "react-hot-toast";
 import * as userApi from "../utils/api/userApi";
 import * as carApi from "../utils/api/carApi";
 import useAuthStore from "../store/authStore";
+import { X } from "lucide-react";
 
 const Modal = ({ isOpen, onClose, onSubmit }) => {
   const navigate = useNavigate();
@@ -40,7 +41,7 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
         }
       } catch (error) {
         console.error("Failed to fetch car data:", error);
-        toast.error("Failed to fetch car brands."); // Added
+        toast.error("Failed to fetch car brands.");
         setBrands([]);
       } finally {
         setLoading(false);
@@ -76,10 +77,10 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
         gasType: selectedBrand.gasType[0],
       };
       await userApi.sendOtp(payload);
-      toast.success("OTP sent successfully!"); // Added
+      toast.success("OTP sent successfully!");
       setAuthStep("otp");
     } catch (error) {
-      toast.error("Error initiating registration. Please try again."); // Added
+      toast.error("Error initiating registration. Please try again.");
     }
   };
 
@@ -90,17 +91,17 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
     try {
       const payload = phone;
       await userApi.sentLoginOtp(payload);
-      toast.success("Login OTP sent!"); // Added
+      toast.success("Login OTP sent!");
       setAuthStep("otp");
     } catch (error) {
-      toast.error("Error initiating login. Please try again."); // Added
+      toast.error("Error initiating login. Please try again.");
     }
   };
 
   const handleFinalVerify = async (e) => {
     e.preventDefault();
     if (otp !== "123456") {
-      toast.error("Invalid OTP. Hint: Use 123456"); // Added
+      toast.error("Invalid OTP. Hint: Use 123456");
       return;
     }
     try {
@@ -111,14 +112,14 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
         response = await userApi.verifyLoginOtp(phone, otp);
       }
       if (response.user) {
-        toast.success("Verification successful!"); // Added
+        toast.success("Verification successful!");
         onClose();
         if (!name) await checkSession();
         navigate("/orders");
       }
     } catch (error) {
       console.error("Auth Error:", error);
-      toast.error("Verification failed on server. Please try again."); // Added
+      toast.error("Verification failed on server. Please try again.");
     }
   };
 
@@ -155,7 +156,7 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
 
   return (
     <>
-      <Toaster position="top-center" reverseOrder={false} /> {/* Added */}
+      <Toaster position="top-right" reverseOrder={false} />
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -187,7 +188,7 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
 
               {authStep === "register" && (
                 <form onSubmit={handleSendOtp} className="space-y-4">
-                  <h2 className="text-2xl font-bold">Register</h2>
+                  <h2 className="font-bold sizelogin">Register</h2>
                   <p className="text-gray-600">
                     Enter your details to create an account.
                   </p>
@@ -200,7 +201,7 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
                       required
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      className="w-full border border-gray-300 rounded-xl px-3 py-2.5 outline-none focus:ring-2 focus:ring-[#b4aa12]"
+                      className="w-full border border-gray-300 rounded-xl px-3 py-2.5 outline-none focus:ring-1 focus:ring-[#b4aa12]"
                     />
                   </div>
                   <div>
@@ -212,7 +213,7 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
                       required
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
-                      className="w-full border border-gray-300 rounded-xl px-3 py-2.5 outline-none focus:ring-2 focus:ring-[#b4aa12]"
+                      className="w-full border border-gray-300 rounded-xl px-3 py-2.5 outline-none focus:ring-1 focus:ring-[#b4aa12]"
                     />
                   </div>
                   <div>
@@ -221,7 +222,7 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
                     </label>
                     <div
                       onClick={() => setOverlayStep("brand")}
-                      className={`w-full border rounded-xl px-3 py-2.5 cursor-pointer ${carDetails ? "border-black bg-white" : "border-gray-300 bg-gray-50"}`}
+                      className={`w-full border rounded-xl px-3 py-2.5 cursor-pointer ${carDetails ?  "border-[#b4aa12] bg-white border-1" : "border-gray-300 bg-gray-50"}`}
                     >
                       {carDetails
                         ? `${carDetails.brand} ${carDetails.model} (${carDetails.gas})`
@@ -235,7 +236,7 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
                   >
                     Continue
                   </button>
-                  <p className="text-center mt-2 text-sm text-gray-600">
+                  <p className="mt-2 text-gray-600 logintext">
                     Already have an account?{" "}
                     <button
                       type="button"
@@ -249,8 +250,8 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
               )}
 
               {authStep === "login" && (
-                <div className="space-y-6">
-                  <h2 className="text-2xl font-bold">Login</h2>
+                <div className="space-y-4">
+                  <h2 className="font-bold sizelogin">Login</h2>
                   <p className="text-gray-500">
                     Welcome back! Enter your phone to login.
                   </p>
@@ -275,7 +276,7 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
                       Send OTP
                     </button>
                   </form>
-                  <p className="text-center text-sm text-gray-600">
+                  <p className="logintext text-gray-600">
                     New here?{" "}
                     <button
                       type="button"
@@ -290,9 +291,10 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
 
               {authStep === "otp" && (
                 <form onSubmit={handleFinalVerify} className="space-y-6">
-                  <div className="text-center">
-                    <h2 className="text-2xl font-bold">Verify OTP</h2>
-                    <p className="text-gray-600 mt-2">Sent to {phone}</p>
+                  <div className="">
+                    <h2 className="font-bold sizelogin">Verify OTP</h2>
+
+                    <p className="text-gray-500">Sent to {phone}</p>
                   </div>
                   <div className="flex justify-between gap-2">
                     {otpArray.map((data, index) => (
@@ -307,10 +309,11 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
                       />
                     ))}
                   </div>
+
                   <button
                     type="submit"
                     disabled={otp.length < 6}
-                    className={`w-full font-semibold py-4 rounded-xl transition-all ${otp.length === 6 ? "bg-black text-white" : "bg-gray-200 text-gray-400"}`}
+                    className={`w-full font-semibold py-3 rounded-xl transition ${otp.length === 6 ? "bg-[#b4aa12] text-white hover:bg-[#8e860e]" : "bg-gray-200 text-gray-400"}`}
                   >
                     Verify & Continue
                   </button>
@@ -328,23 +331,27 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
                   onClick={() => setOverlayStep(null)}
                 >
                   <motion.div
-                    className="bg-white rounded-2xl shadow-lg w-full max-w-lg p-6 relative max-h-[85vh] overflow-y-auto"
+                    className="bg-white rounded-2xl shadow-lg w-full max-w-md p-6 relative max-h-[85vh] overflow-y-auto"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 20 }}
                     onClick={(e) => e.stopPropagation()}
                   >
                     {overlayStep === "brand" && (
-                      <div>
-                        <h2 className="text-lg font-semibold mb-4">
-                          Select Brand
-                        </h2>
+                      <div className="space-y-4">
+                        <button
+                          onClick={() => setOverlayStep(false)}
+                          className="absolute top-6 right-6 text-gray-400 hover:text-black"
+                        >
+                          <X size={24} />
+                        </button>
+                        <h2 className="font-bold sizeloginsub"> Select Brand</h2>
                         <input
                           type="text"
                           placeholder="Search brands..."
                           value={search}
                           onChange={(e) => setSearch(e.target.value)}
-                          className="w-full mb-4 px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#b4aa12]"
+                          className="w-full border border-gray-300 rounded-xl px-3 py-2.5 outline-none focus:ring-2 focus:ring-[#b4aa12]"
                         />
                         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                           {filteredBrands.map((brand) => (
@@ -354,7 +361,7 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
                                 setSelectedBrand(brand);
                                 setOverlayStep("model");
                               }}
-                              className="cursor-pointer group flex flex-col items-center border p-5 rounded-2xl hover:bg-black transition-all"
+                              className="cursor-pointer group flex flex-col items-center border-gray-300 border rounded-xl p-5 hover:bg-gray-100 transition-all"
                             >
                               {brand.logo && (
                                 <img
@@ -363,7 +370,7 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
                                   className="h-8 mb-2 group-hover:invert"
                                 />
                               )}
-                              <span className="text-[10px] font-black uppercase group-hover:text-white">
+                              <span className="text-[10px] font-black uppercase">
                                 {brand.brandName}
                               </span>
                             </div>
@@ -378,7 +385,7 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
                     )}
 
                     {overlayStep === "model" && selectedBrand && (
-                      <div>
+                      <div className="space-y-5">
                         <div className="flex items-center gap-2 mb-4">
                           <button
                             onClick={() => setOverlayStep("brand")}
@@ -386,10 +393,19 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
                           >
                             ←
                           </button>
-                          <h2 className="text-lg font-semibold">
-                            Select {selectedBrand.brandName} Model
-                          </h2>
+                          <h2 className="font-bold sizeloginsub">
+                            {" "}
+                            Select <span className="text-[#b4aa12]">{selectedBrand.brandName}</span> Model
+                          </h2>{" "}
                         </div>
+                        <input
+                          type="text"
+                          placeholder="Search Models..."
+                          value={search}
+                          onChange={(e) => setSearch(e.target.value)}
+                          className="w-full border border-gray-300 rounded-xl px-3 py-2.5 outline-none focus:ring-2 focus:ring-[#b4aa12]"
+                        />
+
                         <div className="grid grid-cols-2 gap-4">
                           {selectedBrand.models?.map((model, idx) => (
                             <div
@@ -398,7 +414,7 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
                                 setSelectedModel(model);
                                 setOverlayStep("gas");
                               }}
-                              className="cursor-pointer text-center border p-3 rounded-xl hover:bg-gray-100 transition-colors"
+                              className="cursor-pointer text-center border-gray-300 border rounded-xl p-3 hover:bg-gray-100 transition-colors"
                             >
                               {model}
                             </div>
@@ -408,16 +424,25 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
                     )}
 
                     {overlayStep === "gas" && (
-                      <div>
-                        <h2 className="text-lg font-semibold mb-4">
-                          Select Gas Type
-                        </h2>
+                      <div className="space-y-4">
+                        <div className="flex items-center gap-2 mb-4">
+                          <button
+                            onClick={() => setOverlayStep("model")}
+                            className="text-gray-400"
+                          >
+                            ←
+                          </button>
+                          <h2 className="font-bold sizeloginsub">
+                            {" "}
+                            Select GasType
+                          </h2>{" "}
+                        </div>
                         <div className="grid grid-cols-2 gap-4">
                           {selectedBrand.gasType.map((gas) => (
                             <div
                               key={gas}
                               onClick={() => handleSelectGas(gas)}
-                              className="cursor-pointer text-center border p-3 rounded-xl hover:bg-gray-100"
+                              className="cursor-pointer text-center border-gray-300 border p-3 rounded-xl hover:bg-gray-100"
                             >
                               {gas}
                             </div>

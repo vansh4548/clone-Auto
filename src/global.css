@@ -7070,9 +7070,15 @@ h4 {
   font-size: 15px;
 }
 .sizelogin{
-  font-size: 25px;
+  font-size: 28px;
 }
 
 .sizec{
+  font-size: 25px;
+}
+.logintext{
+  margin:0px !important;
+}
+.sizeloginsub{
   font-size: 25px;
 }
