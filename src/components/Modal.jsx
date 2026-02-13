@@ -22,6 +22,7 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
   const [selectedModel, setSelectedModel] = useState(null);
   const [search, setSearch] = useState("");
   const { checkSession } = useAuthStore();
+  
 
   const [brands, setBrands] = useState([]);
   const filteredBrands = (brands || []).filter((brand) => {
@@ -156,7 +157,7 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
 
   return (
     <>
-      <Toaster position="top-right" reverseOrder={false} />
+      <Toaster position="top-center" reverseOrder={false} />
       <AnimatePresence>
         {isOpen && (
           <motion.div

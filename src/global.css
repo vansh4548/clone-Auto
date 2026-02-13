@@ -7067,7 +7067,7 @@ h4 {
 }
 
 .sizel{
-  font-size: 15px;
+  font-size: 20px;
 }
 .sizelogin{
   font-size: 28px;
@@ -7081,4 +7081,18 @@ h4 {
 }
 .sizeloginsub{
   font-size: 25px;
+}
+.sizecar{
+  font-size: 30px;
+}
+.pro{
+  margin-bottom: 8px;
+}
+
+.sizeDate{
+  font-size: 15px;
+}
+
+.sizeTotal{
+  font-size: 12px;
 }

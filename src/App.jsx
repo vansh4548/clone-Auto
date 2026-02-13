@@ -5,13 +5,13 @@ import Home from "./views/home";
 import Layout from "./components/Layout";
 import { ProtectedRoute } from "./components/auth/ProtectedRoute";
 import About from "./views/about";
-// import Package from "./views/package";
-// import Checkout from "./views/checkout";
+import Package from "./views/package";
+import Checkout from "./views/checkout";
 import Offering from "./views/offering";
 import Contact from "./views/contact";
 import Gallery from "./views/gallery";
 
-// import Orders from "./views/orders";
+import Orders from "./views/orders";
 import Profile from "./views/profile";
 import Cars from "./views/car";
 
@@ -43,8 +43,8 @@ function App() {
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
          <Route path="/about" element={<About />} />
-          {/* <Route path="/packages" element={<Package />} /> */}
-          {/* <Route path="/checkout" element={<Checkout />} /> */}
+          <Route path="/packages" element={<Package />} />
+          <Route path="/checkout" element={<Checkout />} />
           <Route path="/our-offerings" element={<Offering />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/gallery" element={<Gallery/>}/>
@@ -52,9 +52,9 @@ function App() {
 
       <Route element={<ProtectedRoute />}>
         <Route element={<Layout />}>
-          {/* <Route path="/orders" element={<Orders />} /> */}
+          <Route path="/orders" element={<Orders />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/cars" element={<Cars />} /> */
+          <Route path="/cars" element={<Cars />} />
         </Route>
       </Route>
 

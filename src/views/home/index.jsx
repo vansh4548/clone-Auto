@@ -60,7 +60,7 @@ const Home = () => {
 
   const handleBookingAction = () => {
   if (authenticated) {
-    navigate("/profile"); 
+    navigate("/orders"); 
   } else {
     setIsModalOpen(true);
   }

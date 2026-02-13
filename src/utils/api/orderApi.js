@@ -2,7 +2,7 @@ import axiosInstance from "../api";
 
 export const getorders = async () => {
     try {
-        const response = await axiosInstance.get("/orders/");
+        const response = await axiosInstance.get("/order/");
 
 
         return response.data;
@@ -11,9 +11,10 @@ export const getorders = async () => {
         throw error;
     }
 }
+
 export const createOrder = async (orderData) => {
     try {
-        const response = await axiosInstance.post("/orders/create/", orderData);
+        const response = await axiosInstance.post("/order/", orderData);
         return response.data;
     } catch (error) {
         console.error("Create order error:", error);

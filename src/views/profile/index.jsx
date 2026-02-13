@@ -1,15 +1,10 @@
-import React from "react";
-// import { useOrder } from "../../context/ApiContext";
-import { User, Mail, Phone, Car } from "lucide-react";
+import {  Mail, Phone, Car } from "lucide-react";
 import useAuthStore from "../../store/authStore";
 const Profile = () => {
   
   const { checkSession, session, loading } = useAuthStore();
 
-  // const userInfo = {
-  //   name: "John Doe",
-  //   email: "",
-  // };
+
 
   if (!session?.authenticated ) {
     return (
@@ -37,7 +32,7 @@ const Profile = () => {
             </p>
 
             <div className="grid gap-6">
-              <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-2xl">
+              {/* <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-2xl">
                 <Mail className="text-[#b4aa12]" size={20} />
                 <div>
                   <p className="text-xs text-gray-400 uppercase font-bold">
@@ -45,15 +40,15 @@ const Profile = () => {
                   </p>
                   <p className="font-semibold">{session.user.email}</p>
                 </div>
-              </div>
+              </div> */}
 
               <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-2xl">
                 <Phone className="text-[#b4aa12]" size={20} />
                 <div>
-                  <p className="text-xs text-gray-400 uppercase font-bold">
+                  <p className="text-xs text-gray-400 uppercase font-bold pro">
                     Phone Number
                   </p>
-                  <p className="font-semibold">
+                  <p className="font-semibold pro">
                     {session.user.phone || "Not provided"}
                   </p>
                 </div>
