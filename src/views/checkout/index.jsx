@@ -58,6 +58,7 @@ const Checkout = () => {
     }
 
     const orderData = {
+      coupon: appliedCoupon?._id || null, 
       user: session?.user?._id || null,
       cars: {
         car: primaryCar.car._id,
