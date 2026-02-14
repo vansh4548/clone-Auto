@@ -6,7 +6,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import useOrderStore from "../../store/orderStore";
 import { getcoupons } from "../../utils/api/couponApi";
-import toast, { Toaster } from "react-hot-toast"; 
+import toast, { Toaster } from "react-hot-toast";
 
 import { ShoppingCart } from "lucide-react";
 
@@ -75,8 +75,9 @@ const Package = () => {
     if (!coupon) return;
 
     if (packagePrice < coupon.minAmt) {
-      
-      toast.error(`Minimum order must be TZS ${coupon.minAmt.toLocaleString()}`);
+      toast.error(
+        `Minimum order must be TZS ${coupon.minAmt.toLocaleString()}`,
+      );
       return;
     }
 
@@ -107,7 +108,7 @@ const Package = () => {
   const handleSelectPackage = (pkg) => {
     setSelectedPackage(pkg);
     toast.success(`${pkg.name} added to cart!`, {
-        icon: <ShoppingCart size={20} />
+      icon: <ShoppingCart size={20} />,
     });
   };
 
@@ -184,12 +185,29 @@ const Package = () => {
                           <div className="pbmit-price-btn">
                             <a
                               onClick={() => handleSelectPackage(pkg)}
-                              className="pbmit-button cursor-pointer"
+                              className={`pbmit-button cursor-pointer transition-all duration-300 ${
+                                pkg.name === selectedPackage?.name
+                                  ? "!bg-[#212121] !text-white" // Use ! for important if your CSS variables are stubborn
+                                  : ""
+                              }`}
+                              style={
+                                pkg.name === selectedPackage?.name
+                                  ? {
+                                      backgroundColor:
+                                        "var(--pbmit-link-color-hover)",
+                                      color: "var(--pbmit-white-color)",
+                                    }
+                                  : {}
+                              }
                             >
                               <span className="pbmit-button-text">
-                                {pkg.name === selectedPackage?.name
-                                  ? "Already in Cart"
-                                  : "Add ToCart"}
+                                {pkg.name === selectedPackage?.name ? (
+                                  <span className="flex items-center justify-center gap-2">
+                                    <Check size={18} /> Already in Cart
+                                  </span>
+                                ) : (
+                                  "Add To Cart"
+                                )}
                               </span>
                             </a>
                           </div>

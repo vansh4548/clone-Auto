@@ -73,22 +73,22 @@ const Checkout = () => {
     };
 
     setIsSubmitting(true);
-    // const loadingToast = toast.loading("Processing your booking..."); 
 
     try {
       await orderApi.createOrder(orderData);
-      
-      // toast.success("Booking confirmed successfully!", { id: loadingToast });
       toast.success("Booking confirmed successfully!");
       clearOrder();
       clearCoupon();
-      
+
       setTimeout(() => {
         navigate("/orders");
       }, 1500);
     } catch (err) {
       console.error(err);
-      toast.error(err.response?.data?.message || "Booking failed. Please try again.", { id: loadingToast });
+      toast.error(
+        err.response?.data?.message || "Booking failed. Please try again.",
+        { id: loadingToast },
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -102,7 +102,7 @@ const Checkout = () => {
   return (
     <section className="section-xl bg-gray-50 min-h-screen py-12 mb-pd ">
       <Toaster position="top-center" reverseOrder={false} />
-      
+
       <div className="container mx-auto px-4">
         <div className="flex flex-col xl:flex-row gap-10 checkout">
           <div className="w-full xl:w-3/5 flex flex-col gap-6">
@@ -111,7 +111,7 @@ const Checkout = () => {
                 Select Date & Time Slot
               </h3>
 
-              <div className="flex flex-wrap gap-3 mb-8">
+              <div className="grid grid-cols-4 sm:flex sm:flex-wrap gap-3 mb-8">
                 {next8Days.map((date, idx) => {
                   const isSelected =
                     selectedDate &&
@@ -124,21 +124,22 @@ const Checkout = () => {
                         setSelectedDate(date);
                         setSelectedSlot(null);
                       }}
-                      className={`px-4 py-3 rounded-xl border text-sm font-medium transition-all cursor-pointer ${
+                      className={`flex flex-col items-center justify-center p-3 rounded-xl border text-sm font-medium transition-all cursor-pointer ${
                         isSelected
                           ? "bg-[#b4aa12] text-white border-[#b4aa12] shadow-md scale-105"
                           : "bg-white text-gray-600 border-gray-200 hover:border-[#b4aa12]"
                       }`}
                     >
-                      <span className="block text-xs uppercase opacity-70">
+                      <span className="block text-[10px] uppercase opacity-70 mb-1">
                         {date.toDateString().slice(0, 3)}
                       </span>
-                      <span className="text-lg">{date.getDate()}</span>
+                      <span className="text-base sm:text-lg">
+                        {date.getDate()}
+                      </span>
                     </button>
                   );
                 })}
               </div>
-
               {selectedDate && (
                 <div className="space-y-6">
                   {Object.entries(timeSlots).map(([category, slots]) => (
@@ -169,7 +170,9 @@ const Checkout = () => {
           </div>
           <div className="w-full xl:w-2/5 mt-6 sm:mt-8 xl:mt-0">
             <div className="sticky top-32 bg-gray-100 rounded-2xl p-10">
-              <h3 className="text-xl font-bold mb-6 sizeloginsub">Booking Summary</h3>
+              <h3 className="text-xl font-bold mb-6 sizeloginsub">
+                Booking Summary
+              </h3>
 
               {primaryCar && (
                 <div className="mb-6">
