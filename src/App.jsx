@@ -33,12 +33,6 @@ function App() {
 
   return (
     <Routes>
-      <Route
-        path="/login"
-        element={
-          session?.authenticated ? <Navigate to="/" /> : <div>Login Page</div>
-        }
-      />
 
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />

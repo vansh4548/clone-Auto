@@ -12,6 +12,7 @@ const Orders = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isPreBooking, setIsPreBooking] = useState(false);
   const [isSwitchingCar, setIsSwitchingCar] = useState(false);
+  const [selectedCar, setSelectedCar]=useState();
   const [orders, setOrders] = useState([]);
   const [isloading, setIsLoading] = useState();
   const [garageData, setGarageData] = useState([]);
@@ -49,10 +50,10 @@ const Orders = () => {
       setIsLoading(false);
     }
   };
-console.log(garageData);
+  console.log(selectedCar);
 
   return (
-    <div className="bg-gray-50/50 min-h-screen pb-20">
+    <div className="bg-gray-50/50 min-h-screen pb-20 mb-pd">
       <div className="container mx-auto px-4 pt-10 max-w-4xl">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
           <div>
@@ -72,7 +73,7 @@ console.log(garageData);
         {isPreBooking && (
           <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 px-4">
             <div className="bg-white rounded-3xl p-6 w-full max-w-md shadow-2xl animate-in zoom-in-95 duration-200">
-              <h3 className="text-xl font-black mb-2 text-gray-900">
+              <h3 className="text-xl font-black mb-2 text-gray-900 sizelogin">
                 Confirm Vehicle
               </h3>
               <p className="text-xs text-gray-500 mb-6">
@@ -105,23 +106,26 @@ console.log(garageData);
                   </div>
                 ) : (
                   <div className="space-y-2 mt-2 max-h-48 overflow-y-auto pr-1 custom-scrollbar">
-                    {garageData.map((car) => (
+                    {garageData.map((car, index) => (
                       <div
-                        key={car.id}
+                        key={index}
                         onClick={() => {
+                          console.log(car?.car?._id);
+                          
+                         setSelectedCar(car?.car?._id);
                           setPrimaryCar(car);
                           setIsSwitchingCar(false);
                         }}
                         className={`flex justify-between items-center p-3 rounded-xl border cursor-pointer transition-all ${
-                          car.isPrimary
-                            ? "bg-white border-[#b4aa12] ring-1 ring-[#b4aa12]"
+                          car?.car?._id===selectedCar
+                            ? "bg-white border-[#b4aa12]"
                             : "bg-white border-gray-100 hover:border-gray-300"
                         }`}
                       >
                         <span className="text-xs font-bold">
                           {car.brandName} {car.model}
                         </span>
-                        {primaryCar?._id === car._id && (
+                        {  car?.car?._id===selectedCar && (
                           <Check className="w-3 h-3 text-[#b4aa12]" />
                         )}
                       </div>

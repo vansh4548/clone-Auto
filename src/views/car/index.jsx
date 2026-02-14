@@ -95,7 +95,7 @@ export default function Cars() {
 
   return (
     <div className="bg-gray-50/50 min-h-screen pb-20">
-      <Toaster position="top-right" />
+      {/* <Toaster position="top-right" /> */}
       
       <div className="container mx-auto px-4 pt-10 max-w-5xl">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-10 gap-4">

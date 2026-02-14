@@ -2406,6 +2406,7 @@ body {
 
 @media(max-width: 820px) and (min-width: 768px) {
 
+	
 	/*=== Homepage 03 ===*/
 	.pbmit-column-three .pbmit-static-box-style-1 .pbmit-title-wrapper {
 		padding: 15px 13px 5px 13px;
@@ -2425,4 +2426,11 @@ body {
 		font-size: 20px;
 		line-height: 26px;
 	}
+}
+
+@media(max-width: 820px) {
+.mb-pd {
+		padding: 20px !important;
+	}
+
 }

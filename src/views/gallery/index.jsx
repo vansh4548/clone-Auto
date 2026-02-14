@@ -54,7 +54,7 @@ const Gallery = () => {
 
    {/* Our Garage Highlights */}
 <section className="section">
-  <div className="row pt-4 lg:flex gap-x-8 lg:container mx-auto">
+  <div className="row pt-4 mt-18 lg:flex gap-x-8 lg:container mx-auto">
 
     {/* Expert Mechanics */}
     <div className="col-md-6 col-xl-4 w-full md:w-1/2 xl:w-1/3 px-4 mb-6">

@@ -6,15 +6,26 @@ import { getPackages } from "../../utils/api/packageApi";
 import "swiper/css";
 import "swiper/css/navigation";
 import useOrderStore from "../../store/orderStore";
+import { getcoupons } from "../../utils/api/couponApi";
 
 const Package = () => {
   const navigate = useNavigate();
   const [packages, setPackages] = useState([]);
   const [discount, setDiscount] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [coupon, setCoupon] = useState("");
-  const { selectedPackage, setSelectedPackage, primaryCar } = useOrderStore();
+  const [coupons, setCoupons] = useState([]);
+  const [selectedCoupon, setSelectedCoupon] = useState(null);
 
+  const [showCouponModal, setShowCouponModal] = useState(false);
+  const [couponInput, setCouponInput] = useState("");
+
+  const {
+    selectedPackage,
+    setSelectedPackage,
+    primaryCar,
+    setCoupon,
+    clearCoupon,
+  } = useOrderStore();
 
   const taxRate = 0.1;
 
@@ -33,19 +44,44 @@ const Package = () => {
     fetchPlans();
   }, []);
 
-  const handleApplyCoupon = () => {
-    if (coupon.toUpperCase() === "SAVE20") {
-      setDiscount(2);
-    } else {
-      setDiscount(0);
-      alert("Invalid Coupon!");
-    }
-  };
+  useEffect(() => {
+    const fetchCoupons = async () => {
+      try {
+        const data = await getcoupons();
+        setCoupons(data.filter((c) => c.status === true));
+      } catch (err) {
+        console.error("Failed to load coupons");
+      }
+    };
+    fetchCoupons();
+  }, []);
 
   const packagePrice = selectedPackage ? Number(selectedPackage.price) : 0;
   const subtotal = packagePrice > 0 ? packagePrice - discount : 0;
   const tax = subtotal * taxRate;
   const total = subtotal + tax;
+
+  const handleApplyCoupon = (coupon) => {
+    if (!coupon) return;
+
+    if (packagePrice < coupon.minAmt) {
+      alert(`Minimum order must be TZS ${coupon.minAmt}`);
+      return;
+    }
+
+    const discountValue = Number(coupon.discount);
+    setSelectedCoupon(coupon);
+    setDiscount(discountValue);
+    setCoupon(coupon, discountValue);
+  };
+
+  const applyFromInput = () => {
+    const found = coupons.find(
+      (c) => c.code.toLowerCase() === couponInput.trim().toLowerCase(),
+    );
+    if (!found) return alert("Invalid coupon code");
+    handleApplyCoupon(found);
+  };
 
   return (
     <>
@@ -136,7 +172,6 @@ const Package = () => {
                 </div>
               </div>
             </div>
-
             <div className="w-full xl:w-2/5">
               <div className="sticky top-35 bg-gray-100 rounded-2xl p-10">
                 {primaryCar && (
@@ -148,74 +183,50 @@ const Package = () => {
                         className="max-w-[60px] h-auto rounded"
                       />
                     )}
-                    <h4
-                      className="mt-2 font-bold text-md"
-                      style={{ fontSize: "26px" }}
-                    >
+                    <h4 className="mt-2 font-bold text-md">
                       {primaryCar.brand} {primaryCar.model}{" "}
-                      <span className="text-[#9b9b9b]">({primaryCar.gasType})</span>
+                      <span className="text-[#9b9b9b]">
+                        ({primaryCar.gasType})
+                      </span>
                     </h4>
                   </div>
                 )}
 
-                {selectedPackage ? (
+                {selectedPackage && (
                   <div className="mt-4 p-10 bg-white rounded-xl">
-                    <div className="flex items-center justify-between mb-3">
-                      <h4
-                        className="font-bold text-md"
-                        style={{ fontSize: "20px" }}
-                      >
-                        {selectedPackage.name}
-                      </h4>
-                      <button
-                        onClick={() => {
-                          setSelectedPackage(null);
-                          setDiscount(0);
-                          setCoupon("");
-                        }}
-                        className="bg-gray-300 cursor-pointer hover:scale-105 transition-all text-gray-500 px-2 py-0.5 rounded-full text-sm font-semibold"
-                      >
-                        x
-                      </button>
-                    </div>
+                    <h4 className="font-bold mb-3">{selectedPackage.name}</h4>
 
-                    <div className="mb-2 flex">
+                    <div className="mb-2">
                       <input
-                        type="text"
+                        value={couponInput}
+                        onChange={(e) => setCouponInput(e.target.value)}
                         placeholder="Enter coupon code"
-                        value={coupon}
-                        onChange={(e) => setCoupon(e.target.value)}
-                        className="border border-gray-200 px-3 py-2 mr-2 rounded-xl w-[80%]"
+                        className="border border-gray-300 focus:border-yellow-500 focus:ring-0 px-3 py-2 rounded-xl w-full"
                       />
+
                       <button
-                        onClick={handleApplyCoupon}
-                        className="bg-[#b4aa12] text-white px-4 font-semibold cursor-pointer py-2 rounded-xl"
+                        onClick={() => setShowCouponModal(true)}
+                        className="text-sm underline text-[#b4aa12] mt-1"
                       >
-                        Apply
+                        View Coupons
+                      </button>
+
+                      <button
+                        onClick={applyFromInput}
+                        className="mt-2 w-full bg-black text-white py-2 rounded-xl"
+                      >
+                        Apply Coupon
                       </button>
                     </div>
 
-                    {discount > 0 && (
-                      <div className="flex items-center justify-between text-green-600">
-                        <span>
-                          Coupon applied: -TZS {discount.toLocaleString()}
-                        </span>
-                        <button
-                          onClick={() => {
-                            setCoupon("");
-                            setDiscount(0);
-                          }}
-                          className="text-red-500 font-semibold ml-2 cursor-pointer"
-                        >
-                          Remove
-                        </button>
-                      </div>
+                    {selectedCoupon && (
+                      <p className="text-green-600">
+                        {selectedCoupon.code} applied -TZS {discount}
+                      </p>
                     )}
 
-                    <div className="border-t border-gray-200 mt-4 pt-2">
-                      <p className="m-b-0">
-                        Subtotal: TZS {subtotal.toLocaleString()}
-                      </p>
+                    <div className="border-t mt-4 pt-2">
+                      <p>Subtotal: TZS {subtotal.toLocaleString()}</p>
                       <p>Tax (10%): TZS {tax.toLocaleString()}</p>
                       <p className="font-bold">
                         Total: TZS {total.toLocaleString()}
@@ -223,22 +234,81 @@ const Package = () => {
                     </div>
 
                     <button
-                      className="w-full mt-4 bg-[#b4aa12] font-semibold cursor-pointer text-white py-2.5 rounded-xl"
                       onClick={() => navigate("/checkout")}
-
-                      disabled={!selectedPackage}
+                      className="w-full mt-4 bg-[#b4aa12] text-white py-2 rounded-xl"
                     >
                       Continue to Checkout
                     </button>
                   </div>
-                ) : (
-                  <p>Your cart is empty</p>
                 )}
               </div>
             </div>
           </div>
         </div>
       </section>
+    {showCouponModal && (
+  <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+    {/* Modal Container */}
+    <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden animate-in fade-in zoom-in duration-200">
+      
+      {/* Header */}
+      <div className="px-6 py-4 border-b border-gray-100 flex justify-between items-center">
+        <h3 className="text-xl font-bold text-gray-800 sizeloginsub">Available Coupons</h3>
+        <button 
+          onClick={() => setShowCouponModal(false)}
+          className="text-gray-400 hover:text-gray-600 transition-colors"
+        >
+          ✕
+        </button>
+      </div>
+
+      {/* Coupon List */}
+      <div className="p-6 space-y-3">
+        {coupons.length > 0 ? (
+          coupons.map((c) => (
+            <div
+              key={c._id}
+              className="group border-2 border-dashed border-gray-200 rounded-xl p-4 flex items-center justify-between hover:border-[#b4aa12] hover:bg-yellow-50/30 transition-all"
+            >
+              <div className="flex flex-col">
+                <span className="font-semibold text-gray-900">{c.name}</span>
+                <span className="text-sm text-gray-500 uppercase tracking-wider">
+                  Code: <span className="font-mono font-bold text-gray-700">{c.code}</span>
+                </span>
+                <span className="text-[10px] text-gray-400 mt-1">
+                  Min. Spend: ${c.minAmt}
+                </span>
+              </div>
+              
+              <button
+                onClick={() => {
+                  setCouponInput(c.code);
+                  setShowCouponModal(false);
+                }}
+                className="bg-[#b4aa12] hover:bg-[#9a9110] text-white px-5 py-2 rounded-lg font-medium text-sm transition-colors shadow-sm active:scale-95"
+              >
+                Apply
+              </button>
+            </div>
+          ))
+        ) : (
+          <p className="text-center text-gray-500 py-4">No coupons available at the moment.</p>
+        )}
+      </div>
+
+      {/* Footer */}
+      <div className="px-6 py-4 bg-gray-50 border-t border-gray-100">
+        <button
+          onClick={() => setShowCouponModal(false)}
+          className="w-full py-2.5 text-sm font-semibold text-gray-600 hover:text-gray-800 transition-colors"
+        >
+          Dismiss
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
     </>
   );
 };

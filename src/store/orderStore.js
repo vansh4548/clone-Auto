@@ -1,17 +1,24 @@
-// src/store/orderStore.js
 import { create } from "zustand";
 
 const useOrderStore = create((set) => ({
-  primaryCar: null,
   selectedPackage: null,
+  primaryCar: null,
 
-  setPrimaryCar: (car) => set({ primaryCar: car }),
+  appliedCoupon: null,
+  couponDiscount: 0,
+
   setSelectedPackage: (pkg) => set({ selectedPackage: pkg }),
+  setPrimaryCar: (car) => set({ primaryCar: car }),
+
+  setCoupon: (coupon, discount) =>
+    set({ appliedCoupon: coupon, couponDiscount: discount }),
+
+  clearCoupon: () => set({ appliedCoupon: null, couponDiscount: 0 }),
 
   clearOrder: () =>
     set({
-      primaryCar: null,
       selectedPackage: null,
+      primaryCar: null,
     }),
 }));
 

@@ -22,7 +22,6 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
   const [selectedModel, setSelectedModel] = useState(null);
   const [search, setSearch] = useState("");
   const { checkSession } = useAuthStore();
-  
 
   const [brands, setBrands] = useState([]);
   const filteredBrands = (brands || []).filter((brand) => {
@@ -77,11 +76,17 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
         model: selectedModel,
         gasType: selectedBrand.gasType[0],
       };
-      await userApi.sendOtp(payload);
-      toast.success("OTP sent successfully!");
-      setAuthStep("otp");
+
+      const res = await userApi.sendOtp(payload);
+
+      if (res.status === 200) {
+        setAuthStep("otp");
+        toast.success("OTP sent successfully!");
+      } else {
+        toast.error(res.data?.message || "Something Went Wrong!");
+      }
     } catch (error) {
-      toast.error("Error initiating registration. Please try again.");
+      toast.error(error.response?.data?.message || "Something Went Wrong");
     }
   };
 
@@ -90,12 +95,20 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
     if (phone.length < 10) return;
 
     try {
-      const payload = phone;
-      await userApi.sentLoginOtp(payload);
-      toast.success("Login OTP sent!");
-      setAuthStep("otp");
+      const res = await userApi.sentLoginOtp(phone);
+
+      if (res.status === 200) {
+        toast.success("Login OTP sent!");
+        setAuthStep("otp");
+      } else {
+        toast.error(res.data?.message || "Failed to send OTP");
+      }
     } catch (error) {
-      toast.error("Error initiating login. Please try again.");
+      console.log(error);
+      toast.error(
+        error.response?.data?.message ||
+          "Error initiating login. Please try again.",
+      );
     }
   };
 
@@ -105,22 +118,30 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
       toast.error("Invalid OTP. Hint: Use 123456");
       return;
     }
+
     try {
-      let response;
+      let res;
+
       if (name) {
-        response = await userApi.verifyOtp(phone, otp);
+        res = await userApi.verifyOtp(phone, otp);
       } else {
-        response = await userApi.verifyLoginOtp(phone, otp);
+        res = await userApi.verifyLoginOtp(phone, otp);
       }
-      if (response.user) {
+
+      if (res.status === 200 && res.data?.user) {
         toast.success("Verification successful!");
         onClose();
         if (!name) await checkSession();
-        navigate("/orders");
+        window.location.replace("/orders");
+      } else {
+        toast.error(res.data?.message || "Verification failed");
       }
     } catch (error) {
       console.error("Auth Error:", error);
-      toast.error("Verification failed on server. Please try again.");
+      toast.error(
+        error.response?.data?.message ||
+          "Verification failed on server. Please try again.",
+      );
     }
   };
 
@@ -223,7 +244,7 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
                     </label>
                     <div
                       onClick={() => setOverlayStep("brand")}
-                      className={`w-full border rounded-xl px-3 py-2.5 cursor-pointer ${carDetails ?  "border-[#b4aa12] bg-white border-1" : "border-gray-300 bg-gray-50"}`}
+                      className={`w-full border rounded-xl px-3 py-2.5 cursor-pointer ${carDetails ? "border-[#b4aa12] bg-white border-1" : "border-gray-300 bg-gray-50"}`}
                     >
                       {carDetails
                         ? `${carDetails.brand} ${carDetails.model} (${carDetails.gas})`
@@ -346,7 +367,10 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
                         >
                           <X size={24} />
                         </button>
-                        <h2 className="font-bold sizeloginsub"> Select Brand</h2>
+                        <h2 className="font-bold sizeloginsub">
+                          {" "}
+                          Select Brand
+                        </h2>
                         <input
                           type="text"
                           placeholder="Search brands..."
@@ -396,7 +420,11 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
                           </button>
                           <h2 className="font-bold sizeloginsub">
                             {" "}
-                            Select <span className="text-[#b4aa12]">{selectedBrand.brandName}</span> Model
+                            Select{" "}
+                            <span className="text-[#b4aa12]">
+                              {selectedBrand.brandName}
+                            </span>{" "}
+                            Model
                           </h2>{" "}
                         </div>
                         <input

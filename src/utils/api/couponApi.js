@@ -3,9 +3,7 @@ import axiosInstance from "../api";
 
 export const getcoupons = async () => {
     try {
-        const response = await axiosInstance.get("/coupons/");
-
-
+        const response = await axiosInstance.get("/coupon/");
         return response.data;
     } catch (error) {
         console.error("Get orders error:", error);

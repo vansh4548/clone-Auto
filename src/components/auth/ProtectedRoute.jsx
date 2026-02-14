@@ -5,11 +5,11 @@ const ProtectedRoute = ({ allowedRoles }) => {
   const { session } = useAuthStore();
 
   if (!session?.authenticated) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/orders" replace />;
   }
 
   if (allowedRoles && !allowedRoles.includes(session.user.role)) {
-    return <Navigate to="/dashboard" replace />;
+    return <Navigate to="/orders" replace />;
   }
 
   return <Outlet />;
