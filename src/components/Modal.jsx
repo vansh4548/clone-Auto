@@ -254,7 +254,7 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
                   <button
                     type="submit"
                     disabled={!carDetails || !name || phone.length < 10}
-                    className={`w-full font-semibold py-3 rounded-xl transition ${carDetails && name && phone.length >= 10 ? "bg-[#b4aa12] text-white hover:bg-[#8e860e]" : "bg-gray-200 text-gray-400"}`}
+                    className={`w-full font-semibold py-3 rounded-xl transition cursor-pointer ${carDetails && name && phone.length >= 10 ? "bg-[#b4aa12] text-white hover:bg-[#8e860e]" : "bg-gray-200 text-gray-400"}`}
                   >
                     Continue
                   </button>
@@ -263,7 +263,7 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
                     <button
                       type="button"
                       onClick={() => setAuthStep("login")}
-                      className="text-[#b4aa12] font-medium"
+                      className="text-[#b4aa12] font-medium cursor-pointer"
                     >
                       Login
                     </button>
@@ -293,7 +293,7 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
                     <button
                       type="submit"
                       disabled={phone.length < 10}
-                      className={`w-full font-semibold py-3 rounded-xl transition ${phone.length >= 10 ? "bg-[#b4aa12] text-white hover:bg-[#8e860e]" : "bg-gray-200 text-gray-400"}`}
+                      className={`w-full font-semibold py-3 rounded-xl transition cursor-pointer ${phone.length >= 10 ? "bg-[#b4aa12] text-white hover:bg-[#8e860e]" : "bg-gray-200 text-gray-400"}`}
                     >
                       Send OTP
                     </button>
@@ -303,7 +303,7 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
                     <button
                       type="button"
                       onClick={() => setAuthStep("register")}
-                      className="text-[#b4aa12] font-medium"
+                      className="text-[#b4aa12] font-medium cursor-pointer"
                     >
                       Create Account
                     </button>
@@ -335,7 +335,7 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
                   <button
                     type="submit"
                     disabled={otp.length < 6}
-                    className={`w-full font-semibold py-3 rounded-xl transition ${otp.length === 6 ? "bg-[#b4aa12] text-white hover:bg-[#8e860e]" : "bg-gray-200 text-gray-400"}`}
+                    className={`w-full font-semibold py-3 rounded-xl transition cursor-pointer ${otp.length === 6 ? "bg-[#b4aa12] text-white hover:bg-[#8e860e]" : "bg-gray-200 text-gray-400"}`}
                   >
                     Verify & Continue
                   </button>

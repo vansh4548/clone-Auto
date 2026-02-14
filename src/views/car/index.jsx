@@ -94,18 +94,19 @@ export default function Cars() {
   );
 
   return (
-    <div className="bg-gray-50/50 min-h-screen pb-20">
-      {/* <Toaster position="top-right" /> */}
-      
-      <div className="container mx-auto px-4 pt-10 max-w-5xl">
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-10 gap-4">
-          <div className="space-y-1">
-            <h2 className="text-3xl font-black text-gray-900 uppercase">My Garage</h2>
-            <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">Manage vehicles</p>
+    <div className="bg-gray-50/50 min-h-screen pb-20 mb-pd">
+      <Toaster position="top-center" />
+
+         <div className="container mx-auto px-4 pt-10 max-w-4xl">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
+          <div>
+            <h2 className="text-2xl font-black text-gray-900 tracking-tight">
+              My Garage
+            </h2>
           </div>
           <button
             onClick={handleOpenAddForm}
-            className="flex items-center gap-2 bg-black text-white px-6 py-3 rounded-xl text-xs font-black uppercase hover:bg-gray-800 transition-all shadow-lg"
+            className="flex items-center gap-2 bg-black text-white px-6 py-3 rounded-xl text-xs font-black uppercase hover:bg-gray-800 transition-all shadow-lg cursor-pointer"
           >
             <Plus size={16} /> Add Vehicle
           </button>
@@ -118,19 +119,19 @@ export default function Cars() {
             {garageData.map((car,index) => (
               <div key={car._id} className={`group relative p-8 rounded-2xl border transition-all bg-white border-gray-200`}>
               
-                <button onClick={() => handleDelete(index)} className="absolute bottom-6 right-6 p-2 text-gray-300 hover:text-red-500 transition-colors">
+                <button onClick={() => handleDelete(index)} className="absolute bottom-6 right-6 p-2 text-gray-300 hover:text-red-500 transition-colors cursor-pointer">
                   <Trash2 size={18} />
                 </button>
                 
                 {car.isPrimary && <div className="absolute top-6 right-6 bg-[#b4aa12] text-white text-[9px] font-black px-3 py-1 rounded-full uppercase">Primary</div>}
                 <div className="flex flex-col items-center text-center space-y-4">
-                  <div className="w-20 h-20 bg-gray-50 rounded-3xl flex items-center justify-center p-4">
+                  <div className="w-20 h-20 bg-gray-50 rounded-2xl flex items-center justify-center p-4">
                     {car.logo && <img src={car.logo} alt="" className="w-full h-full object-contain" />}
                   </div>
-                  <h2 className="sizecar font-black text-gray-900 uppercase">{car.brandName} {car.model}</h2>
+                  <h2 className="sizecar font-black text-gray-900 ">{car.brandName} {car.model}</h2>
                   <div className="flex items-center gap-2 text-gray-400">
                     <Fuel size={12} />
-                    <span className="text-[10px] font-bold uppercase">{car.gasType}</span>
+                    <span className="text-[10px] font-bold ">{car.gasType}</span>
                   </div>
                 </div>
               </div>
@@ -166,7 +167,7 @@ export default function Cars() {
                         className="cursor-pointer group flex flex-col items-center border border-gray-300 rounded-xl p-5 hover:bg-gray-100 transition-all"
                       >
                         {brand.logo && <img src={brand.logo} alt="" className="h-8 mb-2 group-hover:invert" />}
-                        <span className="text-[10px] font-black uppercase text-center">{brand.brandName}</span>
+                        <span className="text-[10px] font-black  text-center">{brand.brandName}</span>
                       </div>
                     ))}
                   </div>

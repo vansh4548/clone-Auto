@@ -2434,3 +2434,9 @@ body {
 	}
 
 }
+@media (min-width: 768px) {
+  .heros {
+    height: 90vh;
+    align-content: center;
+  }
+}

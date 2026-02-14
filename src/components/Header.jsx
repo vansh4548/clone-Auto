@@ -89,7 +89,7 @@ const Header = () => {
               ) : (
                 <div className="flex items-center gap-6">
                   <div className="relative group">
-                    <button className="flex items-center space-x-3 text-white border border-[#1d1d1d] px-4 py-2 rounded-lg bg-[#0a0a0a] group-hover:bg-[#1d1d1d] group-hover:border-[#333] transition-all duration-200">
+                    <button className="flex items-center space-x-3 text-white border border-[#1d1d1d] px-4 py-2 rounded-lg bg-[#0a0a0a] group-hover:bg-[#1d1d1d] group-hover:border-[#333] transition-all duration-200 cursor-pointer">
                       <div className="w-8 h-8 bg-[#b4aa12] rounded-full flex items-center justify-center text-black font-bold uppercase transition-transform group-hover:scale-105">
                         {session.user.name?.charAt(0) || "U"}
                       </div>
@@ -103,7 +103,7 @@ const Header = () => {
                       <div className="bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden p-1">
                         <button
                           onClick={handleLogout}
-                          className="w-full text-left px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 rounded-lg font-bold flex items-center justify-between transition-colors group/item"
+                          className="w-full text-left px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 rounded-lg font-bold flex items-center justify-between transition-colors group/item cursor-pointer"
                         >
                           Logout
                           <span className="opacity-0 group-hover/item:opacity-100 transition-opacity">

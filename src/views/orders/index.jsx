@@ -6,17 +6,24 @@ import { getorders } from "../../utils/api/orderApi";
 import { getUserGarage } from "../../utils/api/carApi";
 import toast, { Toaster } from "react-hot-toast";
 import useOrderStore from "../../store/orderStore";
+import { Loader2 } from "lucide-react";
 
 const Orders = () => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isPreBooking, setIsPreBooking] = useState(false);
   const [isSwitchingCar, setIsSwitchingCar] = useState(false);
-  const [selectedCar, setSelectedCar]=useState();
+  const [selectedCar, setSelectedCar] = useState();
   const [orders, setOrders] = useState([]);
-  const [isloading, setIsLoading] = useState();
+  const [isloading, setIsLoading] = useState(false);
   const [garageData, setGarageData] = useState([]);
   const { primaryCar, setPrimaryCar } = useOrderStore();
+  const formatCurrency = (num) => {
+    return Number(num).toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  };
 
   useEffect(() => {
     const fetchOrder = async () => {
@@ -50,7 +57,6 @@ const Orders = () => {
       setIsLoading(false);
     }
   };
-  console.log(selectedCar);
 
   return (
     <div className="bg-gray-50/50 min-h-screen pb-20 mb-pd">
@@ -63,7 +69,7 @@ const Orders = () => {
           </div>
           <button
             onClick={() => setIsPreBooking(true)}
-            className="flex items-center gap-2 bg-black text-white px-6 py-3 rounded-xl text-xs font-black uppercase hover:bg-gray-800 transition-all shadow-lg"
+            className="flex items-center gap-2 bg-black text-white px-6 py-3 rounded-xl text-xs font-black uppercase hover:bg-gray-800 transition-all shadow-lg cursor-pointer"
           >
             <Plus size={16} />
             New Booking
@@ -71,8 +77,13 @@ const Orders = () => {
         </div>
 
         {isPreBooking && (
-          <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 px-4">
-            <div className="bg-white rounded-3xl p-6 w-full max-w-md shadow-2xl animate-in zoom-in-95 duration-200">
+          <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 px-4 pointer-events-auto">
+            <div className="relative bg-white rounded-3xl p-6 w-full max-w-md shadow-2xl animate-in zoom-in-95 duration-200">
+              {isloading && (
+                <div className="absolute inset-0 bg-white/70 flex items-center justify-center rounded-3xl z-10">
+                  <Loader2 className="animate-spin text-[#b4aa12]" size={32} />
+                </div>
+              )}
               <h3 className="text-xl font-black mb-2 text-gray-900 sizelogin">
                 Confirm Vehicle
               </h3>
@@ -88,7 +99,7 @@ const Orders = () => {
                   {garageData?.length > 1 && (
                     <button
                       onClick={() => setIsSwitchingCar(!isSwitchingCar)}
-                      className="text-[10px] font-black uppercase text-[#b4aa12] hover:underline"
+                      className="text-[10px] font-black uppercase text-[#b4aa12] hover:underline cursor-pointer"
                     >
                       {isSwitchingCar ? "Cancel" : "Change"}
                     </button>
@@ -110,14 +121,12 @@ const Orders = () => {
                       <div
                         key={index}
                         onClick={() => {
-                          console.log(car?.car?._id);
-                          
-                         setSelectedCar(car?.car?._id);
+                          setSelectedCar(car?.car?._id);
                           setPrimaryCar(car);
                           setIsSwitchingCar(false);
                         }}
                         className={`flex justify-between items-center p-3 rounded-xl border cursor-pointer transition-all ${
-                          car?.car?._id===selectedCar
+                          car?.car?._id === selectedCar
                             ? "bg-white border-[#b4aa12]"
                             : "bg-white border-gray-100 hover:border-gray-300"
                         }`}
@@ -125,7 +134,7 @@ const Orders = () => {
                         <span className="text-xs font-bold">
                           {car.brandName} {car.model}
                         </span>
-                        {  car?.car?._id===selectedCar && (
+                        {car?.car?._id === selectedCar && (
                           <Check className="w-3 h-3 text-[#b4aa12]" />
                         )}
                       </div>
@@ -140,14 +149,14 @@ const Orders = () => {
                     setIsPreBooking(false);
                     setIsSwitchingCar(false);
                   }}
-                  className="w-1/2 py-3 rounded-xl border border-gray-100 text-xs font-bold uppercase tracking-widest text-gray-400"
+                  className="w-1/2 py-3 rounded-xl border border-gray-100 text-xs font-bold uppercase tracking-widest text-gray-400 cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={() => navigate("/packages")}
                   disabled={!primaryCar}
-                  className={`w-1/2 py-3 rounded-xl text-xs font-bold uppercase tracking-widest text-white shadow-lg ${
+                  className={`w-1/2 py-3 rounded-xl text-xs font-bold uppercase tracking-widest text-white shadow-lg cursor-pointer ${
                     !primaryCar ? "bg-gray-200" : "bg-black hover:bg-gray-800"
                   }`}
                 >
@@ -158,7 +167,11 @@ const Orders = () => {
           </div>
         )}
 
-        {orders.length === 0 ? (
+        {isloading && !isPreBooking ? (
+          <div className="flex justify-center py-20">
+            <Loader2 className="animate-spin text-[#b4aa12]" size={40} />
+          </div>
+        ) : orders.length === 0 ? (
           <div className="bg-white p-10 rounded-3xl text-center border border-gray-100 ">
             <Package className="w-8 h-8 text-gray-200 mx-auto mb-3" />
             <p className="text-sm font-bold text-gray-900">No bookings yet</p>
@@ -184,7 +197,7 @@ const Orders = () => {
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
                         <span
-                          className={`text-[9px] font-black px-2 py-0.5 rounded uppercase tracking-wider ${
+                          className={`text-[9px] font-black px-2 py-0.5 rounded uppercase tracking-wider sizepending ${
                             order.status === "Confirmed"
                               ? "bg-green-100 text-green-700"
                               : "bg-yellow-100 text-yellow-700"
@@ -192,59 +205,55 @@ const Orders = () => {
                         >
                           {order.status}
                         </span>
-                        <span className="text-[10px] text-gray-400 font-medium">
-                          #{order._id}
-                        </span>
                       </div>
                       <h3 className="text-base font-bold text-gray-900 sizes">
                         {order.plan.name}
                       </h3>
                     </div>
                     <div className="text-right">
-                      <p className="text-[9px] text-gray-400 font-bold uppercase mb-0.5 sizeTotal">
+                      <p className="text-[9px] text-gray-400 font-bold uppercase mb-5 sizeTotal">
                         Total
                       </p>
                       <p className="text-lg font-black text-black">
                         <span className="text-[10px] mr-0.5">TZS</span>
-                        {order.totalAmount}
+                        {formatCurrency(order.totalAmount)}
                       </p>
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-4">
-                    <div className="flex items-center gap-3 bg-gray-50 p-2.5 rounded-xl">
-                      <Calendar className="w-4 h-4 text-[#b4aa12]" />
-                      <div>
-                        <p className="text-[8px] text-gray-400 font-bold uppercase sizeDate ">
-                          Date
-                        </p>
-                        <p className="text-[11px] font-bold text-gray-800 sizel">
+                    <div className="bg-gray-50 p-3 rounded-xl flex flex-col justify-between min-h-[70px]">
+                      <p className="text-[10px] text-gray-400 font-bold uppercase tracking-wider sizeDate">
+                        Date
+                      </p>
+                      <div className="flex items-center gap-2 mb-1">
+                        <Calendar className="w-4 h-4 text-[#b4aa12] mb-6" />
+                        <p className="text-[13px] font-bold text-gray-800 leading-none sizel">
                           {new Date(order.serviceDate).toLocaleDateString(
                             "en-In",
                           )}
                         </p>
                       </div>
                     </div>
-
-                    <div className="flex items-center gap-3 bg-gray-50 p-2.5 rounded-xl">
-                      <Clock className="w-4 h-4 text-[#b4aa12]" />
-                      <div>
-                        <p className="text-[8px] text-gray-400 font-bold uppercase sizeDate">
-                          Time
-                        </p>
-                        <p className="text-[11px] font-bold text-gray-800 sizel">
+                    <div className="bg-gray-50 p-3 rounded-xl flex flex-col justify-between min-h-[70px]">
+                      <p className="text-[10px] text-gray-400 font-bold uppercase tracking-wider sizeDate">
+                        Time
+                      </p>
+                      <div className="flex items-center gap-2 mb-1">
+                        <Clock className="w-4 h-4 text-[#b4aa12] mb-6" />
+                        <p className="text-[13px] font-bold text-gray-800 leading-none sizel">
                           {order.serviceTimeSlot}
                         </p>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-3 bg-gray-50 p-2.5 rounded-xl">
-                      <Car className="w-4 h-4 text-[#b4aa12]" />
-                      <div className="min-w-0">
-                        <p className="text-[8px] text-gray-400 font-bold uppercase sizeDate">
-                          Vehicle
-                        </p>
-                        <p className="text-[11px] font-bold text-gray-800 truncate sizel">
+                    <div className="bg-gray-50 p-3 rounded-xl flex flex-col justify-between min-h-[70px]">
+                      <p className="text-[10px] text-gray-400 font-bold uppercase tracking-wider sizeDate">
+                        Vehicle
+                      </p>
+                      <div className="flex items-center gap-2 mb-1 min-w-0">
+                        <Car className="w-4 h-4 text-[#b4aa12] mb-6 shrink-0" />
+                        <p className="text-[13px] font-bold text-gray-800 leading-none truncate sizel">
                           {order?.cars?.car?.brandName} {order?.cars?.model}
                         </p>
                       </div>
@@ -262,7 +271,6 @@ const Orders = () => {
         onClose={() => setIsModalOpen(false)}
         onSubmit={(data) => {
           setIsModalOpen(false);
-          setUserInfo(data);
           navigate("/orders");
         }}
       />
