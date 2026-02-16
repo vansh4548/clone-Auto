@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Search, Plus, Car, Fuel, CheckCircle2, X, Loader2, ChevronLeft, Trash2 } from "lucide-react";
+import { Plus, Fuel, Loader2, Trash2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import toast, { Toaster } from "react-hot-toast";
 import * as carApi from "../../utils/api/carApi";
+import { addCar } from "../../utils/api/carApi";
 
 export default function Cars() {
   const [garageData, setGarageData] = useState([]);
@@ -54,13 +55,16 @@ export default function Cars() {
         isPrimary,
       };
 
-      await carApi.addCar(payload);
-      toast.success(`${selectedBrand.brandName} added!`);
-      fetchGarage();
-      handleCloseForm();
+      const res = await addCar(payload);
+
+      if (res.status === 201) {
+        toast.success(`Car added!`);
+        handleCloseForm();
+      }
     } catch (err) {
-      toast.error("Failed to add car");
+      toast.error(err.response.data.message || "Something went wrong");
     } finally {
+      fetchGarage();
       setFormSubmitting(false);
     }
   };
@@ -75,7 +79,12 @@ export default function Cars() {
   };
 
   const handleDelete = async (carId) => {
-    if (!window.confirm(`Are you sure you want to remove the Car from your garage?`)) return;
+    if (
+      !window.confirm(
+        `Are you sure you want to remove the Car from your garage?`,
+      )
+    )
+      return;
     try {
       setLoading(true);
       await carApi.deleteUserCar(carId);
@@ -83,21 +92,20 @@ export default function Cars() {
       fetchGarage();
     } catch (error) {
       toast.error("Failed to delete vehicle");
-      console.error(error);
     } finally {
       setLoading(false);
     }
   };
 
   const filteredBrands = (masterCarList || []).filter((brand) =>
-    brand?.brandName?.toLowerCase().includes(search.toLowerCase())
+    brand?.brandName?.toLowerCase().includes(search.toLowerCase()),
   );
 
   return (
     <div className="bg-gray-50/50 min-h-screen pb-20 mb-pd">
       <Toaster position="top-center" />
 
-         <div className="container mx-auto px-4 pt-10 max-w-4xl">
+      <div className="container mx-auto px-4 pt-10 max-w-4xl">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
           <div>
             <h2 className="text-2xl font-black text-gray-900 tracking-tight">
@@ -113,25 +121,46 @@ export default function Cars() {
         </div>
 
         {loading && !showForm ? (
-          <div className="flex justify-center py-20"><Loader2 className="animate-spin text-[#b4aa12]" size={40} /></div>
+          <div className="flex justify-center py-20">
+            <Loader2 className="animate-spin text-[#b4aa12]" size={40} />
+          </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {garageData.map((car,index) => (
-              <div key={car._id} className={`group relative p-8 rounded-2xl border transition-all bg-white border-gray-200`}>
-              
-                <button onClick={() => handleDelete(index)} className="absolute bottom-6 right-6 p-2 text-gray-300 hover:text-red-500 transition-colors cursor-pointer">
+            {garageData.map((car, index) => (
+              <div
+                key={car._id}
+                className={`group relative p-8 rounded-2xl border transition-all bg-white border-gray-200`}
+              >
+                <button
+                  onClick={() => handleDelete(index)}
+                  className="absolute bottom-6 right-6 p-2 text-gray-300 hover:text-red-500 transition-colors cursor-pointer"
+                >
                   <Trash2 size={18} />
                 </button>
-                
-                {car.isPrimary && <div className="absolute top-6 right-6 bg-[#b4aa12] text-white text-[9px] font-black px-3 py-1 rounded-full uppercase">Primary</div>}
+
+                {car.isPrimary && (
+                  <div className="absolute top-6 right-6 bg-[#b4aa12] text-white text-[9px] font-black px-3 py-1 rounded-full uppercase">
+                    Primary
+                  </div>
+                )}
                 <div className="flex flex-col items-center text-center space-y-4">
                   <div className="w-20 h-20 bg-gray-50 rounded-2xl flex items-center justify-center p-4">
-                    {car.logo && <img src={car.logo} alt="" className="w-full h-full object-contain" />}
+                    {car.logo && (
+                      <img
+                        src={car.logo}
+                        alt=""
+                        className="w-full h-full object-contain"
+                      />
+                    )}
                   </div>
-                  <h2 className="sizecar font-black text-gray-900 ">{car.brandName} {car.model}</h2>
+                  <h2 className="sizecar font-black text-gray-900 ">
+                    {car.brandName} {car.model}
+                  </h2>
                   <div className="flex items-center gap-2 text-gray-400">
                     <Fuel size={12} />
-                    <span className="text-[10px] font-bold ">{car.gasType}</span>
+                    <span className="text-[10px] font-bold ">
+                      {car.gasType}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -141,33 +170,57 @@ export default function Cars() {
       </div>
       <AnimatePresence>
         {showForm && (
-          <motion.div 
+          <motion.div
             className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 px-4"
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             onClick={handleCloseForm}
           >
-            <motion.div 
+            <motion.div
               className="bg-white rounded-2xl shadow-lg w-full max-w-md p-6 relative max-h-[85vh] overflow-y-auto"
-              initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
               onClick={(e) => e.stopPropagation()}
             >
-              <button onClick={handleCloseForm} className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-xl">✕</button>
+              <button
+                onClick={handleCloseForm}
+                className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-xl"
+              >
+                ✕
+              </button>
 
               {overlayStep === "brand" && (
                 <div className="space-y-4 mt-2">
                   <h2 className="font-bold sizeloginsub">Select Brand</h2>
                   <input
-                    type="text" placeholder="Search brands..." value={search}
+                    type="text"
+                    placeholder="Search brands..."
+                    value={search}
                     onChange={(e) => setSearch(e.target.value)}
                     className="w-full border border-gray-300 rounded-xl px-3 py-2.5 outline-none focus:ring-1 focus:ring-[#b4aa12]"
                   />
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                     {filteredBrands.map((brand) => (
-                      <div key={brand._id} onClick={() => { setSelectedBrand(brand); setOverlayStep("model"); }}
+                      <div
+                        key={brand._id}
+                        onClick={() => {
+                          setSelectedBrand(brand);
+                          setOverlayStep("model");
+                        }}
                         className="cursor-pointer group flex flex-col items-center border border-gray-300 rounded-xl p-5 hover:bg-gray-100 transition-all"
                       >
-                        {brand.logo && <img src={brand.logo} alt="" className="h-8 mb-2 group-hover:invert" />}
-                        <span className="text-[10px] font-black  text-center">{brand.brandName}</span>
+                        {brand.logo && (
+                          <img
+                            src={brand.logo}
+                            alt=""
+                            className="h-8 mb-2 group-hover:invert"
+                          />
+                        )}
+                        <span className="text-[10px] font-black  text-center">
+                          {brand.brandName}
+                        </span>
                       </div>
                     ))}
                   </div>
@@ -176,19 +229,36 @@ export default function Cars() {
 
               {overlayStep === "model" && selectedBrand && (
                 <div className="space-y-5 mt-2">
-                  
                   <div className="flex items-center gap-2">
-                    <button onClick={() => setOverlayStep("brand")} className="text-gray-400">←</button>
-                    <h2 className="font-bold sizeloginsub">Select <span className="text-[#b4aa12]">{selectedBrand.brandName}</span> Model</h2>
+                    <button
+                      onClick={() => setOverlayStep("brand")}
+                      className="text-gray-400"
+                    >
+                      ←
+                    </button>
+                    <h2 className="font-bold sizeloginsub">
+                      Select{" "}
+                      <span className="text-[#b4aa12]">
+                        {selectedBrand.brandName}
+                      </span>{" "}
+                      Model
+                    </h2>
                   </div>
                   <input
-                    type="text" placeholder="Search Models..." value={search}
+                    type="text"
+                    placeholder="Search Models..."
+                    value={search}
                     onChange={(e) => setSearch(e.target.value)}
                     className="w-full border border-gray-300 rounded-xl px-3 py-2.5 outline-none focus:ring-1 focus:ring-[#b4aa12]"
                   />
                   <div className="grid grid-cols-2 gap-4">
                     {selectedBrand.models?.map((model, idx) => (
-                      <div key={idx} onClick={() => { setSelectedModel(model); setOverlayStep("gas"); }}
+                      <div
+                        key={idx}
+                        onClick={() => {
+                          setSelectedModel(model);
+                          setOverlayStep("gas");
+                        }}
                         className="cursor-pointer text-center border border-gray-300 rounded-xl p-3 hover:bg-gray-100 transition-colors"
                       >
                         {model}
@@ -201,14 +271,21 @@ export default function Cars() {
               {overlayStep === "gas" && (
                 <div className="space-y-6 mt-2">
                   <div className="flex items-center gap-2">
-                    <button onClick={() => setOverlayStep("model")} className="text-gray-400">←</button>
+                    <button
+                      onClick={() => setOverlayStep("model")}
+                      className="text-gray-400"
+                    >
+                      ←
+                    </button>
                     <h2 className="font-bold sizeloginsub">Select GasType</h2>
                   </div>
-                  
+
                   <div className="space-y-3">
                     <div className="grid grid-cols-2 gap-4">
                       {selectedBrand.gasType.map((gas) => (
-                        <div key={gas} onClick={() => handleSelectGas(gas)}
+                        <div
+                          key={gas}
+                          onClick={() => handleSelectGas(gas)}
                           className="cursor-pointer text-center border border-gray-300 rounded-xl p-3 hover:bg-[#b4aa12] hover:text-white transition-all"
                         >
                           {gas}
@@ -218,12 +295,21 @@ export default function Cars() {
                   </div>
 
                   <label className="flex items-center gap-3 bg-gray-50 p-4 rounded-xl cursor-pointer mt-4">
-                    <input type="checkbox" checked={isPrimary} onChange={(e) => setIsPrimary(e.target.checked)} className="w-4 h-4 accent-[#b4aa12]" />
-                    <span className="text-[10px] font-black text-gray-600 uppercase">Set as Primary Vehicle</span>
+                    <input
+                      type="checkbox"
+                      checked={isPrimary}
+                      onChange={(e) => setIsPrimary(e.target.checked)}
+                      className="w-4 h-4 accent-[#b4aa12]"
+                    />
+                    <span className="text-[10px] font-black text-gray-600 uppercase">
+                      Set as Primary Vehicle
+                    </span>
                   </label>
-                  
+
                   {formSubmitting && (
-                    <div className="flex justify-center"><Loader2 className="animate-spin text-[#b4aa12]" /></div>
+                    <div className="flex justify-center">
+                      <Loader2 className="animate-spin text-[#b4aa12]" />
+                    </div>
                   )}
                 </div>
               )}

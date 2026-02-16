@@ -22,6 +22,8 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
   const [selectedModel, setSelectedModel] = useState(null);
   const [search, setSearch] = useState("");
   const { checkSession } = useAuthStore();
+  const [isSending, setIsSending] = new useState(false);
+  const [isVerifying, setIsVerifying] = new useState(false);
 
   const [brands, setBrands] = useState([]);
   const filteredBrands = (brands || []).filter((brand) => {
@@ -69,6 +71,7 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
     if (phone.length < 10) return;
 
     try {
+      setIsSending(true);
       const payload = {
         phone,
         name,
@@ -87,6 +90,8 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
       }
     } catch (error) {
       toast.error(error.response?.data?.message || "Something Went Wrong");
+    } finally {
+      setIsSending(false);
     }
   };
 
@@ -95,6 +100,7 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
     if (phone.length < 10) return;
 
     try {
+      setIsSending(true);
       const res = await userApi.sentLoginOtp(phone);
 
       if (res.status === 200) {
@@ -109,6 +115,8 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
         error.response?.data?.message ||
           "Error initiating login. Please try again.",
       );
+    } finally {
+      setIsSending(false);
     }
   };
 
@@ -120,6 +128,7 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
     }
 
     try {
+      setIsVerifying(true);
       let res;
 
       if (name) {
@@ -142,6 +151,8 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
         error.response?.data?.message ||
           "Verification failed on server. Please try again.",
       );
+    } finally {
+      setIsVerifying(false);
     }
   };
 
@@ -253,10 +264,12 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
                   </div>
                   <button
                     type="submit"
-                    disabled={!carDetails || !name || phone.length < 10}
-                    className={`w-full font-semibold py-3 rounded-xl transition cursor-pointer ${carDetails && name && phone.length >= 10 ? "bg-[#b4aa12] text-white hover:bg-[#8e860e]" : "bg-gray-200 text-gray-400"}`}
+                    disabled={
+                      !carDetails || !name || phone.length < 10 || isSending
+                    }
+                    className={`w-full font-semibold py-3 rounded-xl transition cursor-pointer ${!isSending && carDetails && name && phone.length >= 10 ? "bg-[#b4aa12] text-white hover:bg-[#8e860e]" : "bg-gray-200 text-gray-400"}`}
                   >
-                    Continue
+                    {isSending ? <>Sending a OTP...</> : "Register Now"}
                   </button>
                   <p className="mt-2 text-gray-600 logintext">
                     Already have an account?{" "}
@@ -292,10 +305,10 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
                     </div>
                     <button
                       type="submit"
-                      disabled={phone.length < 10}
-                      className={`w-full font-semibold py-3 rounded-xl transition cursor-pointer ${phone.length >= 10 ? "bg-[#b4aa12] text-white hover:bg-[#8e860e]" : "bg-gray-200 text-gray-400"}`}
+                      disabled={phone.length < 10 || isSending}
+                      className={`w-full font-semibold py-3 rounded-xl transition cursor-pointer ${!isSending && phone.length >= 10 ? "bg-[#b4aa12] text-white hover:bg-[#8e860e]" : "bg-gray-200 text-gray-400"}`}
                     >
-                      Send OTP
+                      {isSending ? <>Sending a OTP...</> : "Login Now"}
                     </button>
                   </form>
                   <p className="logintext text-gray-600">
@@ -334,10 +347,10 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
 
                   <button
                     type="submit"
-                    disabled={otp.length < 6}
-                    className={`w-full font-semibold py-3 rounded-xl transition cursor-pointer ${otp.length === 6 ? "bg-[#b4aa12] text-white hover:bg-[#8e860e]" : "bg-gray-200 text-gray-400"}`}
+                    disabled={otp.length < 6 || isVerifying}
+                    className={`w-full font-semibold py-3 rounded-xl transition cursor-pointer ${!isVerifying || otp.length === 6 ? "bg-[#b4aa12] text-white hover:bg-[#8e860e]" : "bg-gray-200 text-gray-400"}`}
                   >
-                    Verify & Continue
+                     {isVerifying ? <>Verifying...</> : "Verify & Continue"}
                   </button>
                 </form>
               )}

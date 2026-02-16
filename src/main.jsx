@@ -10,7 +10,7 @@ import "./assets/css/breadcrumb.css";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
-      <Toaster position="top-right" reverseOrder={false} />
+      <Toaster position="top-center" reverseOrder={false} />
       <App />
     </BrowserRouter>
   </StrictMode>,

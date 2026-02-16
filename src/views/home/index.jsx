@@ -276,7 +276,7 @@ const Home = () => {
             </div>
 
             <div className="w-full xl:w-1/2">
-              <div className="about-two-content">
+              <div className="about-two-content aboutnew ">
                 <div className="pbmit-heading-subheading animation-style2">
                   <h4 className="pbmit-subtitle">Why choose us?</h4>
                   <h2 className="pbmit-title">
@@ -390,7 +390,7 @@ const Home = () => {
         <div className="lg:container mx-auto lg:px-4 px-2">
           <div className="flex flex-col xl:flex-row gap-6 xl:gap-10 mb-10">
             <div className="w-full xl:w-1/2">
-              <div className="pbmit-heading-subheading animation-style4 text-left">
+              <div className="pbmit-heading-subheading animation-style4 text-left aboutf">
                 <h4 className="pbmit-subtitle"> About Us </h4>
                 <h2 className="text-[28px] md:text-[40px] font-bold leading-tight">
                   Top-quality craftsmanship with hands-on care tried and true.
@@ -642,12 +642,12 @@ const Home = () => {
 
             <div className="flex justify-center">
               <button
-                onClick={() => setIsModalOpen(true)}
+                onClick={handleBookingAction}
                 className="pbmit-btn inline-flex items-center cursor-pointer"
               >
                 <span className="pbmit-button-content-wrapper flex items-center">
                   <span className="pbmit-button-text">
-                    Book an Appointment now
+                    {authenticated ? "Order Now" : "Book Car Service"}
                   </span>
                 </span>
               </button>

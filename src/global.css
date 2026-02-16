@@ -345,6 +345,9 @@ footer {
   order: 2;
   font-size: 20px;
 }
+.site-footer .pbmit-contact-widget-lines .pbmit-contact-widget-phone a {
+  color:#b1b1b1;
+}
 
 .site-footer .pbmit-contact-widget-lines .pbmit-contact-widget-email {
   order: 1;
@@ -3251,8 +3254,8 @@ blockquote,
 }
 
 .pbmit-element-posts-wrapper .pbmit-service-style-1 {
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
   margin-bottom: 30px;
 }
 
@@ -7099,4 +7102,10 @@ h4 {
 
 .sizepending{
   font-size:11px;
+}
+a,button{
+  cursor: pointer !important;
+}
+.sizelogincheck{
+  font-size: 22px;
 }

@@ -28,14 +28,15 @@ const Footer = () => {
                         name="EMAIL"
                         placeholder="Enter Your Email Address"
                       />
-                      <button className="pbmit-btn ml-2">
+                      <button className="pbmit-btn ml-2 footerm">
                         <span className="pbmit-button-content-wrapper flex items-center">
                           <span className="pbmit-button-icon">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               width="22.76"
                               height="22.76"
-                              viewBox="0 0 22.76 22.76">
+                              viewBox="0 0 22.76 22.76"
+                            >
                               <title>black-arrow</title>
                               <path
                                 d="M22.34,1A14.67,14.67,0,0,1,12,5.3,14.6,14.6,0,0,1,6.08,4.06,14.68,14.68,0,0,1,1.59,1"
@@ -60,7 +61,9 @@ const Footer = () => {
                               />
                             </svg>
                           </span>
-                          <span className="pbmit-button-text ml-2">Subscribe Now</span>
+                          <span className="pbmit-button-text ml-2">
+                            Subscribe Now
+                          </span>
                         </span>
                       </button>
                     </div>
@@ -78,22 +81,42 @@ const Footer = () => {
                   <div className="textwidget">
                     <ul className="pbmit-social-links flex gap-x-2">
                       <li className="pbmit-social-li pbmit-social-facebook">
-                        <a title="Facebook" href="#" target="_blank" rel="noopener">
+                        <a
+                          title="Facebook"
+                          href="#"
+                          target="_blank"
+                          rel="noopener"
+                        >
                           <Facebook size={20} strokeWidth={1.5} />
                         </a>
                       </li>
                       <li className="pbmit-social-li pbmit-social-twitter">
-                        <a title="Twitter" href="#" target="_blank" rel="noopener">
+                        <a
+                          title="Twitter"
+                          href="#"
+                          target="_blank"
+                          rel="noopener"
+                        >
                           <Twitter size={20} strokeWidth={1.5} />
                         </a>
                       </li>
                       <li className="pbmit-social-li pbmit-social-instagram">
-                        <a title="Instagram" href="#" target="_blank" rel="noopener">
+                        <a
+                          title="Instagram"
+                          href="#"
+                          target="_blank"
+                          rel="noopener"
+                        >
                           <Instagram size={20} strokeWidth={1.5} />
                         </a>
                       </li>
                       <li className="pbmit-social-li pbmit-social-youtube">
-                        <a title="Youtube" href="#" target="_blank" rel="noopener">
+                        <a
+                          title="Youtube"
+                          href="#"
+                          target="_blank"
+                          rel="noopener"
+                        >
                           <Youtube size={20} strokeWidth={1.5} />
                         </a>
                       </li>
@@ -128,13 +151,19 @@ const Footer = () => {
                   <div className="pbmit-timelist-wrapper">
                     <ul className="pbmit-timelist-list">
                       <li>
-                        <span className="pbmit-timelist-time">Mon - Fri: 9.00am - 8.00pm</span>
+                        <span className="pbmit-timelist-time">
+                          Mon - Fri: 9.00am - 8.00pm
+                        </span>
                       </li>
                       <li>
-                        <span className="pbmit-timelist-time">Saturday: 10.00am - 6.00pm</span>
+                        <span className="pbmit-timelist-time">
+                          Saturday: 10.00am - 6.00pm
+                        </span>
                       </li>
                       <li>
-                        <span className="pbmit-timelist-time">Sunday: 10.00am - 4.00pm</span>
+                        <span className="pbmit-timelist-time">
+                          Sunday: 10.00am - 4.00pm
+                        </span>
                       </li>
                     </ul>
                   </div>
@@ -144,9 +173,11 @@ const Footer = () => {
                 <aside className="widget">
                   <h2 className="widget-title">Say Hello</h2>
                   <div className="pbmit-contact-widget-lines">
-                    <div className="pbmit-contact-widget-line pbmit-contact-widget-phone">+255 761 586 464</div>
-                    <div className="pbmit-contact-widget-line pbmit-contact-widget-email">
-                      <a href="mailto:info@autowrench.co.tz" className="__cf_email__">
+                    <div className="pbmit-contact-widget-line pbmit-contact-widget-phone">
+                      <a href="tel:+255 761 586 464">+255 761 586 464</a>
+                    </div>
+                    <div className="pbmit-contact-widget-line pbmit-contact-widget-phone">
+                      <a href="mailto:info@autowrench.co.tz">
                         info@autowrench.co.tz
                       </a>
                     </div>
@@ -163,7 +194,8 @@ const Footer = () => {
                 <div className="w-full">
                   <div className="pbmit-footer-copyright-text-area">
                     {" "}
-                    Copyright © 2025 <a href="/">Auto Wrench</a>, All Rights Reserved.
+                    Copyright © 2025 <a href="/">Auto Wrench</a>, All Rights
+                    Reserved.
                   </div>
                 </div>
               </div>

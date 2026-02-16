@@ -288,7 +288,7 @@ const Package = () => {
                       </div>
                     )}
 
-                    <div className="border-t mt-4 pt-2 space-y-1">
+                    <div className=" mt-4 pt-2 space-y-1">
                       <div className="flex justify-between">
                         <span>Subtotal</span>
                         <span>TZS {formatCurrency(subtotal)}</span>
@@ -297,7 +297,7 @@ const Package = () => {
                         <span>Tax (10%)</span>
                         <span>TZS {formatCurrency(tax)}</span>
                       </div>
-                      <div className="flex justify-between font-bold text-lg border-t pt-2 mt-2">
+                      <div className="flex justify-between font-bold text-lg border-t border-gray-300 pt-2 mt-2">
                         <span>Total</span>
                         <span className="text-[#b4aa12]">
                           TZS {formatCurrency(total)}

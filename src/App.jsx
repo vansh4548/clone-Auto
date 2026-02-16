@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import useAuthStore from "./store/authStore";
 import Home from "./views/home";
 import Layout from "./components/Layout";
@@ -10,14 +10,13 @@ import Checkout from "./views/checkout";
 import Offering from "./views/offering";
 import Contact from "./views/contact";
 import Gallery from "./views/gallery";
-
 import Orders from "./views/orders";
 import Profile from "./views/profile";
 import Cars from "./views/car";
-
+import ScrollToTop from "./components/ScrollToTop"; 
 
 function App() {
-  const { checkSession, session, loading } = useAuthStore();
+  const { checkSession, loading } = useAuthStore();
 
   useEffect(() => {
     checkSession();
@@ -32,28 +31,30 @@ function App() {
   }
 
   return (
-    <Routes>
-
-      <Route element={<Layout />}>
-        <Route path="/" element={<Home />} />
-         <Route path="/about" element={<About />} />
+    <>
+      <ScrollToTop />
+      <Routes>
+        <Route element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
           <Route path="/packages" element={<Package />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/our-offerings" element={<Offering />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/gallery" element={<Gallery/>}/>
-      </Route>
-
-      <Route element={<ProtectedRoute />}>
-        <Route element={<Layout />}>
-          <Route path="/orders" element={<Orders />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/cars" element={<Cars />} />
+          <Route path="/gallery" element={<Gallery />} />
         </Route>
-      </Route>
 
-      <Route path="*" element={<h2>404 - Page not found</h2>} />
-    </Routes>
+        <Route element={<ProtectedRoute />}>
+          <Route element={<Layout />}>
+            <Route path="/orders" element={<Orders />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/cars" element={<Cars />} />
+          </Route>
+        </Route>
+
+        <Route path="*" element={<h2>404 - Page not found</h2>} />
+      </Routes>
+    </>
   );
 }
 

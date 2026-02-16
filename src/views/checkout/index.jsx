@@ -171,7 +171,7 @@ const Checkout = () => {
           </div>
           <div className="w-full xl:w-2/5 mt-6 sm:mt-8 xl:mt-0">
             <div className="sticky top-32 bg-gray-100 rounded-2xl p-10">
-              <h3 className="text-xl font-bold mb-6 sizeloginsub">
+              <h3 className="text-xl font-bold mb-6 sizelogincheck">
                 Booking Summary
               </h3>
 
@@ -234,7 +234,7 @@ const Checkout = () => {
                       </button>
                     </div>
                   )}
-                  <div className="border-t pt-4 space-y-2">
+                  <div className="pt-4 space-y-2">
                     <div className="flex justify-between text-sm text-gray-600">
                       <span>Package Price</span>
                       <span>TZS {formatCurrency(packagePrice)}</span>
@@ -252,7 +252,7 @@ const Checkout = () => {
                       <span>TZS {formatCurrency(tax)}</span>
                     </div>
 
-                    <div className="flex justify-between font-black text-xl border-t pt-4 mt-2">
+                    <div className="flex justify-between font-black text-xl border-t border-gray-300 pt-4 mt-2">
                       <span>Total</span>
                       <span className="text-[#b4aa12]">
                         TZS {formatCurrency(total)}

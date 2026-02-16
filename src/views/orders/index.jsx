@@ -18,6 +18,7 @@ const Orders = () => {
   const [isloading, setIsLoading] = useState(false);
   const [garageData, setGarageData] = useState([]);
   const { primaryCar, setPrimaryCar } = useOrderStore();
+  const [isGarageloading,setIsGarageLoading]=useState(false);
   const formatCurrency = (num) => {
     return Number(num).toLocaleString(undefined, {
       minimumFractionDigits: 2,
@@ -32,7 +33,7 @@ const Orders = () => {
         const data = await getorders();
         setOrders(data);
       } catch (error) {
-        console.error("Failed to load plans");
+        toast.error("Failed to load Order data");
       } finally {
         setIsLoading(false);
       }
@@ -46,15 +47,16 @@ const Orders = () => {
 
   const fetchGarage = async () => {
     try {
-      setIsLoading(true);
+      setIsGarageLoading(true);
       const data = await getUserGarage();
       setGarageData(data || []);
       const active = data?.find((c) => c.isPrimary) || data?.[0];
       setPrimaryCar(active || null);
     } catch (error) {
       toast.error("Failed to load garage data");
-    } finally {
-      setIsLoading(false);
+    } 
+    finally {
+      setIsGarageLoading(false);
     }
   };
 
@@ -77,9 +79,18 @@ const Orders = () => {
         </div>
 
         {isPreBooking && (
-          <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 px-4 pointer-events-auto">
-            <div className="relative bg-white rounded-3xl p-6 w-full max-w-md shadow-2xl animate-in zoom-in-95 duration-200">
-              {isloading && (
+          <div
+            className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 px-4"
+            onClick={() => {
+              setIsPreBooking(false);
+              setIsSwitchingCar(false);
+            }}
+          >
+            <div
+              className="relative bg-white rounded-3xl p-6 w-full max-w-md shadow-2xl animate-in zoom-in-95 duration-200"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {isGarageloading && (
                 <div className="absolute inset-0 bg-white/70 flex items-center justify-center rounded-3xl z-10">
                   <Loader2 className="animate-spin text-[#b4aa12]" size={32} />
                 </div>
@@ -171,21 +182,7 @@ const Orders = () => {
           <div className="flex justify-center py-20">
             <Loader2 className="animate-spin text-[#b4aa12]" size={40} />
           </div>
-        ) : orders.length === 0 ? (
-          <div className="bg-white p-10 rounded-3xl text-center border border-gray-100 ">
-            <Package className="w-8 h-8 text-gray-200 mx-auto mb-3" />
-            <p className="text-sm font-bold text-gray-900">No bookings yet</p>
-            <p className="text-xs text-gray-500 mb-6">
-              Your scheduled services will appear here.
-            </p>
-            <button
-              onClick={() => setIsPreBooking(true)}
-              className="bg-[#b4aa12] text-white px-6 py-2.5 rounded-xl text-xs font-bold"
-            >
-              Start First Booking
-            </button>
-          </div>
-        ) : (
+        ) : orders.length != 0 ? (
           <div className="space-y-4">
             {orders.map((order) => (
               <div
@@ -214,9 +211,11 @@ const Orders = () => {
                       <p className="text-[9px] text-gray-400 font-bold uppercase mb-5 sizeTotal">
                         Total
                       </p>
-                      <p className="text-lg font-black text-black">
-                        <span className="text-[10px] mr-0.5">TZS</span>
-                        {formatCurrency(order.totalAmount)}
+                      <p className="font-black text-black flex items-center">
+                        <span className="text-[15px] mr-0.5">TZS</span>
+                        <span className="text-[20px]">
+                          {formatCurrency(order.totalAmount)}
+                        </span>
                       </p>
                     </div>
                   </div>
@@ -262,6 +261,20 @@ const Orders = () => {
                 </div>
               </div>
             ))}
+          </div>
+        ) : (
+          <div className="bg-white p-10 rounded-3xl text-center border border-gray-100 ">
+            <Package className="w-8 h-8 text-gray-200 mx-auto mb-3" />
+            <p className="text-sm font-bold text-gray-900">No bookings yet</p>
+            <p className="text-xs text-gray-500 mb-6">
+              Your scheduled services will appear here.
+            </p>
+            <button
+              onClick={() => setIsPreBooking(true)}
+              className="bg-[#b4aa12] text-white px-6 py-2.5 rounded-xl text-xs font-bold"
+            >
+              Start First Booking
+            </button>
           </div>
         )}
       </div>

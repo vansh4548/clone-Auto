@@ -16,7 +16,7 @@ const Profile = () => {
 
   return (
     <div className="section-xl min-h-screen bg-gray-50 py-20 mb-pd">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 profilem">
         <div className="max-w-2xl mx-auto bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
           <div className="bg-[#b4aa12] h-32 w-full"></div>
           <div className="px-8 pb-8">
