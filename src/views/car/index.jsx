@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Plus, Fuel, Loader2, Trash2 } from "lucide-react";
+import {
+  Plus,
+  Fuel,
+  Loader2,
+  Trash2,
+  X,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import toast, { Toaster } from "react-hot-toast";
 import * as carApi from "../../utils/api/carApi";
@@ -17,6 +25,8 @@ export default function Cars() {
   const [selectedModel, setSelectedModel] = useState(null);
   const [isPrimary, setIsPrimary] = useState(false);
   const [formSubmitting, setFormSubmitting] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
     fetchGarage();
@@ -33,16 +43,36 @@ export default function Cars() {
       setLoading(false);
     }
   };
+  const fetchMasterCars = async () => {
+    try {
+      setLoading(true);
+      const response = await carApi.getMasterCars(currentPage, search);
+      if (response && response.data) {
+        setMasterCarList(response.data);
+        setTotalPages(response.totalPages || 1);
+      } else if (Array.isArray(response)) {
+        setMasterCarList(response);
+      }
+    } catch (error) {
+      console.error("Failed to fetch car data:", error);
+      toast.error("Could not fetch car list");
+      setMasterCarList([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+  useEffect(() => {
+    if (showForm) {
+      fetchMasterCars();
+    }
+  }, [showForm, currentPage, search]);
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search]);
 
   const handleOpenAddForm = async () => {
     setShowForm(true);
     setOverlayStep("brand");
-    try {
-      const data = await carApi.getMasterCars();
-      setMasterCarList(Array.isArray(data) ? data : []);
-    } catch (error) {
-      toast.error("Could not fetch car list");
-    }
   };
 
   const handleSelectGas = async (gas) => {
@@ -76,6 +106,7 @@ export default function Cars() {
     setSelectedModel(null);
     setSearch("");
     setIsPrimary(false);
+    setCurrentPage(1);
   };
 
   const handleDelete = async (carId) => {
@@ -145,16 +176,16 @@ export default function Cars() {
                 )}
                 <div className="flex flex-col items-center text-center space-y-4">
                   <div className="w-20 h-20 bg-gray-50 rounded-2xl flex items-center justify-center p-4">
-                    {car.logo && (
+                    {car.car?.logo && (
                       <img
-                        src={car.logo}
-                        alt=""
+                        src={car.car.logo}
+                        alt={car.car.brandName}
                         className="w-full h-full object-contain"
                       />
                     )}
                   </div>
-                  <h2 className="sizecar font-black text-gray-900 ">
-                    {car.brandName} {car.model}
+                  <h2 className="sizecar font-black text-gray-900 capitalize">
+                    {car.car?.brandName} ({car.model})
                   </h2>
                   <div className="flex items-center gap-2 text-gray-400">
                     <Fuel size={12} />
@@ -188,7 +219,7 @@ export default function Cars() {
                 onClick={handleCloseForm}
                 className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-xl"
               >
-                ✕
+                <X size={20} />
               </button>
 
               {overlayStep === "brand" && (
@@ -201,29 +232,55 @@ export default function Cars() {
                     onChange={(e) => setSearch(e.target.value)}
                     className="w-full border border-gray-300 rounded-xl px-3 py-2.5 outline-none focus:ring-1 focus:ring-[#b4aa12]"
                   />
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                    {filteredBrands.map((brand) => (
-                      <div
-                        key={brand._id}
-                        onClick={() => {
-                          setSelectedBrand(brand);
-                          setOverlayStep("model");
-                        }}
-                        className="cursor-pointer group flex flex-col items-center border border-gray-300 rounded-xl p-5 hover:bg-gray-100 transition-all"
-                      >
-                        {brand.logo && (
-                          <img
-                            src={brand.logo}
-                            alt=""
-                            className="h-8 mb-2 group-hover:invert"
-                          />
-                        )}
-                        <span className="text-[10px] font-black  text-center">
-                          {brand.brandName}
-                        </span>
-                      </div>
-                    ))}
+
+                  <div>
+                    <div className="grid h-55 overflow-y-auto grid-cols-2 sm:grid-cols-3 gap-4">
+                      {filteredBrands.map((brand) => (
+                        <div
+                          key={brand._id}
+                          onClick={() => {
+                            setSelectedBrand(brand);
+                            setOverlayStep("model");
+                          }}
+                          className="cursor-pointer max-h-25 group flex flex-col items-center border border-gray-300 rounded-xl p-5 hover:bg-gray-100 transition-all"
+                        >
+                          {brand.logo && (
+                            <img src={brand.logo} alt="" className="h-8 mb-2" />
+                          )}
+                          <span className="text-[10px] font-black text-center">
+                            {brand.brandName}
+                          </span>
+                        </div>
+                      ))}
+                      {filteredBrands.length === 0 && !loading && (
+                        <p className="col-span-full text-center text-gray-400 py-4">
+                          No brands found.
+                        </p>
+                      )}
+                    </div>
                   </div>
+
+                  {totalPages > 1 && (
+                    <div className="flex justify-between items-center pt-4 border-t border-gray-100 mt-4">
+                      <button
+                        disabled={currentPage === 1}
+                        onClick={() => setCurrentPage((prev) => prev - 1)}
+                        className="p-2 border border-gray-200 rounded-lg disabled:opacity-30 hover:bg-gray-50 transition-colors"
+                      >
+                        <ChevronLeft size={20} />
+                      </button>
+                      <span className="text-xs font-bold text-gray-500">
+                        Page {currentPage} of {totalPages}
+                      </span>
+                      <button
+                        disabled={currentPage === totalPages}
+                        onClick={() => setCurrentPage((prev) => prev + 1)}
+                        className="p-2 border border-gray-200 rounded-lg disabled:opacity-30 hover:bg-gray-50 transition-colors"
+                      >
+                        <ChevronRight size={20} />
+                      </button>
+                    </div>
+                  )}
                 </div>
               )}
 

@@ -1,16 +1,12 @@
 import axiosInstance from "../api";
 
 export const addCar = async (payload) => {
-  // try {
     const response = await axiosInstance.post("/user/car", payload);
     return response;
-  // } catch (err) {
-  //   throw err;
-  // }
 };
 
-export const getMasterCars = async () => {
-  const response = await axiosInstance.get("/cars/");
+export const getMasterCars = async (page = 1, search = "") => {
+  const response = await axiosInstance.get(`/cars/?page=${page}&search=${search}`);
   return response.data;
 };
 

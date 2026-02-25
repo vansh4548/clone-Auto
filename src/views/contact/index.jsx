@@ -1,9 +1,44 @@
-import React from "react";
-import { ChevronRight, Mail, MapPin, Briefcase } from "lucide-react";
+import { useState } from "react";
+import { ChevronRight, Mail, MapPin, Briefcase, Loader2, CheckCircle2 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
+import { registerSubmisson } from "../../utils/api/submissonApi"; 
+import toast from "react-hot-toast";
 
 const Contact = () => {
-  // JSON data for your existing card design
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: ""
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false); 
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      setIsSubmitting(true);
+      const res = await registerSubmisson(formData);
+      
+      if (res.status === 200 || res.status === 201) {
+        toast.success("Message sent successfully!");
+        setIsSubmitted(true); 
+        setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message || "Failed to send message.");
+      console.error("Submission Error:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const contactInfo = [
     {
       id: "mail",
@@ -49,6 +84,7 @@ const Contact = () => {
 
   return (
     <>
+
       <div className="pbmit-title-bar-wrapper">
         <div className="container mx-auto px-4">
           <div className="pbmit-title-bar-content">
@@ -98,18 +134,6 @@ const Contact = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="pbmit-btn-wrap mt-4">
-                      <div className="pbmit-ihbox-btn">
-                        <a href="#" className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium">
-                          <span className="pbmit-button-text mr-2">Read More</span>
-                          <span className="pbmit-button-icon-wrapper">
-                            <span className="pbmit-button-icon">
-                              <i className="pbmit-base-icon-black-arrow-1" />
-                            </span>
-                          </span>
-                        </a>
-                      </div>
-                    </div>
                   </div>
                 </div>
               </article>
@@ -127,7 +151,7 @@ const Contact = () => {
                   <h4 className="pbmit-subtitle text-blue-600 mb-2">Get in touch</h4>
                   <h2 className="pbmit-title text-3xl font-bold mb-4">Happy to answer all your questions</h2>
                   <div className="pbmit-heading-desc text-gray-600">
-                    We carefully screen all of our cleaners, so you can rest assured that your home would receive the
+                    We carefully screen all of our technicians, so you can rest assured that your vehicle would receive the
                     absolute highest quality of service providing. 
                   </div>
                 </div>
@@ -140,47 +164,120 @@ const Contact = () => {
                 </div>
               </div>
             </div>
+
             <div className="col-md-12 col-xl-7 w-full xl:w-7/12 px-4 mt-8 xl:mt-0">
-              <div className="contact-form-rightbox pbmit-bg-color-light p-18 rounded-4xl shadow-md">
-                <div className="pbmit-heading animation-style2 mb-4 mt-2">
-                  <h3 className="pbmit-title text-2xl font-semibold">Send a message to staff</h3>
-                </div>
-                <p className="py-3 text-gray-700">
-                  Your email address will not be published. Required fields are marked *
-                </p>
-                <form className="contact-form pb-5">
-                  <div className="row flex flex-wrap -mx-2">
-                    <div className="col-md-6 w-full md:w-1/2 px-2 mb-4">
-                      <input type="text" className="form-control w-full border border-gray-300 rounded-4xl p-4" placeholder="Your Name" required />
+              <div className="contact-form-rightbox pbmit-bg-color-light rounded-4xl shadow-md border border-gray-100 p-10 bg-gray-50/30 min-h-[500px] flex flex-col justify-center">
+                
+                {!isSubmitted ? (
+                  <>
+                    <div className="pbmit-heading animation-style2 mb-4 mt-2">
+                      <h3 className="pbmit-title text-2xl font-semibold">Send a message to staff</h3>
                     </div>
-                    <div className="col-md-6 w-full md:w-1/2 px-2 mb-4">
-                      <input type="email" className="form-control w-full border border-gray-300 rounded-4xl p-4" placeholder="Your Email" required />
+                    <p className="py-3 text-gray-700">
+                      Your email address will not be published. Required fields are marked *
+                    </p>
+                    <form className="contact-form pb-5" onSubmit={handleSubmit}>
+                      <div className="row flex flex-wrap -mx-2">
+                        <div className="col-md-6 w-full md:w-1/2 px-2 mb-4">
+                          <input 
+                            type="text" 
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            className="form-control w-full border border-gray-300 rounded-4xl p-4 bg-white focus:ring-2 focus:ring-blue-500 outline-none" 
+                            placeholder="Your Name" 
+                            required 
+                          />
+                        </div>
+                        <div className="col-md-6 w-full md:w-1/2 px-2 mb-4">
+                          <input 
+                            type="email" 
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            className="form-control w-full border border-gray-300 rounded-4xl p-4 bg-white focus:ring-2 focus:ring-blue-500 outline-none" 
+                            placeholder="Your Email" 
+                            required 
+                          />
+                        </div>
+                        <div className="col-md-6 w-full md:w-1/2 px-2 mb-4">
+                          <input 
+                            type="tel" 
+                            name="phone"
+                            value={formData.phone}
+                            onChange={handleChange}
+                            className="form-control w-full border border-gray-300 rounded-4xl p-4 bg-white focus:ring-2 focus:ring-blue-500 outline-none" 
+                            placeholder="Your Phone" 
+                            required 
+                          />
+                        </div>
+                        <div className="col-md-6 w-full md:w-1/2 px-2 mb-4">
+                          <input 
+                            type="text" 
+                            name="subject"
+                            value={formData.subject}
+                            onChange={handleChange}
+                            className="form-control w-full border border-gray-300 rounded-4xl p-4 bg-white focus:ring-2 focus:ring-blue-500 outline-none" 
+                            placeholder="Subject" 
+                            required 
+                          />
+                        </div>
+                        <div className="col-md-12 w-full px-2 mb-4">
+                          <textarea 
+                            name="message"
+                            value={formData.message}
+                            onChange={handleChange}
+                            rows={5} 
+                            className="form-control w-full border border-gray-300 rounded-4xl p-4 bg-white focus:ring-2 focus:ring-blue-500 outline-none" 
+                            placeholder="Message" 
+                            required 
+                          />
+                        </div>
+                      </div>
+                      <button 
+                        type="submit" 
+                        disabled={isSubmitting}
+                        className="pbmit-btn mt-4 inline-flex items-center gap-2 px-8 py-4 bg-blue-600 text-white font-medium rounded-xl hover:bg-blue-700 transition-all disabled:opacity-50"
+                      >
+                        {isSubmitting && <Loader2 className="animate-spin" size={20} />}
+                        <span className="pbmit-button-text">
+                          {isSubmitting ? "Sending..." : "Submit Message"}
+                        </span>
+                      </button>
+                    </form>
+                  </>
+                ) : (
+                  /* Thank You State */
+                  <div className="text-center py-10 animate-in fade-in zoom-in duration-300">
+                    <div className="flex justify-center mb-6">
+                      <div className="bg-green-100 p-4 rounded-full">
+                        <CheckCircle2 className="text-green-600" size={60} />
+                      </div>
                     </div>
-                    <div className="col-md-6 w-full md:w-1/2 px-2 mb-4">
-                      <input type="tel" className="form-control w-full border border-gray-300 rounded-4xl p-4" placeholder="Your Phone" required />
-                    </div>
-                    <div className="col-md-6 w-full md:w-1/2 px-2 mb-4">
-                      <input type="text" className="form-control w-full border border-gray-300 rounded-4xl p-4" placeholder="Subject" required />
-                    </div>
-                    <div className="col-md-12 w-full px-2 mb-4">
-                      <textarea rows={5} className="form-control w-full border border-gray-300 rounded-4xl p-4" placeholder="Message" required />
-                    </div>
+                    <h3 className="text-3xl font-bold text-gray-800 mb-4">Thank You!</h3>
+                    <p className="text-lg text-gray-600 mb-8">
+                      Your message has been received. Our team will get back to you shortly.
+                    </p>
+                    <button 
+                      onClick={() => setIsSubmitted(false)}
+                      className="text-blue-600 font-semibold hover:underline"
+                    >
+                      Send another message
+                    </button>
                   </div>
-                  <button className="pbmit-btn mt-4 inline-flex items-center px-6 py-3 bg-blue-600 text-white font-medium rounded-xl hover:bg-blue-700">
-                    <span className="pbmit-button-text">Get Cost Estimate</span>
-                  </button>
-                </form>
+                )}
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="iframe-section section-lgb pbmit-extend-animation w-full">
+      {/* Map Section */}
+      <section className="iframe-section section-lgb pbmit-extend-animation w-full mt-10">
         <div className="w-full p-0">
           <iframe
             className="w-[95%] rounded-3xl mx-auto h-[450px]"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.12345!2d39.3498817!3d-6.8678335!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwNTInMDQuMiJTIDM5wrAyMCc1OS42IkU!5e0!3m2!1sen!2stz!4v1700000000000"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15844.11654261625!2d39.3144883!3d-6.8871146!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x185c490000000001%3A0x0!2zNsKwNTMnMTMuNiJTIDM5wrAxOCc1Mi4yIkU!5e0!3m2!1sen!2stz!4v1700000000000"
             title="Auto Wrench Garage Location"
             allowFullScreen=""
             loading="lazy"

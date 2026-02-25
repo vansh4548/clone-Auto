@@ -4462,7 +4462,7 @@ body:not(.home) .header-style-1 .site-header-menu:not(.sticky-header) .pbmit-mai
 }
 
 .pbmit-tbar-title {
-  font-size: 60px;
+  font-size: 50px;
   line-height: 60px;
   color: var(--pbmit-white-color);
   text-transform: none;
@@ -7108,4 +7108,8 @@ a,button{
 }
 .sizelogincheck{
   font-size: 22px;
+}
+
+.textTerm{
+  color: #b4aa12;
 }

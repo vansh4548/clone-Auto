@@ -76,3 +76,16 @@ export const verifyLoginOtp = async (phone, otp) => {
     throw error;
   }
 };
+export const getTechnicians = async ({ apiFilters }) => {
+  try {
+    const { search, currentPage } = apiFilters;
+    const params = new URLSearchParams();
+    params.append("role", "technician");
+    if (search) params.append("search", search);
+    if (currentPage) params.append("page", currentPage);
+    const response = await axiosInstance.get(`/user?${params.toString()}`);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};

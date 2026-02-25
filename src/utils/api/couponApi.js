@@ -1,12 +1,13 @@
 import axiosInstance from "../api";
 
-
-export const getcoupons = async () => {
-    try {
-        const response = await axiosInstance.get("/coupon/");
-        return response.data;
-    } catch (error) {
-        console.error("Get orders error:", error);
-        throw error;
-    }
-}
+export const getcoupons = async (page = 1, limit = 10) => {
+  try {
+    const response = await axiosInstance.get(`/coupon/`, {
+      params: { page, limit }
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Get coupons error:", error);
+    throw error;
+  }
+};

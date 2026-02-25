@@ -10,6 +10,7 @@ const Checkout = () => {
   const navigate = useNavigate();
   const { session } = useAuthStore();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
 
   const {
     selectedPackage,
@@ -259,12 +260,28 @@ const Checkout = () => {
                       </span>
                     </div>
                   </div>
-
+                  <div className="mt-6 p-4 bg-gray-50 rounded-xl border border-gray-100">
+                    <div className="flex items-start gap-3">
+                      <input
+                        type="checkbox"
+                        id="checkout-terms"
+                        checked={agreedToTerms}
+                        onChange={(e) => setAgreedToTerms(e.target.checked)}
+                        className="mt-1 h-4 w-4 rounded border-gray-300 text-[#b4aa12] focus:ring-[#b4aa12] cursor-pointer"
+                      />
+                      <label htmlFor="checkout-terms" className="text-xs text-gray-600 cursor-pointer leading-tight">
+                        I have read and agree to the 
+                        <a href="/termsandconditions" className="textTerm hover:underline font-bold mx-1" target="_blank">Terms & Conditions</a> 
+                        and 
+                        <a href="/privacypolicy" className="textTerm hover:underline font-bold mx-1" target="_blank">Privacy Policy</a>.
+                      </label>
+                    </div>
+                  </div>
                   <button
                     onClick={handleCheckout}
-                    disabled={!selectedDate || !selectedSlot || isSubmitting}
-                    className={`w-full mt-4 flex items-center justify-center gap-2 py-3 rounded-xl transition-all font-bold ${
-                      !selectedDate || !selectedSlot || isSubmitting
+                    disabled={!selectedDate || !selectedSlot || isSubmitting || !agreedToTerms}
+                    className={`w-full mt-4 flex items-center justify-center gap-2 py-4 rounded-xl transition-all font-bold ${
+                      !selectedDate || !selectedSlot || isSubmitting || !agreedToTerms
                         ? "bg-gray-300 cursor-not-allowed text-white"
                         : "bg-[#b4aa12] text-white cursor-pointer hover:bg-[#B6AC15] shadow-lg active:scale-95"
                     }`}

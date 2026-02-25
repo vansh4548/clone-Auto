@@ -14,6 +14,9 @@ import Orders from "./views/orders";
 import Profile from "./views/profile";
 import Cars from "./views/car";
 import ScrollToTop from "./components/ScrollToTop"; 
+import TermsAndConditions from "./views/termsandconditions";
+import PrivacyPolicy from "./views/privacypolicy";
+import RefundPolicy from "./views/RefundPolicy";
 
 function App() {
   const { checkSession, loading } = useAuthStore();
@@ -42,6 +45,9 @@ function App() {
           <Route path="/our-offerings" element={<Offering />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/gallery" element={<Gallery />} />
+          <Route path="/RefundPolicy" element={<RefundPolicy />} />
+          <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+          <Route path="/termsandconditions" element={<TermsAndConditions />} />
         </Route>
 
         <Route element={<ProtectedRoute />}>

@@ -133,13 +133,20 @@ const Footer = () => {
                         <a href="/">Home</a>
                       </li>
                       <li>
-                        <a href="/packages">Packages</a>
-                      </li>
-                      <li>
                         <a href="/about">About</a>
                       </li>
                       <li>
                         <a href="/contact">Contact</a>
+                      </li>
+                      {/* Added Legal Links Here */}
+                      <li>
+                        <a href="/privacypolicy">Privacy Policy</a>
+                      </li>
+                      <li>
+                        <a href="/termsandconditions">Terms & Conditions</a>
+                      </li>
+                      <li>
+                        <a href="/RefundPolicy">Refund Policy</a>
                       </li>
                     </ul>
                   </div>
@@ -194,7 +201,7 @@ const Footer = () => {
                 <div className="w-full">
                   <div className="pbmit-footer-copyright-text-area">
                     {" "}
-                    Copyright © 2025 <a href="/">Auto Wrench</a>, All Rights
+                    Copyright © 2026 <a href="/">Auto Wrench</a>, All Rights
                     Reserved.
                   </div>
                 </div>

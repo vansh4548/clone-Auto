@@ -40,6 +40,7 @@ const Orders = () => {
     };
     fetchOrder();
   }, []);
+console.log(orders);
 
   useEffect(() => {
     fetchGarage();
@@ -184,7 +185,7 @@ const Orders = () => {
           </div>
         ) : orders.length != 0 ? (
           <div className="space-y-4">
-            {orders.map((order) => (
+            {orders?.data.map((order) => (
               <div
                 key={order._id}
                 className="bg-white rounded-2xl border border-gray-100 hover:border-[#b4aa12]/30 transition-all overflow-hidden"

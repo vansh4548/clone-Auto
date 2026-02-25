@@ -5,7 +5,7 @@ import toast, { Toaster } from "react-hot-toast";
 import * as userApi from "../utils/api/userApi";
 import * as carApi from "../utils/api/carApi";
 import useAuthStore from "../store/authStore";
-import { X } from "lucide-react";
+import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
 const Modal = ({ isOpen, onClose, onSubmit }) => {
   const navigate = useNavigate();
@@ -22,38 +22,50 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
   const [selectedModel, setSelectedModel] = useState(null);
   const [search, setSearch] = useState("");
   const { checkSession } = useAuthStore();
-  const [isSending, setIsSending] = new useState(false);
-  const [isVerifying, setIsVerifying] = new useState(false);
+  const [isSending, setIsSending] = useState(false);
+  const [isVerifying, setIsVerifying] = useState(false);
 
   const [brands, setBrands] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
+
   const filteredBrands = (brands || []).filter((brand) => {
     const nameToSearch = brand?.brandName || "";
     return nameToSearch.toLowerCase().includes((search || "").toLowerCase());
   });
 
-  useEffect(() => {
-    const fetchMasterCars = async () => {
-      try {
-        setLoading(true);
-        const response = await carApi.getMasterCars();
-        if (Array.isArray(response)) {
-          setBrands(response);
-        } else if (response && response.data) {
-          setBrands(response.data);
-        }
-      } catch (error) {
-        console.error("Failed to fetch car data:", error);
-        toast.error("Failed to fetch car brands.");
-        setBrands([]);
-      } finally {
-        setLoading(false);
+  const fetchMasterCars = async () => {
+    try {
+      setLoading(true);
+      const response = await carApi.getMasterCars(currentPage, search);
+      if (response && response.data) {
+        setBrands(response.data);
+        setTotalPages(response.totalPages || 1);
+      } else if (Array.isArray(response)) {
+        setBrands(response);
       }
-    };
+    } catch (error) {
+      console.error("Failed to fetch car data:", error);
+      toast.error("Failed to fetch car brands.");
+      setBrands([]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  // Re-fetch when page or search changes
+  useEffect(() => {
     if (isOpen) {
       fetchMasterCars();
     }
-  }, [isOpen]);
+  }, [isOpen, currentPage, search]);
+
+  // Reset page when search changes to avoid "no results" on high page numbers
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search]);
 
   useEffect(() => {
     if (!isOpen) {
@@ -63,6 +75,8 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
       setPhone("");
       setName("");
       setCarDetails(null);
+      setCurrentPage(1);
+      setSearch("");
     }
   }, [isOpen]);
 
@@ -262,12 +276,56 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
                         : "Select Car Brand & Model"}
                     </div>
                   </div>
+                  <div className="flex items-start gap-3 mt-4">
+                    <input
+                      type="checkbox"
+                      id="terms"
+                      required
+                      checked={agreedToTerms}
+                      onChange={(e) => setAgreedToTerms(e.target.checked)}
+                      className="mt-0 h-4 w-4 rounded border-gray-300 text-[#b4aa12]  cursor-pointer"
+                    />
+                    <label
+                      htmlFor="terms"
+                      className="text-sm text-gray-600 cursor-pointer leading-tight"
+                    >
+                      I agree to the{" "}
+                      <a
+                        href="/termsandconditions"
+                        className="textTerm hover:underline font-medium "
+                        target="_blank"
+                      >
+                        Terms & Conditions
+                      </a>{" "}
+                      and{" "}
+                      <a
+                        href="/privacypolicy"
+                        className="textTerm hover:underline font-medium"
+                        target="_blank"
+                      >
+                        Privacy Policy
+                      </a>
+                      .
+                    </label>
+                  </div>
                   <button
                     type="submit"
                     disabled={
-                      !carDetails || !name || phone.length < 10 || isSending
+                      !carDetails ||
+                      !name ||
+                      phone.length < 10 ||
+                      isSending ||
+                      !agreedToTerms
                     }
-                    className={`w-full font-semibold py-3 rounded-xl transition cursor-pointer ${!isSending && carDetails && name && phone.length >= 10 ? "bg-[#b4aa12] text-white hover:bg-[#8e860e]" : "bg-gray-200 text-gray-400"}`}
+                    className={`w-full font-semibold py-3 rounded-xl transition cursor-pointer ${
+                      !isSending &&
+                      carDetails &&
+                      name &&
+                      phone.length >= 10 &&
+                      agreedToTerms
+                        ? "bg-[#b4aa12] text-white hover:bg-[#8e860e]"
+                        : "bg-gray-200 text-gray-400"
+                    }`}
                   >
                     {isSending ? <>Sending a OTP...</> : "Register Now"}
                   </button>
@@ -350,7 +408,7 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
                     disabled={otp.length < 6 || isVerifying}
                     className={`w-full font-semibold py-3 rounded-xl transition cursor-pointer ${!isVerifying || otp.length === 6 ? "bg-[#b4aa12] text-white hover:bg-[#8e860e]" : "bg-gray-200 text-gray-400"}`}
                   >
-                     {isVerifying ? <>Verifying...</> : "Verify & Continue"}
+                    {isVerifying ? <>Verifying...</> : "Verify & Continue"}
                   </button>
                 </form>
               )}
@@ -380,10 +438,7 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
                         >
                           <X size={24} />
                         </button>
-                        <h2 className="font-bold sizeloginsub">
-                          {" "}
-                          Select Brand
-                        </h2>
+                        <h2 className="font-bold sizeloginsub">Select Brand</h2>
                         <input
                           type="text"
                           placeholder="Search brands..."
@@ -391,34 +446,57 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
                           onChange={(e) => setSearch(e.target.value)}
                           className="w-full border border-gray-300 rounded-xl px-3 py-2.5 outline-none focus:ring-2 focus:ring-[#b4aa12]"
                         />
-                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                          {filteredBrands.map((brand) => (
-                            <div
-                              key={brand._id}
-                              onClick={() => {
-                                setSelectedBrand(brand);
-                                setOverlayStep("model");
-                              }}
-                              className="cursor-pointer group flex flex-col items-center border-gray-300 border rounded-xl p-5 hover:bg-gray-100 transition-all"
-                            >
-                              {brand.logo && (
-                                <img
-                                  src={brand.logo}
-                                  alt=""
-                                  className="h-8 mb-2 group-hover:invert"
-                                />
-                              )}
-                              <span className="text-[10px] font-black uppercase">
-                                {brand.brandName}
-                              </span>
-                            </div>
-                          ))}
-                          {filteredBrands.length === 0 && (
-                            <p className="col-span-full text-center text-gray-400 py-4">
-                              No brands found.
-                            </p>
-                          )}
+                        <div>
+                          <div className="grid h-55 overflow-y-auto  grid-cols-2 sm:grid-cols-3 gap-4">
+                            {filteredBrands.map((brand) => (
+                              <div
+                                key={brand._id}
+                                onClick={() => {
+                                  setSelectedBrand(brand);
+                                  setOverlayStep("model");
+                                }}
+                                className="cursor-pointer max-h-25 group flex flex-col items-center border-gray-300 border rounded-xl p-5 hover:bg-gray-100 transition-all"
+                              >
+                                {brand.logo && (
+                                  <img
+                                    src={brand.logo}
+                                    alt=""
+                                    className="h-8 mb-2"
+                                  />
+                                )}
+                                <span className="text-[10px] font-black uppercase text-center">
+                                  {brand.brandName}
+                                </span>
+                              </div>
+                            ))}
+                            {filteredBrands.length === 0 && (
+                              <p className="col-span-full text-center text-gray-400 py-4">
+                                No brands found.
+                              </p>
+                            )}
+                          </div>
                         </div>
+                        {totalPages > 1 && (
+                          <div className="flex justify-between items-center pt-4 border-t border-gray-100 mt-4">
+                            <button
+                              disabled={currentPage === 1}
+                              onClick={() => setCurrentPage((prev) => prev - 1)}
+                              className="p-2 border border-gray-200 rounded-lg disabled:opacity-30 hover:bg-gray-50 transition-colors"
+                            >
+                              <ChevronLeft size={20} />
+                            </button>
+                            <span className="text-xs font-bold text-gray-500">
+                              Page {currentPage} of {totalPages}
+                            </span>
+                            <button
+                              disabled={currentPage === totalPages}
+                              onClick={() => setCurrentPage((prev) => prev + 1)}
+                              className="p-2 border border-gray-200 rounded-lg disabled:opacity-30 hover:bg-gray-50 transition-colors"
+                            >
+                              <ChevronRight size={20} />
+                            </button>
+                          </div>
+                        )}
                       </div>
                     )}
 
@@ -432,7 +510,6 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
                             ←
                           </button>
                           <h2 className="font-bold sizeloginsub">
-                            {" "}
                             Select{" "}
                             <span className="text-[#b4aa12]">
                               {selectedBrand.brandName}
@@ -443,8 +520,6 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
                         <input
                           type="text"
                           placeholder="Search Models..."
-                          value={search}
-                          onChange={(e) => setSearch(e.target.value)}
                           className="w-full border border-gray-300 rounded-xl px-3 py-2.5 outline-none focus:ring-2 focus:ring-[#b4aa12]"
                         />
 
@@ -475,7 +550,6 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
                             ←
                           </button>
                           <h2 className="font-bold sizeloginsub">
-                            {" "}
                             Select GasType
                           </h2>{" "}
                         </div>

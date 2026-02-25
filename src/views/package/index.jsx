@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Check, X } from "lucide-react";
+import { Check, X, ChevronLeft, ChevronRight, ShoppingCart } from "lucide-react";
 import { getPackages } from "../../utils/api/packageApi";
-import "swiper/css";
-import "swiper/css/navigation";
 import useOrderStore from "../../store/orderStore";
 import { getcoupons } from "../../utils/api/couponApi";
 import toast, { Toaster } from "react-hot-toast";
-
-import { ShoppingCart } from "lucide-react";
 
 const Package = () => {
   const navigate = useNavigate();
@@ -20,6 +16,10 @@ const Package = () => {
 
   const [showCouponModal, setShowCouponModal] = useState(false);
   const [couponInput, setCouponInput] = useState("");
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [couponLoading, setCouponLoading] = useState(false);
 
   const {
     selectedPackage,
@@ -47,17 +47,28 @@ const Package = () => {
     fetchPlans();
   }, []);
 
-  useEffect(() => {
-    const fetchCoupons = async () => {
-      try {
-        const data = await getcoupons();
-        setCoupons(data.filter((c) => c.status === true));
-      } catch (err) {
-        console.error("Failed to load coupons");
+  const fetchCoupons = async () => {
+    try {
+      setCouponLoading(true);
+      const res = await getcoupons(currentPage, 5);
+      if (res && res.data) {
+        setCoupons(res.data.filter((c) => c.status === true));
+        setTotalPages(res.totalPages || 1);
+      } else if (Array.isArray(res)) {
+        setCoupons(res.filter((c) => c.status === true));
       }
-    };
-    fetchCoupons();
-  }, []);
+    } catch (err) {
+      console.error("Failed to load coupons");
+    } finally {
+      setCouponLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (showCouponModal) {
+      fetchCoupons();
+    }
+  }, [showCouponModal, currentPage]);
 
   const formatCurrency = (num) => {
     return Number(num).toLocaleString(undefined, {
@@ -114,6 +125,7 @@ const Package = () => {
 
   return (
     <>
+      <Toaster position="top-center" />
       <section className="section-xl mb-pd">
         <div className="container mx-auto px-4">
           <div className="flex gap-15 mobilefix">
@@ -187,18 +199,9 @@ const Package = () => {
                               onClick={() => handleSelectPackage(pkg)}
                               className={`pbmit-button cursor-pointer transition-all duration-300 ${
                                 pkg.name === selectedPackage?.name
-                                  ? "!bg-[#212121] !text-white" // Use ! for important if your CSS variables are stubborn
+                                  ? "!bg-[#212121] !text-white"
                                   : ""
                               }`}
-                              style={
-                                pkg.name === selectedPackage?.name
-                                  ? {
-                                      backgroundColor:
-                                        "var(--pbmit-link-color-hover)",
-                                      color: "var(--pbmit-white-color)",
-                                    }
-                                  : {}
-                              }
                             >
                               <span className="pbmit-button-text">
                                 {pkg.name === selectedPackage?.name ? (
@@ -251,7 +254,10 @@ const Package = () => {
                       />
                       <div className="flex justify-end">
                         <button
-                          onClick={() => setShowCouponModal(true)}
+                          onClick={() => {
+                            setCurrentPage(1);
+                            setShowCouponModal(true);
+                          }}
                           className="text-sm underline text-[#b4aa12] mt-1 cursor-pointer hover:text-black transition-colors"
                         >
                           View Coupons
@@ -332,55 +338,70 @@ const Package = () => {
               </button>
             </div>
 
-            <div className="p-6 space-y-3 max-h-[400px] overflow-y-auto">
-              {coupons.length > 0 ? (
-                coupons.map((c) => (
-                  <div
-                    key={c._id}
-                    onClick={() => handleApplyCoupon(c)}
-                    className="group border-2 border-dashed border-gray-200 rounded-xl p-4 flex items-center justify-between hover:border-[#b4aa12] hover:bg-yellow-50/30 transition-all cursor-pointer"
-                  >
-                    <div className="flex flex-col">
-                      <span className="font-semibold text-gray-900">
-                        {c.name}
-                      </span>
-                      <span className="text-sm text-gray-500 uppercase tracking-wider">
-                        Code:{" "}
-                        <span className="font-mono font-bold text-gray-700">
-                          {c.code}
-                        </span>
-                      </span>
-                      <span className="text-[10px] text-gray-400 mt-1">
-                        Min. Spend: TZS {c.minAmt.toLocaleString()}
-                      </span>
-                    </div>
-
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleApplyCoupon(c);
-                        setShowCouponModal(false);
-                      }}
-                      className="bg-[#b4aa12] hover:bg-[#9a9110] text-white px-5 py-2 rounded-lg font-medium text-sm transition-colors shadow-sm active:scale-95 cursor-pointer"
+            <div className="p-6 space-y-3 min-h-[300px] max-h-[400px] overflow-y-auto">
+              {couponLoading ? (
+                <div className="flex flex-col items-center justify-center py-10">
+                  <Loader2 className="animate-spin text-[#b4aa12] mb-2" />
+                  <p className="text-gray-500 text-sm">Loading coupons...</p>
+                </div>
+              ) : coupons.length > 0 ? (
+                <>
+                  {coupons.map((c) => (
+                    <div
+                      key={c._id}
+                      onClick={() => handleApplyCoupon(c)}
+                      className="group border-2 border-dashed border-gray-200 rounded-xl p-4 flex items-center justify-between hover:border-[#b4aa12] hover:bg-yellow-50/30 transition-all cursor-pointer"
                     >
-                      Apply
-                    </button>
-                  </div>
-                ))
+                      <div className="flex flex-col">
+                        <span className="font-semibold text-gray-900">
+                          {c.name}
+                        </span>
+                        <span className="text-sm text-gray-500 uppercase tracking-wider">
+                          Code: <span className="font-mono font-bold text-gray-700">{c.code}</span>
+                        </span>
+                        <span className="text-[10px] text-gray-400 mt-1">
+                          Min. Spend: TZS {c.minAmt.toLocaleString()}
+                        </span>
+                      </div>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleApplyCoupon(c);
+                          setShowCouponModal(false);
+                        }}
+                        className="bg-[#b4aa12] text-white px-5 py-2 rounded-lg font-medium text-sm active:scale-95 transition-all cursor-pointer"
+                      >
+                        Apply
+                      </button>
+                    </div>
+                  ))}
+                  {totalPages > 1 && (
+                    <div className="flex justify-between items-center pt-4 border-t border-gray-100 mt-4">
+                      <button
+                        disabled={currentPage === 1}
+                        onClick={() => setCurrentPage((prev) => prev - 1)}
+                        className="p-2 border border-gray-200 rounded-lg disabled:opacity-30 hover:bg-gray-50 transition-colors cursor-pointer"
+                      >
+                        <ChevronLeft size={20} />
+                      </button>
+                      <span className="text-xs font-bold text-gray-500">
+                        Page {currentPage} of {totalPages}
+                      </span>
+                      <button
+                        disabled={currentPage === totalPages}
+                        onClick={() => setCurrentPage((prev) => prev + 1)}
+                        className="p-2 border border-gray-200 rounded-lg disabled:opacity-30 hover:bg-gray-50 transition-colors cursor-pointer"
+                      >
+                        <ChevronRight size={20} />
+                      </button>
+                    </div>
+                  )}
+                </>
               ) : (
                 <p className="text-center text-gray-500 py-4">
                   No coupons available at the moment.
                 </p>
               )}
-            </div>
-
-            <div className="px-6 py-4 bg-gray-50 border-t border-gray-100">
-              <button
-                onClick={() => setShowCouponModal(false)}
-                className="w-full py-2.5 text-sm font-semibold text-gray-600 hover:text-gray-800 transition-colors cursor-pointer"
-              >
-                Dismiss
-              </button>
             </div>
           </div>
         </div>
@@ -388,5 +409,29 @@ const Package = () => {
     </>
   );
 };
+const Loader2 = ({ className }) => (
+  <svg
+    className={`animate-spin ${className}`}
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    width="24"
+    height="24"
+  >
+    <circle
+      className="opacity-25"
+      cx="12"
+      cy="12"
+      r="10"
+      stroke="currentColor"
+      strokeWidth="4"
+    ></circle>
+    <path
+      className="opacity-75"
+      fill="currentColor"
+      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+    ></path>
+  </svg>
+);
 
 export default Package;
