@@ -16,7 +16,7 @@ const RefundPolicy = () => {
               <div className="pbmit-breadcrumb">
                 <div className="pbmit-breadcrumb-inner">
                   <span><a href="/" className="home text-[#b4aa12] hover:underline">Auto Wrench</a></span>
-                  <span className="sep"><ChevronRight className="inline mx-2" size={18} /></span>
+                  <span className="sep"></span>
                   <span><span className="current-item">Refund Policy</span></span>
                 </div>
               </div>
@@ -25,13 +25,13 @@ const RefundPolicy = () => {
         </div>
       </div>
 
-      <section className="section-lgb py-20 bg-white">
+      <section className="section-lgb py-20 bg-white mb-pd">
         <div className="container mx-auto px-4 max-w-5xl">
-          <div className="bg-gray-50 rounded-4xl p-8 md:p-16 border border-gray-100 shadow-sm">
+          <div className="bg-gray-50 rounded-4xl p-8 md:p-16 border border-gray-100 shadow-sm ">
             <div className="prose prose-blue max-w-none">
               
               <div className="mb-12 border-b border-gray-200 pb-8">
-                <h2 className="text-4xl font-bold text-gray-900 mb-4">Refund & Cancellation Policy</h2>
+                <h2 className="text-3xl font-bold text-gray-900 mb-4 aboutSize">Refund & Cancellation Policy</h2>
                 <p className="text-gray-700 text-lg leading-relaxed">
                   We aim to resolve all disputes through fair inspection and mutual agreement. Below are our terms regarding cancellations and service refunds.
                 </p>
@@ -40,7 +40,7 @@ const RefundPolicy = () => {
               {/* Cancellations */}
               <div className="mb-12">
                 <h4 className="flex items-center gap-3 text-2xl font-bold text-gray-900 mb-6 sizeloginsub">
-                  <CalendarX className="text-[#b4aa12]" size={28} /> Cancellations
+                   Cancellations
                 </h4>
                 <ul className="space-y-4 text-gray-700 text-lg ml-2">
                   <li className="flex gap-2">
@@ -57,7 +57,7 @@ const RefundPolicy = () => {
               {/* Refunds */}
               <div className="mb-12">
                 <h4 className="flex items-center gap-3 text-2xl font-bold text-gray-900 mb-6 sizeloginsub">
-                  <Banknote className="text-[#b4aa12]" size={28} /> Refunds on Services
+                 Refunds on Services
                 </h4>
                 <ul className="space-y-4 text-gray-700 text-lg ml-2">
                   <li className="flex gap-2">
@@ -74,7 +74,7 @@ const RefundPolicy = () => {
               {/* Dispute Resolution */}
               <div className="mb-12">
                 <h4 className="flex items-center gap-3 text-2xl font-bold text-gray-900 mb-6 sizeloginsub">
-                  <Scale className="text-[#b4aa12]" size={28} /> Dispute Resolution
+                  Dispute Resolution
                 </h4>
                 <p className="text-gray-700 text-lg leading-relaxed">
                   If you feel a refund is warranted due to a service failure, please contact our management

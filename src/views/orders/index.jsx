@@ -18,7 +18,7 @@ const Orders = () => {
   const [isloading, setIsLoading] = useState(false);
   const [garageData, setGarageData] = useState([]);
   const { primaryCar, setPrimaryCar } = useOrderStore();
-  const [isGarageloading,setIsGarageLoading]=useState(false);
+  const [isGarageloading, setIsGarageLoading] = useState(false);
   const formatCurrency = (num) => {
     return Number(num).toLocaleString(undefined, {
       minimumFractionDigits: 2,
@@ -40,7 +40,7 @@ const Orders = () => {
     };
     fetchOrder();
   }, []);
-console.log(orders);
+  console.log(orders);
 
   useEffect(() => {
     fetchGarage();
@@ -55,8 +55,7 @@ console.log(orders);
       setPrimaryCar(active || null);
     } catch (error) {
       toast.error("Failed to load garage data");
-    } 
-    finally {
+    } finally {
       setIsGarageLoading(false);
     }
   };

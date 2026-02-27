@@ -5,7 +5,7 @@ const TermsConditions = () => {
   return (
     <>
       {/* Title Bar Section */}
-      <div className="pbmit-title-bar-wrapper">
+      <div className="pbmit-title-bar-wrapper ">
         <div className="container mx-auto px-4">
           <div className="pbmit-title-bar-content">
             <div className="pbmit-title-bar-content-inner">
@@ -27,7 +27,7 @@ const TermsConditions = () => {
       </div>
 
       {/* Main Single Column Content */}
-      <section className="section-lgb py-20 bg-white">
+      <section className="section-lgb py-20 bg-white mb-pd">
         <div className="container mx-auto px-4 max-w-5xl">
           <div className="bg-gray-50 rounded-4xl p-8 md:p-16 border border-gray-100 shadow-sm">
             <div className="prose prose-blue max-w-none">
@@ -42,7 +42,7 @@ const TermsConditions = () => {
               {/* Service Estimates */}
               <div className="mb-12">
                 <h4 className="flex items-center gap-3 text-2xl font-bold text-gray-900 mb-6">
-                  <ClipboardList className="text-[#b4aa12]" size={28} /> Service Estimates
+                   Service Estimates
                 </h4>
                 <ul className="space-y-4 text-gray-700 text-lg ml-2">
                   <li className="flex gap-2">
@@ -59,7 +59,7 @@ const TermsConditions = () => {
               {/* Responsibilities */}
               <div className="mb-12">
                 <h4 className="flex items-center gap-3 text-2xl font-bold text-gray-900 mb-6 sizeloginsub">
-                  <UserCheck className="text-[#b4aa12]" size={28} /> Customer Responsibilities
+                 Customer Responsibilities
                 </h4>
                 <ul className="space-y-4 text-gray-700 text-lg ml-2">
                   <li className="flex gap-2">
@@ -76,7 +76,7 @@ const TermsConditions = () => {
               {/* Parts & Labor */}
               <div className="mb-12">
                 <h4 className="flex items-center gap-3 text-2xl font-bold text-gray-900 mb-6 sizeloginsub">
-                  <Settings className="text-[#b4aa12]" size={28} /> Parts and Labor
+                   Parts and Labor
                 </h4>
                 <ul className="space-y-4 text-gray-700 text-lg ml-2">
                   <li className="flex gap-2">
@@ -93,7 +93,7 @@ const TermsConditions = () => {
               {/* Storage */}
               <div className="mb-12">
                 <h4 className="flex items-center gap-3 text-2xl font-bold text-gray-900 mb-6 sizeloginsub">
-                  <Warehouse className="text-[#b4aa12]" size={28} /> Vehicle Storage
+                 Vehicle Storage
                 </h4>
                 <p className="text-gray-700 text-lg leading-relaxed">
                   Vehicles must be picked up within 48 hours of service completion. Failure to do so may

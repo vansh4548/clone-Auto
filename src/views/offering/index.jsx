@@ -61,7 +61,7 @@ const Offering = () => {
       </div>
 
       {/* Pricing Section */}
-      <section className="pricing-two-bg section-xl">
+      <section className="pricing-two-bg section-xl mb-pd">
         <div className="lg:container mx-auto lg:px-4 px-2">
           <div className="lg:flex gap-15">
             <div className="w-full xl:w-1/3">
@@ -147,7 +147,7 @@ const Offering = () => {
       </section>
 
             {/* Features */}
-      <section className="section">
+      <section className="section mb-pd">
         <div className="row pt-4 lg:flex gap-x-8 lg:container mx-auto">
           <div className="col-md-6 col-xl-4 w-full md:w-1/2 xl:w-1/3 px-4 mb-6">
             <div className="pbmit-ihbox-style-1">
@@ -204,7 +204,7 @@ const Offering = () => {
       </section>
 
       {/* Services */}
-      <section className="section-xl">
+      <section className="section-xl mb-pd">
         <div className="lg:container px-2 mx-auto lg:flex lg:flex-wrap items-center">
           <div className="w-full md:w-7/12">
             <div className="pbmit-heading-subheading animation-style2">
@@ -488,7 +488,7 @@ repairs.
       </section>
 
       {/* Cta */}
-      <section className="lg:mb-40 mb-20">
+      <section className="lg:mb-40 mb-20 mb-pd">
         <div className="container mx-auto px-0 xl:px-3">
           <div className="appointment-two-bg bg-blue-600 p-6 rounded-lg">
             <div className="row flex flex-wrap -mx-4 items-center">

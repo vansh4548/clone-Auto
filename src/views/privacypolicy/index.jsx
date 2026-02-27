@@ -40,7 +40,7 @@ const PrivacyPolicy = () => {
               </p>
               <div className="mb-12">
                 <h4 className="flex items-center gap-3 text-2xl font-bold text-gray-900 mb-6 sizeloginsub">
-                  <FileText className="text-[#b4aa12]" size={28} /> Information We Collect
+                  Information We Collect
                 </h4>
                 <ul className="space-y-4 text-gray-700 text-lg ml-2">
                   <li className="flex gap-2">
@@ -60,7 +60,7 @@ const PrivacyPolicy = () => {
 
               <div className="mb-12">
                 <h4 className="flex items-center gap-3 text-2xl font-bold text-gray-900 mb-6 sizeloginsub">
-                  <ShieldCheck className="text-[#b4aa12]" size={28} /> How We Use Your Information
+                  How We Use Your Information
                 </h4>
                 <ul className="space-y-4 text-gray-700 text-lg ml-2">
                   <li className="flex gap-2">
@@ -85,7 +85,7 @@ const PrivacyPolicy = () => {
               {/* Security */}
               <div className="mb-12">
                 <h4 className="flex items-center gap-3 text-2xl font-bold text-gray-900 mb-6 sizeloginsub">
-                  <Lock className="text-[#b4aa12]" size={28} /> Data Security
+                  Data Security
                 </h4>
                 <p className="text-gray-700 text-lg leading-relaxed">
                   We implement industry-standard security measures to protect your data. We do not sell or

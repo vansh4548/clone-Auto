@@ -53,10 +53,10 @@ const Gallery = () => {
       </div>
 
       {/* Our Garage Highlights */}
-      <section className="section">
+      <section className="section mb-pd">
         <div className="row pt-4 gallerypy lg:flex gap-x-8 lg:container mx-auto">
           {/* Expert Mechanics */}
-          <div className="col-md-6 col-xl-4 w-full md:w-1/2 xl:w-1/3 px-4 mb-6">
+          <div className="col-md-6 col-xl-4 w-full md:w-1/2 xl:w-1/3 px-4 mb-6 ">
             <div className="pbmit-ihbox-style-1">
               <div className="pbmit-ihbox-headingicon items-start space-x-4">
                 <div className="pbmit-ihbox-icon">
@@ -126,7 +126,7 @@ const Gallery = () => {
       </section>
 
       {/* Garage */}
-      <section className="section-xl gallerym">
+      <section className="section-xl gallerym mb-pd">
         <div className="lg:container px-2 mx-auto lg:flex lg:flex-wrap items-center">
           <div className="w-full md:w-7/12">
             <div className="pbmit-heading-subheading animation-style2">
@@ -261,7 +261,7 @@ const Gallery = () => {
       </section>
 
       {/* Team */}
-      <section className="section-xl">
+      <section className="section-xl mb-pd">
         <div className="lg:container px-2 mx-auto lg:flex lg:flex-wrap items-center">
           <div className="w-full md:w-7/12">
             <div className="pbmit-heading-subheading animation-style2">

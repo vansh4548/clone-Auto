@@ -84,7 +84,7 @@ const About = () => {
       </div>
 
       {/* About Us */}
-      <section className="section-xl">
+      <section className="section-xl mb-pd">
         <div className="lg:container mx-auto lg:px-4 px-2">
           <div className="flex flex-wrap">
             <div className="w-full xl:w-1/2">
@@ -195,8 +195,8 @@ const About = () => {
       </section>
 
       {/* Our Story */}
-      <section>
-        <div className="pbmit-entry-content container mx-auto lg:mb-35 mb-20">
+      <section >
+        <div className="pbmit-entry-content container mx-auto lg:mb-35 mb-20 mb-pd">
           <div className="pbmit-service_content px-2">
             <div className="pbmit-heading animation-style2">
               <h3 className="pbmit-title mb-3 text-2xl font-semibold">
@@ -237,7 +237,7 @@ const About = () => {
       </section>
 
       {/* How It Works */}
-      <section className="section-xl ihbox-three-bg pbmit-bg-color-light">
+      <section className="section-xl ihbox-three-bg pbmit-bg-color-light mb-pd">
         <div className="lg:container mx-auto lg:px-4 px-2">
           <div className="pbmit-heading-subheading text-center animation-style2">
             <h4 className="pbmit-subtitle"> How it Works </h4>
@@ -355,8 +355,8 @@ const About = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="section-lg">
-        <div className="lg:container mx-auto lg:px-4 px-2">
+      <section className="section-lg mb-pd">
+        <div className="lg:container mx-auto lg:px-4 px-2 ">
           <div className="testimonial-three-area">
             <div className="flex flex-wrap items-center mb-6">
               <div className="tween-effect-style">
@@ -455,7 +455,7 @@ const About = () => {
       </section>
 
       {/* Cta */}
-      <section className="lg:mb-40 mb-20">
+      <section className="lg:mb-40 mb-20 mb-pd">
         <div className="container mx-auto px-0 xl:px-3">
           <div className="appointment-two-bg bg-blue-600 p-6 rounded-lg">
             <div className="row flex flex-wrap -mx-4 items-center">

@@ -6,6 +6,7 @@ import * as userApi from "../utils/api/userApi";
 import * as carApi from "../utils/api/carApi";
 import useAuthStore from "../store/authStore";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import corolla from "../assets/images/toyota_corolla_fielder.png"; // Keeping as fallback
 
 const Modal = ({ isOpen, onClose, onSubmit }) => {
   const navigate = useNavigate();
@@ -31,6 +32,14 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
 
   const [agreedToTerms, setAgreedToTerms] = useState(false);
 
+  const getImageUrl = (path) => {
+    if (!path) return "";
+    if (path.startsWith("http") || path.startsWith("data:")) return path;
+    const baseUrl = import.meta.env.VITE_SERVER_BASE?.replace(/\/$/, "") || "http://localhost:8000";
+    const cleanPath = path.replace(/^\//, "");
+    return `${baseUrl}/${cleanPath}`;
+  };
+
   const filteredBrands = (brands || []).filter((brand) => {
     const nameToSearch = brand?.brandName || "";
     return nameToSearch.toLowerCase().includes((search || "").toLowerCase());
@@ -55,14 +64,12 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
     }
   };
 
-  // Re-fetch when page or search changes
   useEffect(() => {
     if (isOpen) {
       fetchMasterCars();
     }
   }, [isOpen, currentPage, search]);
 
-  // Reset page when search changes to avoid "no results" on high page numbers
   useEffect(() => {
     setCurrentPage(1);
   }, [search]);
@@ -214,7 +221,7 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
             onClick={onClose}
           >
             <motion.div
-              className="bg-white rounded-2xl shadow-lg w-full max-w-lg p-6 sm:p-10 relative overflow-y-auto max-h-[90vh]"
+              className="bg-white rounded-2xl shadow-lg w-full max-w-lg p-6 sm:p-10 relative overflow-y-auto max-h-[90vh] z-50"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
@@ -455,13 +462,14 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
                                   setSelectedBrand(brand);
                                   setOverlayStep("model");
                                 }}
-                                className="cursor-pointer max-h-25 group flex flex-col items-center border-gray-300 border rounded-xl p-5 hover:bg-gray-100 transition-all"
+                                className="cursor-pointer max-h-25 group flex flex-col items-center justify-center border-gray-300 border rounded-xl p-3 hover:bg-gray-100 transition-all"
                               >
                                 {brand.logo && (
+                                  // Updated to use getImageUrl
                                   <img
-                                    src={brand.logo}
-                                    alt=""
-                                    className="h-8 mb-2"
+                                    src={getImageUrl(brand.logo)}
+                                    alt={brand.brandName}
+                                    className="h-8 mb-2 object-contain"
                                   />
                                 )}
                                 <span className="text-[10px] font-black uppercase text-center">
@@ -523,19 +531,37 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
                           className="w-full border border-gray-300 rounded-xl px-3 py-2.5 outline-none focus:ring-2 focus:ring-[#b4aa12]"
                         />
 
-                        <div className="grid grid-cols-2 gap-4">
-                          {selectedBrand.models?.map((model, idx) => (
-                            <div
-                              key={`${selectedBrand._id}-${model}-${idx}`}
-                              onClick={() => {
-                                setSelectedModel(model);
-                                setOverlayStep("gas");
-                              }}
-                              className="cursor-pointer text-center border-gray-300 border rounded-xl p-3 hover:bg-gray-100 transition-colors"
-                            >
-                              {model}
-                            </div>
-                          ))}
+                        <div className="grid grid-cols-3 gap-4">
+                          {selectedBrand.models?.map((modelItem, idx) => {
+                            const modelName = typeof modelItem === 'object' ? modelItem.modelName : modelItem;
+                            const modelImg = typeof modelItem === 'object' ? modelItem.image : null;
+
+                            return (
+                              <div
+                                key={`${selectedBrand._id}-${modelName}-${idx}`}
+                                onClick={() => {
+                                  setSelectedModel(modelName);
+                                  setOverlayStep("gas");
+                                }}
+                                className="cursor-pointer flex flex-col items-center text-center border-gray-300 border rounded-xl p-3 hover:bg-gray-100 transition-colors"
+                              >
+                                {modelImg ? (
+                                  <img
+                                    src={getImageUrl(modelImg)}
+                                    alt={modelName}
+                                    className="mb-2 h-12 w-auto object-contain"
+                                  />
+                                ) : (
+                                  <img
+                                    src={corolla}
+                                    alt={modelName}
+                                    className="mb-2 h-12 w-auto object-contain opacity-50"
+                                  />
+                                )}
+                                <span className="text-sm font-medium">{modelName}</span>
+                              </div>
+                            );
+                          })}
                         </div>
                       </div>
                     )}

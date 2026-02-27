@@ -195,9 +195,9 @@ const Home = () => {
             <div className="flex justify-center md:justify-start gap-4">
               <button
                 onClick={handleBookingAction}
-                className="pbmit-btn inline-flex items-center cursor-pointer"
+                className="pbmit-btn inline-flex items-center cursor-pointer heroButton"
               >
-                <span className="pbmit-button-content-wrapper flex items-center">
+                <span className="pbmit-button-content-wrapper flex items-center ">
                   <span className="pbmit-button-text">
                     {authenticated ? "Order Now" : "Book Car Service"}
                   </span>
@@ -223,7 +223,7 @@ const Home = () => {
         </div>
       </section>
 {/* Why choose us */}
-      <section className="section-xl about-sec-two">
+      <section className="section-xl about-sec-two mb-pd">
         <div className="lg:container mx-auto lg:px-4 px-2 pbmit-col-stretched-yes pbmit-col-left">
           <div className="flex gap-x-20 whychoose">
             <div className="w-full xl:w-1/2 relative">
@@ -386,13 +386,13 @@ const Home = () => {
       </section>
 
       {/* About Us */}
-      <section className="section-xl overflow-hidden">
+      <section className="section-xl overflow-hidden mb-pd">
         <div className="lg:container mx-auto lg:px-4 px-2">
           <div className="flex flex-col xl:flex-row gap-6 xl:gap-10 mb-10">
             <div className="w-full xl:w-1/2">
               <div className="pbmit-heading-subheading animation-style4 text-left aboutf">
                 <h4 className="pbmit-subtitle"> About Us </h4>
-                <h2 className="text-[28px] md:text-[40px] font-bold leading-tight">
+                <h2 className="text-[28px] md:text-[32px] font-bold leading-tight aboutsize">
                   Top-quality craftsmanship with hands-on care tried and true.
                 </h2>
               </div>
@@ -498,7 +498,7 @@ const Home = () => {
       </section>
 
       {/* Our Services */}
-      <section className="section-lg-1 max-w-full overflow-hidden">
+      <section className="section-lg-1 max-w-full overflow-hidden mb-pd">
         <div className="lg:container px-2 pbmit-col-stretched-yes pbmit-col-right lg:px-4 mx-auto">
           {/* Heading Row */}
           <div className="flex flex-wrap items-center">
@@ -657,7 +657,7 @@ const Home = () => {
       </section>
 
       {/* Pricing */}
-      <section className="pricing-two-bg section-xl">
+      <section className="pricing-two-bg section-xl mb-pd">
         <div className="lg:container mx-auto lg:px-4 px-2">
           <div className="lg:flex gap-15">
             <div className="w-full xl:w-1/3">
@@ -743,7 +743,7 @@ const Home = () => {
       </section>
 
       {/* How It Works */}
-      <section className="section-xl ihbox-three-bg pbmit-bg-color-light">
+      <section className="section-xl ihbox-three-bg pbmit-bg-color-light mb-pd">
         <div className="lg:container mx-auto lg:px-2 px-2">
           <div className="pbmit-heading-subheading text-center animation-style2">
             <h4 className="pbmit-subtitle"> How it Works </h4>
@@ -861,7 +861,7 @@ const Home = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="section-lg">
+      <section className="section-lg mb-pd">
         <div className="lg:container px-2 mx-auto lg:px-4">
           <div className="testimonial-three-area">
             <div className="flex flex-wrap items-center mb-6">

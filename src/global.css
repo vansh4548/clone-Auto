@@ -522,7 +522,7 @@ h1 {
 }
 
 h2 {
-  font-size: 40px;
+  font-size: 32px;
   line-height: 50px;
   letter-spacing: -1px;
 }
@@ -3906,7 +3906,7 @@ blockquote,
   margin: 0;
   padding: 60px 0 40px 0;
   border: 0;
-  font-weight: 600;
+  font-weight: 300;
   color: var(--pbmit-blackish-color);
 }
 
@@ -3988,12 +3988,12 @@ blockquote,
 } */
 
 .pbmit-testimonial-style-2 .pbminfotech-testimonial-text {
-  font-size: 24px;
-  line-height: 36px;
+  font-size: 18px;
+  line-height: 30px;
   margin: 0;
   padding: 60px 0 40px 0;
   border: 0;
-  font-weight: 600;
+  font-weight: 300;
   color: var(--pbmit-blackish-color);
 }
 
@@ -5803,7 +5803,7 @@ body:not(.home) .header-style-1 .site-header-menu:not(.sticky-header) .pbmit-mai
 }
 
 .pbminfotech-ele-ptable-style-3 .pbminfotech-ptable-price {
-  font-size: 50px;
+  font-size: 40px;
   line-height: 72px;
 }
 
@@ -7112,4 +7112,8 @@ a,button{
 
 .textTerm{
   color: #b4aa12;
+}
+
+.aboutsize{
+  font-size: 32px;
 }

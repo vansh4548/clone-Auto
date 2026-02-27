@@ -37,7 +37,7 @@ const Header = () => {
       />
 
       <header
-        className={`sticky top-0 bg-black border-b border-[#1d1d1d] z-50 transition-all duration-300 ${
+        className={`sticky top-0 bg-black border-b border-[#1d1d1d] z-40 transition-all duration-300  ${
           isScrolled ? "shadow-md" : ""
         }`}
       >

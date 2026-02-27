@@ -768,6 +768,7 @@ body {
   /*=== Section-Title ===*/
   .pbmit-heading-subheading .pbmit-heading-desc br {
     display: none;
+    
   }
 
   /*=== Title Bar ===*/
@@ -1005,6 +1006,7 @@ body {
   .pbmit-heading-subheading .pbmit-title {
     font-size: 44px;
     line-height: 46px;
+    
   }
 
   /*=== Section Padding ===*/
@@ -1260,6 +1262,7 @@ body {
   .pbmit-heading-subheading .pbmit-title {
     font-size: 40px;
     line-height: 42px;
+    
   }
   .whychoose {
     display: block;
@@ -1401,6 +1404,13 @@ body {
   /*=== Section Title ===*/
   .pbmit-heading-subheading {
     margin-bottom: 30px;
+    padding-top: 0px;
+    /* padding-bottom: 30px; */
+  }
+  .pbmit-heading-subheadingabout {
+
+      padding-top: 40px;
+   
   }
 
   .pbmit-heading-subheading .pbmit-title {
@@ -2415,6 +2425,9 @@ body {
   .mb-pd {
     padding: 0.5rem !important;
   }
+   .heroButton{
+    margin-bottom: 10px !important ;
+  }
   .aboutnew {
     padding-left: 0%;
     padding-right: 0%;
@@ -2447,4 +2460,8 @@ body {
     height: 90vh;
     align-content: center;
   }
+  .heroButton{
+    margin-bottom: 10px !important ;
+  }
 }
+
