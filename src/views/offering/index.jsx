@@ -5,8 +5,14 @@ import "../../assets/css/pricing.css";
 import "../../assets/css/cta.css";
 import { getPackages } from "../../utils/api/packageApi"; 
 
-import ExperiencedStaff from "../../assets/images/experienced-staff.webp";
-import QualityProducts from "../../assets/images/quality-staff.webp";
+import AirConditioning from "../../assets/images/services/AirConditioning.png";
+import Brakeservices from "../../assets/images/services/Brakeservices.png";
+import EngineDiagnosticsRepairs from "../../assets/images/services/EngineDiagnosticsRepairs.png";
+import GeneralVehicleInspections from "../../assets/images/services/GeneralVehicleInspections.png";
+import oilchangelubrication from "../../assets/images/services/oilchangelubrication.png";
+import SuspensionSteeringRepairs from "../../assets/images/services/SuspensionSteeringRepairs.png";
+import TransmissionServices from "../../assets/images/services/TransmissionServices.png";
+import TyreServices from "../../assets/images/services/TyreServices.png";
 
 import Skilled from "../../assets/images/Skilledtechnicians.svg";
 import Parts from "../../assets/images/AdvancedEquipment.svg";
@@ -237,7 +243,7 @@ const Offering = () => {
                   <div className="pbmit-service-image-wrapper relative">
                     <div className="pbmit-featured-img-wrapper">
                       <div className="pbmit-featured-wrapper">
-                        <img src={ExperiencedStaff} className="w-full h-auto object-cover" alt="" />
+                        <img src={TyreServices} className="w-full h-auto object-cover" alt="" />
                       </div>
                     </div>
                     <a className="pbmit-link absolute inset-0" href="service-details.html" />
@@ -269,7 +275,7 @@ const Offering = () => {
                   <div className="pbmit-service-image-wrapper relative">
                     <div className="pbmit-featured-img-wrapper">
                       <div className="pbmit-featured-wrapper">
-                        <img src={ExperiencedStaff} className="w-full h-auto object-cover" alt="" />
+                        <img src={AirConditioning} className="w-full h-auto object-cover" alt="" />
                       </div>
                     </div>
 
@@ -302,7 +308,7 @@ const Offering = () => {
                   <div className="pbmit-service-image-wrapper relative">
                     <div className="pbmit-featured-img-wrapper">
                       <div className="pbmit-featured-wrapper">
-                        <img src={QualityProducts} className="w-full h-auto object-cover" alt="" />
+                        <img src={oilchangelubrication} className="w-full h-auto object-cover" alt="" />
                       </div>
                     </div>
 
@@ -335,7 +341,7 @@ const Offering = () => {
                   <div className="pbmit-service-image-wrapper relative">
                     <div className="pbmit-featured-img-wrapper">
                       <div className="pbmit-featured-wrapper">
-                        <img src={QualityProducts} className="w-full h-auto object-cover" alt="" />
+                        <img src={TransmissionServices} className="w-full h-auto object-cover" alt="" />
                       </div>
                     </div>
 
@@ -368,7 +374,7 @@ const Offering = () => {
                   <div className="pbmit-service-image-wrapper relative">
                     <div className="pbmit-featured-img-wrapper">
                       <div className="pbmit-featured-wrapper">
-                        <img src={QualityProducts} className="w-full h-auto object-cover" alt="" />
+                        <img src={Brakeservices} className="w-full h-auto object-cover" alt="" />
                       </div>
                     </div>
 
@@ -402,7 +408,7 @@ const Offering = () => {
                   <div className="pbmit-service-image-wrapper relative">
                     <div className="pbmit-featured-img-wrapper">
                       <div className="pbmit-featured-wrapper">
-                        <img src={QualityProducts} className="w-full h-auto object-cover" alt="" />
+                        <img src={SuspensionSteeringRepairs} className="w-full h-auto object-cover" alt="" />
                       </div>
                     </div>
 
@@ -435,7 +441,7 @@ const Offering = () => {
                   <div className="pbmit-service-image-wrapper relative">
                     <div className="pbmit-featured-img-wrapper">
                       <div className="pbmit-featured-wrapper">
-                        <img src={QualityProducts} className="w-full h-auto object-cover" alt="" />
+                        <img src={GeneralVehicleInspections} className="w-full h-auto object-cover" alt="" />
                       </div>
                     </div>
 
@@ -468,7 +474,7 @@ const Offering = () => {
                   <div className="pbmit-service-image-wrapper relative">
                     <div className="pbmit-featured-img-wrapper">
                       <div className="pbmit-featured-wrapper">
-                        <img src={QualityProducts} className="w-full h-auto object-cover" alt="" />
+                        <img src={EngineDiagnosticsRepairs} className="w-full h-auto object-cover" alt="" />
                       </div>
                     </div>
 

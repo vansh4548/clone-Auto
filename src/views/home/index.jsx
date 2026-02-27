@@ -16,7 +16,17 @@ import "../../assets/css/pricing.css";
 import "../../assets/css/about.css";
 import "../../assets/css/testimonials.css";
 
-import Maintenance from "../../assets/images/maintenance.webp";
+import AirConditioning from "../../assets/images/services/AirConditioning.png";
+import Brakeservices from "../../assets/images/services/Brakeservices.png";
+import EngineDiagnosticsRepairs from "../../assets/images/services/EngineDiagnosticsRepairs.png";
+import GeneralVehicleInspections from "../../assets/images/services/GeneralVehicleInspections.png";
+import oilchangelubrication from "../../assets/images/services/oilchangelubrication.png";
+import SuspensionSteeringRepairs from "../../assets/images/services/SuspensionSteeringRepairs.png";
+import TransmissionServices from "../../assets/images/services/TransmissionServices.png";
+import TyreServices from "../../assets/images/services/TyreServices.png";
+
+
+
 import ExperiencedStaff from "../../assets/images/about/1.png";
 import QualityProducts from "../../assets/images/about/8.png";
 import ModernEquipment from "../../assets/images/about/4.png";
@@ -75,7 +85,7 @@ const Home = () => {
       number: "01",
       category: "Accessories",
       title: "Tyre Services",
-      img: Maintenance,
+      img: TyreServices,
       iconClass: "pbmit-karsfix-icon-repair",
       link: "service-details.html",
       catLink: "services.html",
@@ -85,7 +95,7 @@ const Home = () => {
       number: "02",
       category: "Maintenance",
       title: "Air Conditioning",
-      img: Maintenance,
+      img: AirConditioning,
       iconClass: "pbmit-karsfix-icon-tyre",
       link: "service-details.html",
       catLink: "services.html",
@@ -95,7 +105,7 @@ const Home = () => {
       number: "03",
       category: "Maintenance",
       title: "Oil Change & Lubrication",
-      img: Maintenance,
+      img: oilchangelubrication,
       iconClass: "pbmit-karsfix-icon-tyre",
       link: "service-details.html",
       catLink: "services.html",
@@ -105,7 +115,7 @@ const Home = () => {
       number: "04",
       category: "Maintenance",
       title: "Transmission Services",
-      img: Maintenance,
+      img: TransmissionServices,
       iconClass: "pbmit-karsfix-icon-tyre",
       link: "service-details.html",
       catLink: "services.html",
@@ -115,7 +125,7 @@ const Home = () => {
       number: "05",
       category: "Maintenance",
       title: "Brake Services",
-      img: Maintenance,
+      img: Brakeservices,
       iconClass: "pbmit-karsfix-icon-tyre",
       link: "service-details.html",
       catLink: "services.html",
@@ -125,7 +135,7 @@ const Home = () => {
       number: "06",
       category: "Maintenance",
       title: "Suspension & Steering Repairs",
-      img: Maintenance,
+      img: SuspensionSteeringRepairs,
       iconClass: "pbmit-karsfix-icon-tyre",
       link: "service-details.html",
       catLink: "services.html",
@@ -135,7 +145,7 @@ const Home = () => {
       number: "05",
       category: "Maintenance",
       title: "Engine Diagnostics & Repairs",
-      img: Maintenance,
+      img: SuspensionSteeringRepairs,
       iconClass: "pbmit-karsfix-icon-tyre",
       link: "service-details.html",
       catLink: "services.html",
@@ -145,7 +155,7 @@ const Home = () => {
       number: "06",
       category: "Maintenance",
       title: "General Vehicle Inspections",
-      img: Maintenance,
+      img: GeneralVehicleInspections,
       iconClass: "pbmit-karsfix-icon-tyre",
       link: "service-details.html",
       catLink: "services.html",
