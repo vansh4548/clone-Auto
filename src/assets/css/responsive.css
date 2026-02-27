@@ -2425,6 +2425,16 @@ body {
   .mb-pd {
     padding: 0.5rem !important;
   }
+  .m-sp {
+margin-top: 80px !important;
+margin-bottom: 80px !important;
+}
+.m-spp {
+padding-top: 80px !important;
+padding-bottom: 80px !important;
+}
+.m-spt {
+margin-top: 40px;}
    .heroButton{
     margin-bottom: 10px !important ;
   }

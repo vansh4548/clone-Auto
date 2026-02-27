@@ -1,6 +1,6 @@
 .pbmit-title-bar-wrapper {
     background-color: rgba(0, 0, 0, .5);
-    background-image: url('../images//breadcrumb.jpg');
+    /* background-image: url('../images//breadcrumb.jpg'); */
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -8,6 +8,30 @@
     position: relative;
     z-index: 2
 }
+.contact-bg{
+    background-image: url('../images/Contactus.png');
+}
+.about-bg{
+    background-image: url('../images/Aboutus.png');
+}
+.service-bg{
+    background-image: url('../images/Ourservice.png');
+}
+.workshop-bg{
+    background-image: url('../images/OurWorkshop.png');
+}
+.policy-bg{
+    background-image: url('../images/PrivacyPolicy.png');
+}
+
+.terms-bg{
+    background-image: url('../images/Terms&Condition.png');
+}
+.refund-bg{
+    background-image: url('../images/RefundPolicy.png');
+}
+
+
 
 .pbmit-title-bar-wrapper:before {
     content: "";

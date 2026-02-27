@@ -4,9 +4,9 @@ import { ChevronRight, CalendarX, Banknote, Scale } from "lucide-react";
 const RefundPolicy = () => {
   return (
     <>
-      <div className="pbmit-title-bar-wrapper">
+      <div className="pbmit-title-bar-wrapper refund-bg">
         <div className="container mx-auto px-4">
-          <div className="pbmit-title-bar-content">
+          <div className="pbmit-title-bar-content ">
             <div className="pbmit-title-bar-content-inner">
               <div className="pbmit-tbar">
                 <div className="pbmit-tbar-inner container mx-auto px-4">
@@ -27,8 +27,8 @@ const RefundPolicy = () => {
 
       <section className="section-lgb py-20 bg-white mb-pd">
         <div className="container mx-auto px-4 max-w-5xl">
-          <div className="bg-gray-50 rounded-4xl p-8 md:p-16 border border-gray-100 shadow-sm ">
-            <div className="prose prose-blue max-w-none">
+          <div className="bg-gray-50 rounded-4xl p-8 md:p-16 border border-gray-100 shadow-sm m-sp">
+            <div className="prose prose-blue max-w-none m-spp">
               
               <div className="mb-12 border-b border-gray-200 pb-8">
                 <h2 className="text-3xl font-bold text-gray-900 mb-4 aboutSize">Refund & Cancellation Policy</h2>

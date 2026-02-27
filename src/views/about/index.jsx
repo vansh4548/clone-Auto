@@ -5,12 +5,13 @@ import { Navigation, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 
-import ExperiencedStaff from "../../assets/images/experienced-staff.webp";
-import QualityProducts from "../../assets/images/quality-staff.webp";
-import ModernEquipment from "../../assets/images/modern-equipment.webp";
-import ArianaGreen from "../../assets/images/ariana-green.webp";
-import AdelineWood from "../../assets/images/adeline-wood.webp";
-import EvangelineLee from "../../assets/images/evangeline-lee.webp";
+
+import ExperiencedStaff from "../../assets/images/about/1.png";
+import QualityProducts from "../../assets/images/about/8.png";
+import ModernEquipment from "../../assets/images/about/4.png";
+import ArianaGreen from "../../assets/images/about/2.png";
+import AdelineWood from "../../assets/images/about/3.png";
+import EvangelineLee from "../../assets/images/about/6.png";
 import TestimonialBg from "../../assets/images/testimonial-bg.webp";
 
 const About = () => {
@@ -43,7 +44,7 @@ const About = () => {
   return (
     <>
       {/* Breadcrumb */}
-      <div className="pbmit-title-bar-wrapper">
+      <div className="pbmit-title-bar-wrapper about-bg">
         <div className="container mx-auto px-4">
           <div className="pbmit-title-bar-content">
             <div className="pbmit-title-bar-content-inner">
@@ -84,7 +85,7 @@ const About = () => {
       </div>
 
       {/* About Us */}
-      <section className="section-xl mb-pd">
+      <section className="section-xl mb-pd m-sp">
         <div className="lg:container mx-auto lg:px-4 px-2">
           <div className="flex flex-wrap">
             <div className="w-full xl:w-1/2">
@@ -230,15 +231,15 @@ const About = () => {
             </p>
           </div>
           <div className="grid grid-cols-2 lg:gap-x-10 gap-x-5 mt-15 px-2">
-            <img src={ExperiencedStaff} className="w-full rounded-2xl" />
-            <img src={QualityProducts} className="w-full rounded-2xl" />
+            <img src={AdelineWood} className="w-full rounded-2xl" />
+            <img src={EvangelineLee} className="w-full rounded-2xl" />
           </div>
         </div>
       </section>
 
       {/* How It Works */}
-      <section className="section-xl ihbox-three-bg pbmit-bg-color-light mb-pd">
-        <div className="lg:container mx-auto lg:px-4 px-2">
+      <section className="section-xl ihbox-three-bg pbmit-bg-color-light mb-pd ">
+        <div className="lg:container mx-auto lg:px-4 px-2 m-spp">
           <div className="pbmit-heading-subheading text-center animation-style2">
             <h4 className="pbmit-subtitle"> How it Works </h4>
             <h2 className="pbmit-title">
@@ -355,7 +356,7 @@ const About = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="section-lg mb-pd">
+      <section className="section-lg mb-pd m-sp">
         <div className="lg:container mx-auto lg:px-4 px-2 ">
           <div className="testimonial-three-area">
             <div className="flex flex-wrap items-center mb-6">
@@ -455,7 +456,7 @@ const About = () => {
       </section>
 
       {/* Cta */}
-      <section className="lg:mb-40 mb-20 mb-pd">
+      <section className="lg:mb-40 mb-20 mb-pd ">
         <div className="container mx-auto px-0 xl:px-3">
           <div className="appointment-two-bg bg-blue-600 p-6 rounded-lg">
             <div className="row flex flex-wrap -mx-4 items-center">

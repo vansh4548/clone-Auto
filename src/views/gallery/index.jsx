@@ -8,13 +8,16 @@ import QualityProducts from "../../assets/images/quality-staff.webp";
 import BatteryReplacement from "../../assets/images/battery-replacement.webp";
 import { FaUserAlt, FaCog, FaCarAlt } from "react-icons/fa";
 
+import Skilled from "../../assets/images/ExpertMechanics.svg";
+import Parts from "../../assets/images/BestQualityParts.svg";
+import Experience from "../../assets/images/Experience.svg";
 const Gallery = () => {
   return (
     <>
       {/* Breadcrumb */}
-      <div className="pbmit-title-bar-wrapper">
+      <div className="pbmit-title-bar-wrapper workshop-bg">
         <div className="container mx-auto px-4">
-          <div className="pbmit-title-bar-content">
+          <div className="pbmit-title-bar-content ">
             <div className="pbmit-title-bar-content-inner">
               <div className="pbmit-tbar">
                 <div className="pbmit-tbar-inner container mx-auto px-4">
@@ -53,15 +56,16 @@ const Gallery = () => {
       </div>
 
       {/* Our Garage Highlights */}
-      <section className="section mb-pd">
+      <section className="section mb-pd ">
         <div className="row pt-4 gallerypy lg:flex gap-x-8 lg:container mx-auto">
           {/* Expert Mechanics */}
           <div className="col-md-6 col-xl-4 w-full md:w-1/2 xl:w-1/3 px-4 mb-6 ">
             <div className="pbmit-ihbox-style-1">
               <div className="pbmit-ihbox-headingicon items-start space-x-4">
                 <div className="pbmit-ihbox-icon">
-                  <div className="pbmit-ihbox-icon-wrapper pbmit-icon-type-icon text-4xl text-blue-600">
-                    <FaUserAlt className="pbmit-karsfix-icon pbmit-karsfix-icon-worker" />
+                  <div className="pbmit-ihbox-icon-wrapper pbmit-icon-type-icon text-4xl text-blue-600 p-4">
+                    {/* <FaUserAlt className="pbmit-karsfix-icon pbmit-karsfix-icon-worker" /> */}
+                    <img src={Skilled} alt="" />
                   </div>
                 </div>
                 <div className="pbmit-ihbox-contents">
@@ -83,8 +87,8 @@ const Gallery = () => {
             <div className="pbmit-ihbox-style-1">
               <div className="pbmit-ihbox-headingicon items-start space-x-4">
                 <div className="pbmit-ihbox-icon">
-                  <div className="pbmit-ihbox-icon-wrapper pbmit-icon-type-icon text-4xl text-blue-600">
-                    <FaCog className="pbmit-karsfix-icon pbmit-karsfix-icon-nut" />
+                  <div className="pbmit-ihbox-icon-wrapper pbmit-icon-type-icon text-4xl text-blue-600 p-4">
+                   <img src={Parts} alt="" />
                   </div>
                 </div>
                 <div className="pbmit-ihbox-contents">
@@ -105,8 +109,8 @@ const Gallery = () => {
             <div className="pbmit-ihbox-style-1">
               <div className="pbmit-ihbox-headingicon items-start space-x-4">
                 <div className="pbmit-ihbox-icon">
-                  <div className="pbmit-ihbox-icon-wrapper pbmit-icon-type-icon text-4xl text-blue-600">
-                    <FaCarAlt className="pbmit-karsfix-icon pbmit-karsfix-icon-car-lifter" />
+                  <div className="pbmit-ihbox-icon-wrapper pbmit-icon-type-icon text-4xl text-blue-600 p-4">
+                    <img src={Experience} alt="" />
                   </div>
                 </div>
                 <div className="pbmit-ihbox-contents">
@@ -126,7 +130,7 @@ const Gallery = () => {
       </section>
 
       {/* Garage */}
-      <section className="section-xl gallerym mb-pd">
+      <section className="section-xl gallerym mb-pd m-spt">
         <div className="lg:container px-2 mx-auto lg:flex lg:flex-wrap items-center">
           <div className="w-full md:w-7/12">
             <div className="pbmit-heading-subheading animation-style2">
@@ -261,7 +265,7 @@ const Gallery = () => {
       </section>
 
       {/* Team */}
-      <section className="section-xl mb-pd">
+      <section className="section-xl mb-pd m-spt">
         <div className="lg:container px-2 mx-auto lg:flex lg:flex-wrap items-center">
           <div className="w-full md:w-7/12">
             <div className="pbmit-heading-subheading animation-style2">
@@ -382,6 +386,9 @@ const Gallery = () => {
           </div>
         </div>
       </section>
+      <div className=" m-spt">
+
+      </div>
     </>
   );
 };

@@ -17,17 +17,20 @@ import "../../assets/css/about.css";
 import "../../assets/css/testimonials.css";
 
 import Maintenance from "../../assets/images/maintenance.webp";
-import ExperiencedStaff from "../../assets/images/experienced-staff.webp";
-import QualityProducts from "../../assets/images/quality-staff.webp";
-import ModernEquipment from "../../assets/images/modern-equipment.webp";
+import ExperiencedStaff from "../../assets/images/about/1.png";
+import QualityProducts from "../../assets/images/about/8.png";
+import ModernEquipment from "../../assets/images/about/4.png";
 import ArianaGreen from "../../assets/images/ariana-green.webp";
 import AdelineWood from "../../assets/images/adeline-wood.webp";
 import EvangelineLee from "../../assets/images/evangeline-lee.webp";
 import TestimonialBg from "../../assets/images/testimonial-bg.webp";
-import Hero from "../../assets/images/hero.png";
-import HeroLight from "../../assets/images/hero-light2.png";
+import Hero from "../../assets/images/1.png";
+import HeroLight from "../../assets/images/2.png";
 
 import { getPackages } from "../../utils/api/packageApi";
+import Skilled from "../../assets/images/ExpertMechanics.svg";
+import Parts from "../../assets/images/BestQualityParts.svg";
+import Experience from "../../assets/images/Experience.svg";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -223,7 +226,7 @@ const Home = () => {
         </div>
       </section>
 {/* Why choose us */}
-      <section className="section-xl about-sec-two mb-pd">
+      <section className="section-xl about-sec-two mb-pd m-sp">
         <div className="lg:container mx-auto lg:px-4 px-2 pbmit-col-stretched-yes pbmit-col-left">
           <div className="flex gap-x-20 whychoose">
             <div className="w-full xl:w-1/2 relative">
@@ -233,12 +236,8 @@ const Home = () => {
                     <div className="pbmit-ihbox-headingicon">
                       <div className="pbmit-ihbox-wrap">
                         <div className="pbmit-ihbox-icon">
-                          <div className="pbmit-ihbox-icon-wrapper pbmit-icon-type-icon">
-                            <Car
-                              strokeWidth={1}
-                              size={45}
-                              className="pbmit-karsfix-icon pbmit-karsfix-icon-automobile"
-                            />
+                          <div className="pbmit-ihbox-icon-wrapper pbmit-icon-type-icon p-4">
+                            <img src={Experience} alt="" />
                           </div>
                         </div>
                         <div className="pbmit-ihbox-contents">
@@ -297,11 +296,7 @@ const Home = () => {
                       <div className="pbmit-ihbox-headingicon">
                         <div className="pbmit-ihbox-icon">
                           <div className="pbmit-ihbox-icon-wrapper pbmit-icon-type-icon">
-                            <Car
-                              strokeWidth={0.5}
-                              size={45}
-                              className="pbmit-karsfix-icon pbmit-karsfix-icon-automobile"
-                            />
+                           <img src={Skilled}  className="pbmit-karsfix-icon h-10 w-10 pbmit-karsfix-icon-automobile" />
                           </div>
                         </div>
                         <div className="pbmit-ihbox-contents">
@@ -322,11 +317,8 @@ const Home = () => {
                       <div className="pbmit-ihbox-headingicon">
                         <div className="pbmit-ihbox-icon">
                           <div className="pbmit-ihbox-icon-wrapper pbmit-icon-type-icon">
-                            <Car
-                              strokeWidth={0.5}
-                              size={45}
-                              className="pbmit-karsfix-icon pbmit-karsfix-icon-automobile"
-                            />
+                           
+                             <img src={Parts}  className="pbmit-karsfix-icon h-10 w-10 pbmit-karsfix-icon-automobile" />
                           </div>
                         </div>
                         <div className="pbmit-ihbox-contents">
@@ -386,7 +378,7 @@ const Home = () => {
       </section>
 
       {/* About Us */}
-      <section className="section-xl overflow-hidden mb-pd">
+      <section className="section-xl overflow-hidden mb-pd ">
         <div className="lg:container mx-auto lg:px-4 px-2">
           <div className="flex flex-col xl:flex-row gap-6 xl:gap-10 mb-10">
             <div className="w-full xl:w-1/2">
@@ -498,7 +490,7 @@ const Home = () => {
       </section>
 
       {/* Our Services */}
-      <section className="section-lg-1 max-w-full overflow-hidden mb-pd">
+      <section className="section-lg-1 max-w-full overflow-hidden mb-pd m-spt">
         <div className="lg:container px-2 pbmit-col-stretched-yes pbmit-col-right lg:px-4 mx-auto">
           {/* Heading Row */}
           <div className="flex flex-wrap items-center">
@@ -657,7 +649,7 @@ const Home = () => {
       </section>
 
       {/* Pricing */}
-      <section className="pricing-two-bg section-xl mb-pd">
+      <section className="pricing-two-bg section-xl mb-pd m-sp">
         <div className="lg:container mx-auto lg:px-4 px-2">
           <div className="lg:flex gap-15">
             <div className="w-full xl:w-1/3">
@@ -744,7 +736,7 @@ const Home = () => {
 
       {/* How It Works */}
       <section className="section-xl ihbox-three-bg pbmit-bg-color-light mb-pd">
-        <div className="lg:container mx-auto lg:px-2 px-2">
+        <div className="lg:container mx-auto lg:px-2 px-2 m-spp">
           <div className="pbmit-heading-subheading text-center animation-style2">
             <h4 className="pbmit-subtitle"> How it Works </h4>
             <h2 className="pbmit-title">
@@ -861,7 +853,7 @@ const Home = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="section-lg mb-pd">
+      <section className="section-lg mb-pd m-sp">
         <div className="lg:container px-2 mx-auto lg:px-4">
           <div className="testimonial-three-area">
             <div className="flex flex-wrap items-center mb-6">
