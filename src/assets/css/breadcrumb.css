@@ -9,29 +9,27 @@
     z-index: 2
 }
 .contact-bg{
-    background-image: url('../images/Contactus.png');
+    background-image: url('../images/banner/Contactus.webp');
 }
 .about-bg{
-    background-image: url('../images/Aboutus.png');
+    background-image: url('../images/banner/Aboutus.webp');
 }
 .service-bg{
-    background-image: url('../images/Ourservice.png');
+    background-image: url('../images/banner/Ourservice.webp');
 }
 .workshop-bg{
-    background-image: url('../images/OurWorkshop.png');
+    background-image: url('../images/banner/OurWorkshop.webp');
 }
 .policy-bg{
-    background-image: url('../images/PrivacyPolicy.png');
+    background-image: url('../images/banner/PrivacyPolicy.webp');
 }
 
 .terms-bg{
-    background-image: url('../images/Terms&Condition.png');
+    background-image: url('../images/banner/Terms&Condition.webp');
 }
 .refund-bg{
-    background-image: url('../images/RefundPolicy.png');
+    background-image: url('../images/banner/RefundPolicy.webp');
 }
-
-
 
 .pbmit-title-bar-wrapper:before {
     content: "";

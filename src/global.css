@@ -944,7 +944,7 @@ a.link-btn i,
 
 .pbmit-service-style-1 .pbmit-service-title {
   position: relative;
-  font-size: 24px;
+  font-size: 18px;
   line-height: 28px;
   margin-bottom: 10px;
   overflow: hidden;
@@ -1017,7 +1017,7 @@ a.link-btn i,
 }
 
 .pbmit-service-style-2 .pbmit-service-title {
-  font-size: 24px;
+  font-size: 18px;
   line-height: 28px;
   margin-bottom: 0
 }
@@ -1574,7 +1574,7 @@ body:not(.home) .header-style-1 .site-header-menu:not(.sticky-header) .pbmit-mai
 
 .pbmit-heading-subheading .pbmit-subtitle,
 .pbmit-custom-heading .pbmit-subtitle {
-  font-size: 13px;
+  font-size: 16px;
   line-height: 24px;
   letter-spacing: 0.5px;
   text-transform: uppercase;
@@ -1597,7 +1597,7 @@ body:not(.home) .header-style-1 .site-header-menu:not(.sticky-header) .pbmit-mai
 }
 
 .pbmit-heading-subheading .pbmit-title {
-  font-size: 48px;
+  font-size: 42px;
   line-height: 50px;
   letter-spacing: -2px;
   text-transform: none;
@@ -1776,7 +1776,7 @@ blockquote,
 }
 
 .pbmit-ihbox-style-1 .pbmit-element-title {
-  font-size: 24px;
+  font-size: 18px;
   line-height: 28px;
   margin-bottom: 8px;
 }
@@ -2051,7 +2051,7 @@ blockquote,
 }
 
 .pbmit-ihbox-style-4 .pbmit-element-title {
-  font-size: 24px;
+  font-size: 18px;
   line-height: 28px;
   margin-bottom: 25px;
 }
@@ -2251,7 +2251,7 @@ blockquote,
 }
 
 .pbmit-ihbox-style-6 .pbmit-element-title {
-  font-size: 24px;
+  font-size: 20px;
   line-height: 28px;
   margin-bottom: 15px;
 }
@@ -2668,7 +2668,7 @@ blockquote,
 }
 
 .pbmit-ihbox-style-10 .pbmit-ihbox-btn .pbmit-button-text {
-  font-size: 0;
+  font-size: 16px;
 }
 
 .pbmit-ihbox-style-10 .pbmit-ihbox-btn a .pbmit-button-icon-wrapper {
@@ -3212,7 +3212,7 @@ blockquote,
 
 .pbmit-service-style-1 .pbmit-service-title {
   position: relative;
-  font-size: 24px;
+  font-size: 18px;
   line-height: 28px;
   margin-bottom: 10px;
   overflow: hidden;
@@ -6272,7 +6272,7 @@ body:not(.home) .header-style-1 .site-header-menu:not(.sticky-header) .pbmit-mai
 }
 
 .pbmit-static-box-style-1 .pbmit-staticbox-title {
-  font-size: 20px;
+  font-size: 18px;
   line-height: 24px;
   margin-bottom: 0;
   overflow: hidden;
@@ -6827,7 +6827,7 @@ body:not(.home) .header-style-1 .site-header-menu:not(.sticky-header) .pbmit-mai
 
 .pbmit-service-style-1 .pbmit-service-title {
   position: relative;
-  font-size: 24px;
+  font-size: 18px;
   line-height: 28px;
   margin-bottom: 10px;
   overflow: hidden;
@@ -6844,7 +6844,7 @@ body:not(.home) .header-style-1 .site-header-menu:not(.sticky-header) .pbmit-mai
 }
 
 .pbmit-service-style-2 .pbmit-service-title {
-  font-size: 24px;
+  font-size: 18px;
   line-height: 28px;
   margin-bottom: 0
 }
@@ -7028,7 +7028,7 @@ body .m-b-0 {
   width: auto;
   z-index: 1;
   overflow: hidden;
-  background-image: url('./assets/images/about/6.png');
+  background-image: url('./assets/images/services/Whychooseus.webp');
   border-radius: 30px;
   background-color: transparent;
   background-position: 50% 50%;
@@ -7115,5 +7115,19 @@ a,button{
 }
 
 .aboutsize{
-  font-size: 32px;
+  font-size: 24px;
+}
+
+p.pbmit-text-editor {
+    padding-top: 20px;
+}
+
+.pbmit-heading-subheading .pbmit-heading-desc {
+    margin-top: 25px;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 26px;
+    letter-spacing: 0px;
+    color: var(--pbmit-blackish-color);
+    text-transform: none;
 }

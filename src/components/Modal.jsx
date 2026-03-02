@@ -6,8 +6,17 @@ import * as userApi from "../utils/api/userApi";
 import * as carApi from "../utils/api/carApi";
 import useAuthStore from "../store/authStore";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
-import corolla from "../assets/images/toyota_corolla_fielder.png"; // Keeping as fallback
-
+import corolla from "../assets/images/toyota_corolla_fielder.png";
+import Diesel from "../assets/images/gastype/Diesel.webp";
+import Petrol from "../assets/images/gastype/Petrol.webp";
+import Electric from "../assets/images/gastype/Electric.webp";
+import Hybrid from "../assets/images/gastype/Hybrid.webp";
+const gasTypeImages = {
+  Petrol: Petrol,
+  Diesel: Diesel,
+  Hybrid: Hybrid,
+  Electric: Electric,
+};
 const Modal = ({ isOpen, onClose, onSubmit }) => {
   const navigate = useNavigate();
   const [authStep, setAuthStep] = useState("register");
@@ -35,9 +44,11 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
   const getImageUrl = (path) => {
     if (!path) return "";
     if (path.startsWith("http") || path.startsWith("data:")) return path;
-    const baseUrl = import.meta.env.VITE_SERVER_BASE?.replace(/\/$/, "") || "http://localhost:8000";
+    const baseUrl =
+      import.meta.env.VITE_SERVER_BASE?.replace(/\/$/, "") ||
+      "http://localhost:8000/";
     const cleanPath = path.replace(/^\//, "");
-    return `${baseUrl}/${cleanPath}`;
+    return `${baseUrl}${cleanPath}`;
   };
 
   const filteredBrands = (brands || []).filter((brand) => {
@@ -533,8 +544,14 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
 
                         <div className="grid grid-cols-3 gap-4">
                           {selectedBrand.models?.map((modelItem, idx) => {
-                            const modelName = typeof modelItem === 'object' ? modelItem.modelName : modelItem;
-                            const modelImg = typeof modelItem === 'object' ? modelItem.image : null;
+                            const modelName =
+                              typeof modelItem === "object"
+                                ? modelItem.modelName
+                                : modelItem;
+                            const modelImg =
+                              typeof modelItem === "object"
+                                ? modelItem.image
+                                : null;
 
                             return (
                               <div
@@ -558,7 +575,9 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
                                     className="mb-2 h-12 w-auto object-contain opacity-50"
                                   />
                                 )}
-                                <span className="text-sm font-medium">{modelName}</span>
+                                <span className="text-sm font-medium">
+                                  {modelName}
+                                </span>
                               </div>
                             );
                           })}
@@ -576,7 +595,7 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
                             ←
                           </button>
                           <h2 className="font-bold sizeloginsub">
-                            Select GasType
+                            Select Fuel Type
                           </h2>{" "}
                         </div>
                         <div className="grid grid-cols-2 gap-4">
@@ -584,9 +603,14 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
                             <div
                               key={gas}
                               onClick={() => handleSelectGas(gas)}
-                              className="cursor-pointer text-center border-gray-300 border p-3 rounded-xl hover:bg-gray-100"
+                              className="cursor-pointer text-center border-gray-300 border p-4 rounded-xl hover:bg-gray-100 flex flex-col items-center gap-2"
                             >
-                              {gas}
+                              <img
+                                src={gasTypeImages[gas]}
+                                alt={gas}
+                                className="w-12 h-12 object-contain"
+                              />
+                              <span className="font-medium">{gas}</span>
                             </div>
                           ))}
                         </div>

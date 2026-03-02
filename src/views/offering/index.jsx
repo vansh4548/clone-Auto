@@ -5,14 +5,15 @@ import "../../assets/css/pricing.css";
 import "../../assets/css/cta.css";
 import { getPackages } from "../../utils/api/packageApi"; 
 
-import AirConditioning from "../../assets/images/services/AirConditioning.png";
-import Brakeservices from "../../assets/images/services/Brakeservices.png";
-import EngineDiagnosticsRepairs from "../../assets/images/services/EngineDiagnosticsRepairs.png";
-import GeneralVehicleInspections from "../../assets/images/services/GeneralVehicleInspections.png";
-import oilchangelubrication from "../../assets/images/services/oilchangelubrication.png";
-import SuspensionSteeringRepairs from "../../assets/images/services/SuspensionSteeringRepairs.png";
-import TransmissionServices from "../../assets/images/services/TransmissionServices.png";
-import TyreServices from "../../assets/images/services/TyreServices.png";
+import AirConditioning from "../../assets/images/services/AirConditioning.webp";
+import Brakeservices from "../../assets/images/services/Brakeservices.webp";
+import EngineDiagnosticsRepairs from "../../assets/images/services/EngineDiagnostics.webp";
+// import GeneralVehicleInspections from "../../assets/images/services/GeneralVehicleInspections.webp";
+import oilchangelubrication from "../../assets/images/services/oilchangelubrication.webp";
+import SuspensionSteeringRepairs from "../../assets/images/services/SuspensionSteeringRepairs.webp";
+import TransmissionServices from "../../assets/images/services/TransmissionServices.webp";
+import TyreServices from "../../assets/images/services/TyreServices.webp";
+import BatteryTestingReplacement from "../../assets/images/services/BatteryTestingReplacement.webp";
 
 import Skilled from "../../assets/images/Skilledtechnicians.svg";
 import Parts from "../../assets/images/AdvancedEquipment.svg";
@@ -173,7 +174,7 @@ const Offering = () => {
               Skilled technicians
             </h2>
             <div className="pbmit-heading-desc text-gray-600 text-sm">
-              We had technical knowledge and physical abilities, important to practice and learn Mechanics
+              Our experienced mechanics combine technical expertise and hands-on skill to deliver precise and dependable automotive service.
             </div>
           </div>
         </div>
@@ -193,7 +194,7 @@ const Offering = () => {
               Best quality parts
             </h2>
             <div className="pbmit-heading-desc text-gray-600 text-sm">
-              Choosing the right equipment for your auto can spell the difference between other service
+              We use trusted, high-quality parts and lubricants to ensure durability, safety, and long-lasting vehicle performance.
             </div>
           </div>
         </div>
@@ -213,7 +214,7 @@ const Offering = () => {
               Quality Equipment
             </h2>
             <div className="pbmit-heading-desc text-gray-600 text-sm">
-              Our experienced technicians arrive equipped with the necessary tools and expertise for 24/7
+              Our workshop is equipped with modern diagnostic tools and professional-grade machinery for accurate and efficient repairs.
             </div>
           </div>
         </div>
@@ -441,7 +442,7 @@ const Offering = () => {
                   <div className="pbmit-service-image-wrapper relative">
                     <div className="pbmit-featured-img-wrapper">
                       <div className="pbmit-featured-wrapper">
-                        <img src={GeneralVehicleInspections} className="w-full h-auto object-cover" alt="" />
+                        <img src={BatteryTestingReplacement} className="w-full h-auto object-cover" alt="" />
                       </div>
                     </div>
 
@@ -489,7 +490,7 @@ const Offering = () => {
                     </div>
                     <h3 className="pbmit-service-title text-lg font-semibold mb-2">
                       <a href="service-details.html" className="hover:text-blue-600">
-                        Engine Diagnostics
+                        Engine Diagnostics & Repairs
                       </a>
                     </h3>
                     <div className="pbmit-service-description text-gray-600 text-sm">
@@ -502,27 +503,70 @@ repairs.
                 </div>
               </div>
             </article>
+            {/* <article className="pbmit-service-style-1 col-md-4 w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
+              <div className="pbminfotech-post-item bg-white rounded-lg shadow-md overflow-hidden">
+                <div className="pbmit-box-content-wrap">
+                  <div className="pbmit-service-image-wrapper relative">
+                    <div className="pbmit-featured-img-wrapper">
+                      <div className="pbmit-featured-wrapper">
+                        <img src={GeneralVehicleInspections} className="w-full h-auto object-cover" alt="" />
+                      </div>
+                    </div>
+
+                    <a className="pbmit-link absolute inset-0" href="service-details.html" />
+                  </div>
+                  <div className="pbmit-content-box p-4">
+                    <div className="pbminfotech-box-number text-gray-400 text-xl font-bold">03</div>
+                    <div className="pbmit-serv-cat text-sm text-blue-600 my-2">
+                      <a href="services.html" rel="tag">
+                        Repair
+                      </a>
+                    </div>
+                    <h3 className="pbmit-service-title text-lg font-semibold mb-2">
+                      <a href="service-details.html" className="hover:text-blue-600">
+General Vehicle Inspections                      </a>
+                    </h3>
+                    <div className="pbmit-service-description text-gray-600 text-sm">
+                      <p>
+                       Complete vehicle health and safety checks.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article> */}
           </div>
         </div>
       </section>
 
       {/* Cta */}
-      <section className="lg:mb-40 mb-20 mb-pd m-spt">
+      <section className="lg:mb-40 mb-20 mb-pd ">
         <div className="container mx-auto px-0 xl:px-3">
           <div className="appointment-two-bg bg-blue-600 p-6 rounded-lg">
             <div className="row flex flex-wrap -mx-4 items-center">
               <div className="col-md-12 col-xl-8 w-full xl:w-2/3 px-4 mb-6 xl:mb-0">
                 <div className="pbmit-heading-subheading white-text mb-3 animation-style4">
-                  <h4 className="pbmit-subtitle text-white text-lg mb-2">Limited Period Offer</h4>
+                  <h4 className="pbmit-subtitle text-white text-lg mb-2">
+                    BOOK APPOINTMENT
+                  </h4>
                   <h2 className="pbmit-title text-white text-3xl font-bold">
-                   Book your service today and drive with confidence!                  </h2>
+                   Book your service today and 
+                   <br />
+                   drive with confidence!
+                  </h2>
                 </div>
                 <a
                   className="pbmit-btn pbmit-btn-hover-white inline-flex items-center mt-4 px-6 py-3 border border-white text-white font-medium rounded hover:bg-white hover:text-blue-600"
-                  href="contact-us.html">
+                  href="contact-us.html"
+                >
                   <span className="pbmit-button-content-wrapper flex items-center">
                     <span className="pbmit-button-icon mr-2">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="22.76" height="22.76" viewBox="0 0 22.76 22.76">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="22.76"
+                        height="22.76"
+                        viewBox="0 0 22.76 22.76"
+                      >
                         <title>black-arrow</title>
                         <path
                           d="M22.34,1A14.67,14.67,0,0,1,12,5.3,14.6,14.6,0,0,1,6.08,4.06,14.68,14.68,0,0,1,1.59,1"
@@ -563,8 +607,13 @@ repairs.
                         </div>
                       </div>
                       <h2 className="pbmit-element-title text-lg font-semibold">
-                        <a href="tel:+125-8845-5421" className="flex items-center text-gray-800 hover:text-blue-600">
-                          <span className="pbmit-button-text mr-2">+125-8845-5421</span>
+                        <a
+                          href="tel:++255 761 586 464"
+                          className="flex items-center text-gray-800 hover:text-blue-600"
+                        >
+                          <span className="pbmit-button-text mr-2">
+                            +255 761 586 464
+                          </span>
                           <span className="pbmit-button-icon-wrapper">
                             <span className="pbmit-button-icon">
                               <i className="pbmit-base-icon-black-arrow-1" />

@@ -55,7 +55,7 @@ const Contact = () => {
   const contactInfo = [
     {
       id: "mail",
-      title: "Mail Us 24/7",
+      title: "Mail Us",
       detail: "info@autowrench.co.tz",
       icon: Email,
       iconClass: "text-blue-600",
@@ -69,7 +69,7 @@ const Contact = () => {
     },
     {
       id: "call",
-      title: "Call Us 24/7",
+      title: "Call Us",
       detail: (
         <>
           Phone: +255 761 586 464 <br />
@@ -185,15 +185,13 @@ const Contact = () => {
               <div className="contact-us-left-area">
                 <div className="pbmit-heading-subheading animation-style4">
                   <h4 className="pbmit-subtitle text-blue-600 mb-2">
-                    Get in touch
+                    Get In Touch
                   </h4>
                   <h2 className="pbmit-title text-3xl font-bold mb-4">
-                    Happy to answer all your questions
+                    Happy to Answer All Your Questions
                   </h2>
                   <div className="pbmit-heading-desc text-gray-600">
-                    We carefully screen all of our technicians, so you can rest
-                    assured that your vehicle would receive the absolute highest
-                    quality of service providing.
+                   Whether you need service advice, a repair estimate, or have questions about your vehicle, our team is ready to assist. Contact us today and experience reliable, transparent automotive support.
                   </div>
                 </div>
                 <div className="tween-style mt-6">
@@ -216,12 +214,11 @@ const Contact = () => {
                   <>
                     <div className="pbmit-heading animation-style2 mb-4 mt-2">
                       <h3 className="pbmit-title text-2xl font-semibold">
-                        Send a message to staff
+                        Send a Message to Our Team
                       </h3>
                     </div>
                     <p className="py-3 text-gray-700">
-                      Your email address will not be published. Required fields
-                      are marked *
+                      Fill out the form below and our team will respond as soon as possible. Please provide accurate details so we can assist you efficiently.
                     </p>
                     <form className="contact-form pb-5" onSubmit={handleSubmit}>
                       <div className="row flex flex-wrap -mx-2">
@@ -290,7 +287,7 @@ const Contact = () => {
                           <Loader2 className="animate-spin" size={20} />
                         )}
                         <span className="pbmit-button-text">
-                          {isSubmitting ? "Sending..." : "Submit Message"}
+                          {isSubmitting ? "Sending.." : "Send Inquiry"}
                         </span>
                       </button>
                     </form>

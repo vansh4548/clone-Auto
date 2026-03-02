@@ -6,39 +6,57 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 
-import ExperiencedStaff from "../../assets/images/about/1.png";
-import QualityProducts from "../../assets/images/about/8.png";
-import ModernEquipment from "../../assets/images/about/4.png";
-import ArianaGreen from "../../assets/images/about/2.png";
-import AdelineWood from "../../assets/images/about/3.png";
-import EvangelineLee from "../../assets/images/about/6.png";
+import ExperiencedStaff from "../../assets/images/about/1.webp";
+import QualityProducts from "../../assets/images/about/8.webp";
+import ModernEquipment from "../../assets/images/about/2.webp";
+// import ArianaGreen from "../../assets/images/about/2.webp";
+import AdelineWood from "../../assets/images/about/3.webp";
+import EvangelineLee from "../../assets/images/about/6.webp";
 import TestimonialBg from "../../assets/images/testimonial-bg.webp";
-
+import women from "../../assets/images/testi/1.webp";
+import men1 from "../../assets/images/testi/2.webp";
+import men2 from "../../assets/images/testi/3.webp";
+import men3 from "../../assets/images/testi/4.webp";
+import men4 from "../../assets/images/testi/5.webp";
 const About = () => {
   const testimonialPrevRef = useRef(null);
   const testimonialNextRef = useRef(null);
 
-  const testimonials = [
+ const testimonials = [
     {
       id: 1,
-      name: "Evangeline Lee",
+      name: "Amina K.",
       role: "Satisfied Client",
-      text: "I would recommend practitioners at this center to everyone! They are great to work with and are excellent trainers. Thank you all!",
-      img: EvangelineLee,
+      text: "I had brake issues and was worried about safety. The team at Auto Wrench explained everything clearly and fixed it the same day. Very professional and trustworthy service!",
+      img: women,
     },
     {
       id: 2,
-      name: "Adeline Wood",
+      name: "David M.",
       role: "Customer",
-      text: "I would recommend practitioners at this center to everyone! They are great to work with and are excellent trainers. Thank you all!",
-      img: AdelineWood,
+      text: "Excellent service and honest pricing. They diagnosed my engine problem quickly and saved me from unnecessary repairs. Highly recommended workshop in Dar es-Salaam.",
+      img: men1,
     },
     {
       id: 3,
-      name: "Ariana Green",
+      name: "Hassan R.",
       role: "Manager",
-      text: "I would recommend practitioners at this center to everyone! They are great to work with and are excellent trainers. Thank you all!",
-      img: ArianaGreen,
+      text: "The technicians really know what they’re doing. My car feels smoother and more powerful after the service. Great experience overall.",
+      img: men2,
+    },
+    {
+      id: 4,
+      name: "Joseph T.",
+      role: "Manager",
+      text: "Clean workshop, modern equipment, and skilled mechanics. They completed the job on time and kept me updated throughout the process.",
+      img: men3,
+    },
+    {
+      id: 5,
+      name: "Brian L.",
+      role: "Manager",
+      text: "Reliable, transparent, and efficient. Auto Wrench is now my go-to garage for maintenance and repairs on Kibada Road.”",
+      img: men4,
     },
   ];
   return (
@@ -92,19 +110,20 @@ const About = () => {
               <div className="pbmit-heading-subheading animation-style4">
                 <h4 className="pbmit-subtitle"> About Us </h4>
                 <h2 className="pbmit-title">
-                  Top-quality craftsmanship with hands-on care tried and true.
+                  About Auto Wrench
                 </h2>
               </div>
             </div>
             <div className="w-full xl:w-1/2">
               <p className="pbmit-text-editor">
-                <b>At Auto Wrench Ltd,</b> we are more than just an auto garage
-                – we are your trusted car care partner in Ungindoni, Kigamboni.
-                With a team of skilled mechanics and technicians, we specialize
-                in keeping your vehicle safe, reliable, and performing at its
-                best.
+                <b>Auto Wrench</b> is a professional automotive workshop based on Kibada Road, Dar es-Salaam, dedicated to delivering dependable repairs and quality maintenance. With skilled technicians and modern tools, we ensure every vehicle receives expert care and attention for a safer driving experience.
+
               </p>
-              <p className="pbmit-text-editor">
+
+
+
+
+              {/* <p className="pbmit-text-editor">
                 Our mission is to provide top-quality automotive services with
                 honesty, transparency, and a customer-first approach. Whether
                 it’s a quick oil change, a complex engine repair, or a complete
@@ -115,7 +134,7 @@ const About = () => {
                 hands-on expertise to deliver solutions you can rely on. At Auto
                 Wrench Ltd, your car is not just another job – it’s part of your
                 everyday life, and we’re here to keep it running smoothly.
-              </p>
+              </p> */}
             </div>
           </div>
           <div className="lg:flex pbmit-column-three gap-x-6">
@@ -201,33 +220,19 @@ const About = () => {
           <div className="pbmit-service_content px-2">
             <div className="pbmit-heading animation-style2">
               <h3 className="pbmit-title mb-3 text-2xl font-semibold">
-                General Type Problems Service of Car
+                Committed to Keeping You Moving
               </h3>
             </div>
             <p className="pbmit-firstletter mb-4">
-              we have an efficient and experienced team that works diligently to
-              ensure your car is in top condition. also check the lights and
-              electrical system and other wear and tear parts in every{" "}
+              Founded with a vision to raise the standard of automotive service in Dar es-Salaam, Auto Wrench focuses on precision, transparency, and long-term reliability.{" "}
               <strong>
-                <u>periodic maintenance service of the car.</u>
+                <u>Our workshop</u>
               </strong>{" "}
-              We also have pickup and drop facilities for car servicing one of
-              the best ways to identify any issues that may turn into major ones
-              if left unchecked.
+            is equipped with advanced diagnostic technology and supported by experienced mechanics who handle everything from routine servicing and brake repairs to complex engine and suspension work.
+             We prioritize honest communication, fair pricing, and consistent quality - building lasting relationships with drivers who trust us to keep their vehicles performing at their best.
             </p>
             <p className="mb-6">
-              Like any other parts in your car, the batteries also need to be{" "}
-              <strong>
-                <u>tested during car services to ensure</u>
-              </strong>{" "}
-              it performs optimally and lasts longer. Over time, your car
-              battery can deteriorate and the car engine may have trouble
-              starting up We can help restore clarity to old headlights or
-              replace them if they have turned color Equipped with the latest
-              technology and experienced technicians. If you’re experiencing
-              unusual vibration or poor handling while driving or have low tyre
-              threads and other problems, it’s time to get your car tires
-              checked.
+             
             </p>
           </div>
           <div className="grid grid-cols-2 lg:gap-x-10 gap-x-5 mt-15 px-2">
@@ -238,25 +243,24 @@ const About = () => {
       </section>
 
       {/* How It Works */}
-      <section className="section-xl ihbox-three-bg pbmit-bg-color-light mb-pd ">
-        <div className="lg:container mx-auto lg:px-4 px-2 m-spp">
+      <section className="section-xl ihbox-three-bg pbmit-bg-color-light mb-pd">
+        <div className="lg:container mx-auto lg:px-2 px-2 m-spp">
           <div className="pbmit-heading-subheading text-center animation-style2">
             <h4 className="pbmit-subtitle"> How it Works </h4>
             <h2 className="pbmit-title">
-              Get amazing car service in <br /> 4 simple{" "}
+              Get Professional Car Service in <br /> 4 simple{" "}
               <span className="pbmit-global-color">steps</span>
             </h2>
           </div>
-          <div className="flex flex-wrap -mx-4">
+          <div className="flex flex-wrap -mx-4 lg:px-4">
             <article className="pbmit-miconheading-style-6 w-full sm:w-1/2 lg:w-1/4 px-4">
               <div className="pbmit-ihbox-style-6">
                 <div className="pbmit-ihbox-headingicon">
                   <div className="pbmit-ihbox-wrap">
                     <div className="pbmit-ihbox-contents">
-                      <h2 className="pbmit-element-title">Set schedule</h2>
+                      <h2 className="pbmit-element-title">Book Appointment</h2>
                       <div className="pbmit-heading-desc">
-                        You can book a car servicing directly from our website
-                        or by calling or WhatsApp
+                        Book your service through our website or via call at your convenience.
                       </div>
                     </div>
                     <div className="pbmit-ihbox-icon">
@@ -279,10 +283,9 @@ const About = () => {
                 <div className="pbmit-ihbox-headingicon">
                   <div className="pbmit-ihbox-wrap">
                     <div className="pbmit-ihbox-contents">
-                      <h2 className="pbmit-element-title">Select Service</h2>
+                      <h2 className="pbmit-element-title">Choose Your Service</h2>
                       <div className="pbmit-heading-desc">
-                        Choose Your Service From Our Wide Range Of Offerings
-                        with affordable service price
+                        Choose the service you need from our wide range of repair and maintenance solutions.
                       </div>
                     </div>
                     <div className="pbmit-ihbox-icon">
@@ -305,10 +308,10 @@ const About = () => {
                 <div className="pbmit-ihbox-headingicon">
                   <div className="pbmit-ihbox-wrap">
                     <div className="pbmit-ihbox-contents">
-                      <h2 className="pbmit-element-title">Get things done</h2>
+                      <h2 className="pbmit-element-title">Expert Service
+</h2>
                       <div className="pbmit-heading-desc">
-                        Will keep up the performance, increase the lifespan of
-                        batteries and even save maintenance
+                       Our skilled technicians inspect, diagnose, and service your vehicle with precision and care.
                       </div>
                     </div>
                     <div className="pbmit-ihbox-icon">
@@ -331,10 +334,9 @@ const About = () => {
                 <div className="pbmit-ihbox-headingicon">
                   <div className="pbmit-ihbox-wrap">
                     <div className="pbmit-ihbox-contents">
-                      <h2 className="pbmit-element-title">Get your car</h2>
+                      <h2 className="pbmit-element-title">Drive with Confidence</h2>
                       <div className="pbmit-heading-desc">
-                        We offer pick-up and drop-off facility for your car, so
-                        you can continue with your schedule!
+                       After a final quality check, your vehicle is ready for a safe and smooth drive.
                       </div>
                     </div>
                     <div className="pbmit-ihbox-icon">
@@ -356,104 +358,103 @@ const About = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="section-lg mb-pd m-sp">
-        <div className="lg:container mx-auto lg:px-4 px-2 ">
-          <div className="testimonial-three-area">
-            <div className="flex flex-wrap items-center mb-6">
-              <div className="tween-effect-style">
-                <div className="pbmit-tween-effect-style-1">
-                  <div className="pbmit-tween-effect">
-                    <img src={TestimonialBg} className="img-fluid" alt="" />
-                  </div>
-                </div>
-              </div>
-              <div className="w-full md:w-2/3 lg:w-7/12">
-                <div className="pbmit-heading-subheading animation-style2">
-                  <h4 className="pbmit-subtitle"> Testimonials </h4>
-                  <h2 className="pbmit-title">
-                    <span className="pbmit-global-color">Trusted</span> by
-                    thousands of <br /> people & companies.
-                  </h2>
-                </div>
-              </div>
-              <div className="w-full md:w-1/3 lg:w-5/12 text-right">
-                <div className="testimonial-swiper-arrow swiper-btn-custom gap-x-2.5 inline-flex flex-row-reverse border border-[#151313] rounded-4xl py-3 px-1 items-center">
-                  <button
-                    ref={testimonialPrevRef}
-                    className="swiper-button-next-custom cursor-pointer pr-3"
-                  >
-                    <ChevronRight
-                      strokeWidth={1.5}
-                      className="text-[#151313]"
-                    />
-                  </button>
-                  <span className="w-px h-5 bg-gray-300" />
-                  <button
-                    ref={testimonialNextRef}
-                    className="swiper-button-prev-custom cursor-pointer pl-3"
-                  >
-                    <ChevronLeft strokeWidth={1.5} className="text-[#151313]" />
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <Swiper
-              modules={[Navigation, Autoplay]}
-              loop={true}
-              navigation={{
-                prevEl: testimonialPrevRef.current,
-                nextEl: testimonialNextRef.current,
-              }}
-              autoplay={{ delay: 4000, disableOnInteraction: false }}
-              onInit={(swiper) => {
-                swiper.params.navigation.prevEl = testimonialPrevRef.current;
-                swiper.params.navigation.nextEl = testimonialNextRef.current;
-                swiper.navigation.init();
-                swiper.navigation.update();
-              }}
-              slidesPerView={2}
-              spaceBetween={45}
-              breakpoints={{
-                320: { slidesPerView: 1, spaceBetween: 16 },
-                640: { slidesPerView: 1.2, spaceBetween: 20 },
-                768: { slidesPerView: 1.5, spaceBetween: 24 },
-                1024: { slidesPerView: 2, spaceBetween: 32 },
-              }}
-            >
-              {testimonials.map((t) => (
-                <SwiperSlide key={t.id}>
-                  <article className="pbmit-testimonial-style-2">
-                    <div className="pbminfotech-post-item">
-                      <div className="pbminfotech-box-desc">
-                        <Quote size={50} className="text-[#b4aa12]" />
-                        <blockquote className="pbminfotech-testimonial-text">
-                          <p>{t.text}</p>
-                        </blockquote>
-                      </div>
-                      <div className="pbmit-auther-content">
-                        <h3 className="pbminfotech-box-title">{t.name}</h3>
-                        <div className="pbminfotech-testimonial-detail">
-                          {t.role}
-                        </div>
-                      </div>
-                      <div className="pbmit-featured-img-wrapper">
-                        <div className="pbmit-featured-wrapper">
-                          <img
-                            src={t.img}
-                            className="w-full h-auto"
-                            alt={t.name}
-                          />
+            <section className="section-lg mb-pd m-sp">
+              <div className="lg:container px-2 mx-auto lg:px-4">
+                <div className="testimonial-three-area">
+                  <div className="flex flex-wrap items-center mb-6">
+                    <div className="tween-effect-style">
+                      <div className="pbmit-tween-effect-style-1">
+                        <div className="pbmit-tween-effect">
+                          <img src={TestimonialBg} className="img-fluid" alt="" />
                         </div>
                       </div>
                     </div>
-                  </article>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </div>
-        </div>
-      </section>
+                    <div className="w-full md:w-2/3 lg:w-7/12">
+                      <div className="pbmit-heading-subheading animation-style2">
+                        <h4 className="pbmit-subtitle"> CLIENT TESTIMONIALS </h4>
+                        <h2 className="pbmit-title">
+                          <span className="pbmit-global-color">Trusted</span> by
+                         Drivers  Across <br /> Dar es-Salaam.
+      
+                        </h2>
+                      </div>
+                    </div>
+                    <div className="w-full md:w-1/3 lg:w-5/12 text-right">
+                      <div className="testimonial-swiper-arrow swiper-btn-custom gap-x-2.5 inline-flex flex-row-reverse border border-[#151313] rounded-4xl py-3 px-1 items-center">
+                        <button
+                          ref={testimonialPrevRef}
+                          className="swiper-button-next-custom cursor-pointer pr-3"
+                        >
+                          <ChevronRight
+                            strokeWidth={1.5}
+                            className="text-[#151313]"
+                          />
+                        </button>
+                        <span className="w-px h-5 bg-gray-300" />
+                        <button
+                          ref={testimonialNextRef}
+                          className="swiper-button-prev-custom cursor-pointer pl-3"
+                        >
+                          <ChevronLeft strokeWidth={1.5} className="text-[#151313]" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+      
+                  <Swiper
+                    modules={[Navigation, Autoplay]}
+                    loop={true}
+                    navigation={{
+                      prevEl: testimonialPrevRef.current,
+                      nextEl: testimonialNextRef.current,
+                    }}
+                    autoplay={{ delay: 4000, disableOnInteraction: false }}
+                    onInit={(swiper) => {
+                      swiper.params.navigation.prevEl = testimonialPrevRef.current;
+                      swiper.params.navigation.nextEl = testimonialNextRef.current;
+                      swiper.navigation.init();
+                      swiper.navigation.update();
+                    }}
+                    slidesPerView={2}
+                    spaceBetween={45}
+                    breakpoints={{
+                      320: { slidesPerView: 1, spaceBetween: 16 },
+                      640: { slidesPerView: 1.2, spaceBetween: 20 },
+                      768: { slidesPerView: 1.5, spaceBetween: 24 },
+                      1024: { slidesPerView: 2, spaceBetween: 32 },
+                    }}
+                  >
+                    {testimonials.map((t) => (
+                      <SwiperSlide key={t.id}>
+                        <article className="pbmit-testimonial-style-2">
+                          <div className="pbminfotech-post-item">
+                            <div className="pbminfotech-box-desc">
+                              <Quote size={50} className="text-[#b4aa12]" />
+                              <blockquote className="pbminfotech-testimonial-text">
+                                <p>{t.text}</p>
+                              </blockquote>
+                            </div>
+                            <div className="pbmit-auther-content">
+                              <h3 className="pbminfotech-box-title">{t.name}</h3>
+                            
+                            </div>
+                            <div className="pbmit-featured-img-wrapper">
+                              <div className="pbmit-featured-wrapper">
+                                <img
+                                  src={t.img}
+                                  className="w-full h-auto"
+                                  alt={t.name}
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </article>
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                </div>
+              </div>
+            </section>
 
       {/* Cta */}
       <section className="lg:mb-40 mb-20 mb-pd ">
@@ -463,10 +464,12 @@ const About = () => {
               <div className="col-md-12 col-xl-8 w-full xl:w-2/3 px-4 mb-6 xl:mb-0">
                 <div className="pbmit-heading-subheading white-text mb-3 animation-style4">
                   <h4 className="pbmit-subtitle text-white text-lg mb-2">
-                    Limited Period Offer
+                    BOOK APPOINTMENT
                   </h4>
                   <h2 className="pbmit-title text-white text-3xl font-bold">
-                   Book your service today and drive with confidence!
+                   Book your service today and 
+                   <br />
+                   drive with confidence!
                   </h2>
                 </div>
                 <a
@@ -522,11 +525,11 @@ const About = () => {
                       </div>
                       <h2 className="pbmit-element-title text-lg font-semibold">
                         <a
-                          href="tel:+125-8845-5421"
+                          href="tel:++255 761 586 464"
                           className="flex items-center text-gray-800 hover:text-blue-600"
                         >
                           <span className="pbmit-button-text mr-2">
-                            +125-8845-5421
+                            +255 761 586 464
                           </span>
                           <span className="pbmit-button-icon-wrapper">
                             <span className="pbmit-button-icon">

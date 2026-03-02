@@ -16,31 +16,36 @@ import "../../assets/css/pricing.css";
 import "../../assets/css/about.css";
 import "../../assets/css/testimonials.css";
 
-import AirConditioning from "../../assets/images/services/AirConditioning.png";
-import Brakeservices from "../../assets/images/services/Brakeservices.png";
-import EngineDiagnosticsRepairs from "../../assets/images/services/EngineDiagnosticsRepairs.png";
-import GeneralVehicleInspections from "../../assets/images/services/GeneralVehicleInspections.png";
-import oilchangelubrication from "../../assets/images/services/oilchangelubrication.png";
-import SuspensionSteeringRepairs from "../../assets/images/services/SuspensionSteeringRepairs.png";
-import TransmissionServices from "../../assets/images/services/TransmissionServices.png";
-import TyreServices from "../../assets/images/services/TyreServices.png";
+import AirConditioning from "../../assets/images/services/AirConditioning.webp";
+import Brakeservices from "../../assets/images/services/Brakeservices.webp";
+import EngineDiagnosticsRepairs from "../../assets/images/services/EngineDiagnostics.webp";
+// import GeneralVehicleInspections from "../../assets/images/services/GeneralVehicleInspections.webp";
+import oilchangelubrication from "../../assets/images/services/oilchangelubrication.webp";
+import SuspensionSteeringRepairs from "../../assets/images/services/SuspensionSteeringRepairs.webp";
+import TransmissionServices from "../../assets/images/services/TransmissionServices.webp";
+import TyreServices from "../../assets/images/services/TyreServices.webp";
+import BatteryTestingReplacement from "../../assets/images/services/BatteryTestingReplacement.webp";
 
-
-
-import ExperiencedStaff from "../../assets/images/about/1.png";
-import QualityProducts from "../../assets/images/about/8.png";
-import ModernEquipment from "../../assets/images/about/4.png";
+import ExperiencedStaff from "../../assets/images/about/1.webp";
+import QualityProducts from "../../assets/images/about/8.webp";
+import ModernEquipment from "../../assets/images/about/2.webp";
 import ArianaGreen from "../../assets/images/ariana-green.webp";
 import AdelineWood from "../../assets/images/adeline-wood.webp";
 import EvangelineLee from "../../assets/images/evangeline-lee.webp";
 import TestimonialBg from "../../assets/images/testimonial-bg.webp";
-import Hero from "../../assets/images/1.png";
-import HeroLight from "../../assets/images/2.png";
+import Hero from "../../assets/images/3.webp";
+import HeroLight from "../../assets/images/4.webp";
 
 import { getPackages } from "../../utils/api/packageApi";
 import Skilled from "../../assets/images/ExpertMechanics.svg";
 import Parts from "../../assets/images/BestQualityParts.svg";
 import Experience from "../../assets/images/Experience.svg";
+
+import women from "../../assets/images/testi/1.webp";
+import men1 from "../../assets/images/testi/2.webp";
+import men2 from "../../assets/images/testi/3.webp";
+import men3 from "../../assets/images/testi/4.webp";
+import men4 from "../../assets/images/testi/5.webp";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -72,12 +77,12 @@ const Home = () => {
   }, []);
 
   const handleBookingAction = () => {
-  if (authenticated) {
-    navigate("/orders"); 
-  } else {
-    setIsModalOpen(true);
-  }
-};
+    if (authenticated) {
+      navigate("/orders");
+    } else {
+      setIsModalOpen(true);
+    }
+  };
 
   const slides = [
     {
@@ -150,62 +155,76 @@ const Home = () => {
       link: "service-details.html",
       catLink: "services.html",
     },
-    {
-      id: 8,
-      number: "06",
-      category: "Maintenance",
-      title: "General Vehicle Inspections",
-      img: GeneralVehicleInspections,
-      iconClass: "pbmit-karsfix-icon-tyre",
-      link: "service-details.html",
-      catLink: "services.html",
-    },
+    // {
+    //   id: 8,
+    //   number: "06",
+    //   category: "Maintenance",
+    //   title: "General Vehicle Inspections",
+    //   img: GeneralVehicleInspections,
+    //   iconClass: "pbmit-karsfix-icon-tyre",
+    //   link: "service-details.html",
+    //   catLink: "services.html",
+    // },
   ];
 
   const testimonials = [
-{
+    {
       id: 1,
-      name: "Evangeline Lee",
+      name: "Amina K.",
       role: "Satisfied Client",
-      text: "I would recommend practitioners at this center to everyone! They are great to work with and are excellent trainers. Thank you all!",
-      img: EvangelineLee,
+      text: "I had brake issues and was worried about safety. The team at Auto Wrench explained everything clearly and fixed it the same day. Very professional and trustworthy service!",
+      img: women,
     },
     {
       id: 2,
-      name: "Adeline Wood",
+      name: "David M.",
       role: "Customer",
-      text: "I would recommend practitioners at this center to everyone! They are great to work with and are excellent trainers. Thank you all!",
-      img: AdelineWood,
-    },{
+      text: "Excellent service and honest pricing. They diagnosed my engine problem quickly and saved me from unnecessary repairs. Highly recommended workshop in Dar es-Salaam.",
+      img: men1,
+    },
+    {
       id: 3,
-      name: "Ariana Green",
+      name: "Hassan R.",
       role: "Manager",
-      text:
-        "I would recommend practitioners at this center to everyone! They are great to work with and are excellent trainers. Thank you all!",
-      img: ArianaGreen,
+      text: "The technicians really know what they’re doing. My car feels smoother and more powerful after the service. Great experience overall.",
+      img: men2,
+    },
+    {
+      id: 4,
+      name: "Joseph T.",
+      role: "Manager",
+      text: "Clean workshop, modern equipment, and skilled mechanics. They completed the job on time and kept me updated throughout the process.",
+      img: men3,
+    },
+    {
+      id: 5,
+      name: "Brian L.",
+      role: "Manager",
+      text: "Reliable, transparent, modern equipment, skilled mechanics and efficient. Auto Wrench is now my go-to garage for maintenance and repairs on Kibada Road.",
+      img: men4,
     },
   ];
 
   return (
     <>
       {/* Hero */}
-      <section className="bg-black section-xl heros">
+      <section className="bg-black section-xl heros hnew">
         <div className="lg:flex lg:px-18 px-2 md:flex-row items-center md:justify-between gap-x-15">
-          <div className="md:w-1/2 text-center md:text-left">
+          <div className="md:w-1/2  md:text-left">
             <div className="pbmit-heading-subheading animation-style4">
               <h4 className="pbmit-subtitle">Auto Wrench</h4>
               <h2 className="pbmit-title pb-4 hero-title">
                 Welcome to Auto Wrench Ltd – Your Trusted Garage in Kigamboni.
               </h2>
               <p className="pbmit-text-editor hero-des">
-                At Auto Wrench Ltd, we keep your car running safely, smoothly, and
-                reliably. From quick routine maintenance to full mechanical
+                At Auto Wrench Ltd, we keep your car running safely, smoothly,
+                and reliably. From quick routine maintenance to full mechanical
                 repairs, our expert team in Ungindoni, Kigamboni is here to
                 provide professional, affordable, and honest auto care.
               </p>
             </div>
 
-            <div className="flex justify-center md:justify-start gap-4">
+            <div className="flex md:justify-start gap-4">
               <button
                 onClick={handleBookingAction}
                 className="pbmit-btn inline-flex items-center cursor-pointer heroButton"
@@ -235,7 +254,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-{/* Why choose us */}
+      {/* Why choose us */}
       <section className="section-xl about-sec-two mb-pd m-sp">
         <div className="lg:container mx-auto lg:px-4 px-2 pbmit-col-stretched-yes pbmit-col-left">
           <div className="flex gap-x-20 whychoose">
@@ -293,10 +312,16 @@ const Home = () => {
                     service workshop
                   </h2>
                   <div className="pbmit-heading-desc">
-                    We experiencing unusual vibration or poor handling while
-                    driving or have low type threads and other problems, it’s
-                    time to get your car tires checked. Maintaining and
-                    repairing electric cars is slightly different
+                    At <b>Auto Wrench</b>, we believe every vehicle deserves
+                    expert care and attention. Whether you're experiencing
+                    unusual vibrations, poor handling, brake issues, AC
+                    problems, or warning lights on your dashboard - our team is
+                    ready to diagnose and fix it with precision.
+                  <br />
+                   From routine
+                    maintenance to advanced diagnostics, we combine modern
+                    equipment with experienced hands to keep your vehicle
+                    performing at its best on Tanzanian roads.
                   </div>
                 </div>
 
@@ -306,7 +331,10 @@ const Home = () => {
                       <div className="pbmit-ihbox-headingicon">
                         <div className="pbmit-ihbox-icon">
                           <div className="pbmit-ihbox-icon-wrapper pbmit-icon-type-icon">
-                           <img src={Skilled}  className="pbmit-karsfix-icon h-10 w-10 pbmit-karsfix-icon-automobile" />
+                            <img
+                              src={Skilled}
+                              className="pbmit-karsfix-icon h-10 w-10 pbmit-karsfix-icon-automobile"
+                            />
                           </div>
                         </div>
                         <div className="pbmit-ihbox-contents">
@@ -314,8 +342,8 @@ const Home = () => {
                             Skilled technicians
                           </h2>
                           <div className="pbmit-heading-desc">
-                            We had technical knowledge and physical abilities,
-                            practice and learn Mechanics
+                            Experts deliver precise and reliable service every time.
+
                           </div>
                         </div>
                       </div>
@@ -327,8 +355,10 @@ const Home = () => {
                       <div className="pbmit-ihbox-headingicon">
                         <div className="pbmit-ihbox-icon">
                           <div className="pbmit-ihbox-icon-wrapper pbmit-icon-type-icon">
-                           
-                             <img src={Parts}  className="pbmit-karsfix-icon h-10 w-10 pbmit-karsfix-icon-automobile" />
+                            <img
+                              src={Parts}
+                              className="pbmit-karsfix-icon h-10 w-10 pbmit-karsfix-icon-automobile"
+                            />
                           </div>
                         </div>
                         <div className="pbmit-ihbox-contents">
@@ -336,8 +366,8 @@ const Home = () => {
                             Best quality parts
                           </h2>
                           <div className="pbmit-heading-desc">
-                            Choosing the right part for your auto can spell the
-                            difference service
+                            Premium, trusted parts for lasting performance and safety.
+
                           </div>
                         </div>
                       </div>
@@ -406,13 +436,6 @@ const Home = () => {
                 With a team of skilled mechanics and technicians, we specialize
                 in keeping your vehicle safe, reliable, and performing at its
                 best.{" "}
-              </p>
-              <p className="pbmit-text-editor text-[15px] leading-relaxed opacity-80">
-                Our mission is to provide top-quality automotive services with
-                honesty, transparency, and a customer-first approach. Whether
-                it’s a quick oil change, a complex engine repair, or a complete
-                vehicle inspection, we handle every job with precision and
-                care.{" "}
               </p>
             </div>
           </div>
@@ -638,10 +661,6 @@ const Home = () => {
           {/* Button aligned properly */}
           {/* CTA text + centered button */}
           <div className="lg:container mx-auto px-4 mt-10 text-center">
-            <p className="text-gray-700 text-base mb-4">
-              Book your service today and drive with confidence!
-            </p>
-
             <div className="flex justify-center">
               <button
                 onClick={handleBookingAction}
@@ -666,7 +685,8 @@ const Home = () => {
               <div className="pbmit-heading-subheading animation-style2">
                 <h4 className="pbmit-subtitle"> Pricing Table </h4>
                 <h2 className="pbmit-title">
-                  The best <span className="pbmit-global-color">pricing</span> to help you!
+                  The best <span className="pbmit-global-color">pricing</span>{" "}
+                  to help you!
                 </h2>
                 <div className="pbmit-heading-desc">
                   We use the most reliable methods to locate issues and correct
@@ -675,51 +695,63 @@ const Home = () => {
                 </div>
               </div>
             </div>
-      
+
             <div className="w-full xl:w-2/3">
               <div className="pbminfotech-ele-ptable-style-3">
                 <div className="pbmit-ptable-cols flex flex-wrap">
                   {loading ? (
                     <div className="w-full text-center py-10 font-bold uppercase tracking-widest">
-                        Loading Services...
+                      Loading Services...
                     </div>
                   ) : (
                     packages.map((item) => (
                       <div
                         key={item._id || item.name}
                         className={`pbmit-ptable-col w-full md:w-1/2 lg:w-1/3 ${
-                          item.name === "Standard Service Package" ? "pbmit-pricing-table-featured-col" : ""
+                          item.name === "Standard Service Package"
+                            ? "pbmit-pricing-table-featured-col"
+                            : ""
                         }`}
                       >
                         <div className="pbmit-pricing-table-box">
                           <div className="pbmit-feature-wrap">
-                            {item.name === "Standard Service Package" && <div className="pbmit-ptablebox-featured-w" />}
+                            {item.name === "Standard Service Package" && (
+                              <div className="pbmit-ptablebox-featured-w" />
+                            )}
                           </div>
-                          
+
                           <div className="pbmit-pricing-table-inner">
                             <div className="pbmit-head-wrap">
-                              <h3 className="pbminfotech-ptable-heading">{item.name}</h3>
+                              <h3 className="pbminfotech-ptable-heading">
+                                {item.name}
+                              </h3>
                               <div className="pbmit-price-wrapper">
                                 <div className="pbmit-ptable-price-w">
-                                  <div className="pbminfotech-ptable-symbol">TZS</div>
+                                  <div className="pbminfotech-ptable-symbol">
+                                    TZS
+                                  </div>
                                   <div className="pbminfotech-ptable-price">
                                     {Number(item.price).toLocaleString()}
                                   </div>
                                 </div>
                               </div>
                             </div>
-        
+
                             <div className="pbmit-ptable-lines">
-                              {item.features && item.features.map((feature, index) => (
-                                <div key={index} className="pbmit-ptable-line">
-                                  <Check
-                                    className="ti-check inline mr-2"
-                                    size={22}
-                                    strokeWidth={1.5}
-                                  />
-                                  {feature}
-                                </div>
-                              ))}
+                              {item.features &&
+                                item.features.map((feature, index) => (
+                                  <div
+                                    key={index}
+                                    className="pbmit-ptable-line"
+                                  >
+                                    <Check
+                                      className="ti-check inline mr-2"
+                                      size={22}
+                                      strokeWidth={1.5}
+                                    />
+                                    {feature}
+                                  </div>
+                                ))}
                               {item.note && (
                                 <div className="pbmit-ptable-recommendation mt-4 inline-block rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600">
                                   {item.note}
@@ -727,10 +759,12 @@ const Home = () => {
                               )}
                             </div>
                           </div>
-        
+
                           <div className="pbmit-price-btn">
                             <a href="#" className="pbmit-button">
-                              <span className="pbmit-button-text">Book Now</span>
+                              <span className="pbmit-button-text">
+                                Book Now
+                              </span>
                             </a>
                           </div>
                         </div>
@@ -750,7 +784,7 @@ const Home = () => {
           <div className="pbmit-heading-subheading text-center animation-style2">
             <h4 className="pbmit-subtitle"> How it Works </h4>
             <h2 className="pbmit-title">
-              Get amazing car service in <br /> 4 simple{" "}
+              Get Professional Car Service in <br /> 4 simple{" "}
               <span className="pbmit-global-color">steps</span>
             </h2>
           </div>
@@ -760,10 +794,9 @@ const Home = () => {
                 <div className="pbmit-ihbox-headingicon">
                   <div className="pbmit-ihbox-wrap">
                     <div className="pbmit-ihbox-contents">
-                      <h2 className="pbmit-element-title">Set schedule</h2>
+                      <h2 className="pbmit-element-title">Book Appointment</h2>
                       <div className="pbmit-heading-desc">
-                        You can book a car servicing directly from our website
-                        or by calling or WhatsApp
+                        Book your service through our website or via call at your convenience.
                       </div>
                     </div>
                     <div className="pbmit-ihbox-icon">
@@ -786,10 +819,9 @@ const Home = () => {
                 <div className="pbmit-ihbox-headingicon">
                   <div className="pbmit-ihbox-wrap">
                     <div className="pbmit-ihbox-contents">
-                      <h2 className="pbmit-element-title">Select Service</h2>
+                      <h2 className="pbmit-element-title">Choose Your Service</h2>
                       <div className="pbmit-heading-desc">
-                        Choose Your Service From Our Wide Range Of Offerings
-                        with affordable service price
+                        Choose the service you need from our wide range of repair and maintenance solutions.
                       </div>
                     </div>
                     <div className="pbmit-ihbox-icon">
@@ -812,10 +844,10 @@ const Home = () => {
                 <div className="pbmit-ihbox-headingicon">
                   <div className="pbmit-ihbox-wrap">
                     <div className="pbmit-ihbox-contents">
-                      <h2 className="pbmit-element-title">Get things done</h2>
+                      <h2 className="pbmit-element-title">Expert Service
+</h2>
                       <div className="pbmit-heading-desc">
-                        Will keep up the performance, increase the lifespan of
-                        batteries and even save maintenance
+                       Our skilled technicians inspect, diagnose, and service your vehicle with precision and care.
                       </div>
                     </div>
                     <div className="pbmit-ihbox-icon">
@@ -838,10 +870,9 @@ const Home = () => {
                 <div className="pbmit-ihbox-headingicon">
                   <div className="pbmit-ihbox-wrap">
                     <div className="pbmit-ihbox-contents">
-                      <h2 className="pbmit-element-title">Get your car</h2>
+                      <h2 className="pbmit-element-title">Drive with Confidence</h2>
                       <div className="pbmit-heading-desc">
-                        We offer pick-up and drop-off facility for your car, so
-                        you can continue with your schedule!
+                       After a final quality check, your vehicle is ready for a safe and smooth drive.
                       </div>
                     </div>
                     <div className="pbmit-ihbox-icon">
@@ -876,10 +907,11 @@ const Home = () => {
               </div>
               <div className="w-full md:w-2/3 lg:w-7/12">
                 <div className="pbmit-heading-subheading animation-style2">
-                  <h4 className="pbmit-subtitle"> Testimonials </h4>
+                  <h4 className="pbmit-subtitle"> CLIENT TESTIMONIALS </h4>
                   <h2 className="pbmit-title">
                     <span className="pbmit-global-color">Trusted</span> by
-                    thousands of <br /> people & companies.
+                   Drivers  Across <br /> Dar es-Salaam.
+
                   </h2>
                 </div>
               </div>
@@ -940,9 +972,7 @@ const Home = () => {
                       </div>
                       <div className="pbmit-auther-content">
                         <h3 className="pbminfotech-box-title">{t.name}</h3>
-                        <div className="pbminfotech-testimonial-detail">
-                          {t.role}
-                        </div>
+                       
                       </div>
                       <div className="pbmit-featured-img-wrapper">
                         <div className="pbmit-featured-wrapper">
@@ -961,8 +991,8 @@ const Home = () => {
           </div>
         </div>
       </section>
-      
-            <Modal
+
+      <Modal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onSubmit={() => {

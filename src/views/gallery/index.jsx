@@ -6,15 +6,16 @@ import "../../assets/css/cta.css";
 import ExperiencedStaff from "../../assets/images/experienced-staff.webp";
 import QualityProducts from "../../assets/images/quality-staff.webp";
 import BatteryReplacement from "../../assets/images/battery-replacement.webp";
-import { FaUserAlt, FaCog, FaCarAlt } from "react-icons/fa";
+
 
 import Skilled from "../../assets/images/ExpertMechanics.svg";
 import Parts from "../../assets/images/BestQualityParts.svg";
 import Experience from "../../assets/images/Experience.svg";
+
 const Gallery = () => {
   return (
     <>
-      {/* Breadcrumb */}
+
       <div className="pbmit-title-bar-wrapper workshop-bg">
         <div className="container mx-auto px-4">
           <div className="pbmit-title-bar-content ">
@@ -55,7 +56,7 @@ const Gallery = () => {
         </div>
       </div>
 
-      {/* Our Garage Highlights */}
+
       <section className="section mb-pd ">
         <div className="row pt-4 gallerypy lg:flex gap-x-8 lg:container mx-auto">
           {/* Expert Mechanics */}
@@ -64,8 +65,7 @@ const Gallery = () => {
               <div className="pbmit-ihbox-headingicon items-start space-x-4">
                 <div className="pbmit-ihbox-icon">
                   <div className="pbmit-ihbox-icon-wrapper pbmit-icon-type-icon text-4xl text-blue-600 p-4">
-                    {/* <FaUserAlt className="pbmit-karsfix-icon pbmit-karsfix-icon-worker" /> */}
-                    <img src={Skilled} alt="" />
+                    <img src={Skilled} alt="Expert Mechanics" />
                   </div>
                 </div>
                 <div className="pbmit-ihbox-contents">
@@ -73,9 +73,7 @@ const Gallery = () => {
                     Expert Mechanics
                   </h2>
                   <div className="pbmit-heading-desc text-gray-600 text-sm">
-                    Our garage is staffed with highly trained professionals who
-                    diagnose and repair vehicles quickly, accurately, and
-                    reliably.
+                    Our workshop is staffed with skilled professionals who diagnose and repair vehicles with precision and reliability.
                   </div>
                 </div>
               </div>
@@ -88,7 +86,7 @@ const Gallery = () => {
               <div className="pbmit-ihbox-headingicon items-start space-x-4">
                 <div className="pbmit-ihbox-icon">
                   <div className="pbmit-ihbox-icon-wrapper pbmit-icon-type-icon text-4xl text-blue-600 p-4">
-                   <img src={Parts} alt="" />
+                   <img src={Parts} alt="Genuine Parts" />
                   </div>
                 </div>
                 <div className="pbmit-ihbox-contents">
@@ -96,8 +94,7 @@ const Gallery = () => {
                     Genuine Parts
                   </h2>
                   <div className="pbmit-heading-desc text-gray-600 text-sm">
-                    We use only approved and high-quality spare parts to ensure
-                    long life, safety, and peak performance for your vehicle.
+                   We use approved, high-quality spare parts to ensure durability, safety, and optimal vehicle performance.
                   </div>
                 </div>
               </div>
@@ -110,7 +107,7 @@ const Gallery = () => {
               <div className="pbmit-ihbox-headingicon items-start space-x-4">
                 <div className="pbmit-ihbox-icon">
                   <div className="pbmit-ihbox-icon-wrapper pbmit-icon-type-icon text-4xl text-blue-600 p-4">
-                    <img src={Experience} alt="" />
+                    <img src={Experience} alt="Advanced Equipment" />
                   </div>
                 </div>
                 <div className="pbmit-ihbox-contents">
@@ -118,9 +115,7 @@ const Gallery = () => {
                     Advanced Equipment
                   </h2>
                   <div className="pbmit-heading-desc text-gray-600 text-sm">
-                    Our garage is fully equipped with modern tools and
-                    diagnostic systems to handle all types of servicing and
-                    complex repairs.
+                    Our garage is equipped with modern tools and diagnostic systems to handle servicing and complex repairs efficiently.
                   </div>
                 </div>
               </div>
@@ -129,266 +124,166 @@ const Gallery = () => {
         </div>
       </section>
 
-      {/* Garage */}
-      <section className="section-xl gallerym mb-pd m-spt">
-        <div className="lg:container px-2 mx-auto lg:flex lg:flex-wrap items-center">
-          <div className="w-full md:w-7/12">
-            <div className="pbmit-heading-subheading animation-style2">
-              <h4 className="pbmit-subtitle"> Our Garage </h4>
-              <h2 className="pbmit-title">
-                Trusted <span className="pbmit-global-color">auto care</span>{" "}
-                <br />
-                under one roof
-              </h2>
-            </div>
-          </div>
-          <div className="w-full md:w-5/12 text-right"></div>
-        </div>
 
+      <section className="section-xl mb-pd m-spt pb-12">
         <div className="lg:container mx-auto px-4">
-          <div className="pbmit-element-posts-wrapper row flex flex-wrap -mx-4">
-            {/* Tyre Services */}
-            <article className="pbmit-service-style-1 col-md-4 w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
-              <div className="pbminfotech-post-item bg-white rounded-lg shadow-md overflow-hidden">
-                <div className="pbmit-box-content-wrap">
-                  <div className="pbmit-service-image-wrapper relative">
-                    <div className="pbmit-featured-img-wrapper">
-                      <div className="pbmit-featured-wrapper">
-                        <img
-                          src={ExperiencedStaff}
-                          className="w-full h-auto object-cover"
-                          alt=""
-                        />
-                      </div>
-                    </div>
-                    <a
-                      className="pbmit-link absolute inset-0"
-                      href="service-details.html"
-                    />
-                  </div>
-                  <div className="pbmit-content-box p-4 galleryp">
-                    <div className="pbminfotech-box-number text-gray-400 text-xl font-bold">
-                      01
-                    </div>
-                    <div className="pbmit-serv-cat text-sm text-blue-600 my-2">
-                      Wheels & Tyres
-                    </div>
-                    <h3 className="pbmit-service-title text-lg font-semibold mb-2">
-                      Tyre Services
-                    </h3>
-                    <div className="pbmit-service-description text-gray-600 text-sm">
-                      Professional tyre replacement, balancing, rotation, and
-                      pressure checks for a safer and smoother drive.
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </article>
 
-            {/* Battery */}
-            <article className="pbmit-service-style-1 col-md-4 w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
-              <div className="pbminfotech-post-item bg-white rounded-lg shadow-md overflow-hidden">
-                <div className="pbmit-box-content-wrap">
-                  <div className="pbmit-service-image-wrapper relative">
-                    <div className="pbmit-featured-img-wrapper">
-                      <div className="pbmit-featured-wrapper">
-                        <img
-                          src={QualityProducts}
-                          className="w-full h-auto object-cover"
-                          alt=""
-                        />
-                      </div>
-                    </div>
-                    <a
-                      className="pbmit-link absolute inset-0"
-                      href="service-details.html"
-                    />
-                  </div>
-                  <div className="pbmit-content-box p-4 galleryp">
-                    <div className="pbminfotech-box-number text-gray-400 text-xl font-bold">
-                      02
-                    </div>
-                    <div className="pbmit-serv-cat text-sm text-blue-600 my-2">
-                      Electrical
-                    </div>
-                    <h3 className="pbmit-service-title text-lg font-semibold mb-2">
-                      Battery Testing & Replacement
-                    </h3>
-                    <div className="pbmit-service-description text-gray-600 text-sm">
-                      Complete battery testing, charging, and replacement to
-                      keep your car starting reliably every time.
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </article>
+          <div className="text-center mb-10">
+            <h2 className="text-4xl font-bold pbmit-title">
+              Our <span className="pbmit-global-color text-blue-600">Garage</span>
+            </h2>
+            <p className="text-gray-500 mt-2">Take a look inside our workspace</p>
+          </div>
 
-            {/* Diagnostics */}
-            <article className="pbmit-service-style-1 col-md-4 w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
-              <div className="pbminfotech-post-item bg-white rounded-lg shadow-md overflow-hidden">
-                <div className="pbmit-box-content-wrap">
-                  <div className="pbmit-service-image-wrapper relative">
-                    <div className="pbmit-featured-img-wrapper">
-                      <div className="pbmit-featured-wrapper">
-                        <img
-                          src={QualityProducts}
-                          className="w-full h-auto object-cover"
-                          alt=""
-                        />
-                      </div>
-                    </div>
-                    <a
-                      className="pbmit-link absolute inset-0"
-                      href="service-details.html"
-                    />
-                  </div>
-                  <div className="pbmit-content-box p-4 galleryp">
-                    <div className="pbminfotech-box-number text-gray-400 text-xl font-bold">
-                      03
-                    </div>
-                    <div className="pbmit-serv-cat text-sm text-blue-600 my-2">
-                      Diagnostics
-                    </div>
-                    <h3 className="pbmit-service-title text-lg font-semibold mb-2">
-                      Engine Diagnostics
-                    </h3>
-                    <div className="pbmit-service-description text-gray-600 text-sm">
-                      Advanced computer diagnostics to quickly identify engine
-                      and system issues before they become costly.
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </article>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-[250px]">
+
+            <div className="md:col-span-2 md:row-span-2 rounded-xl overflow-hidden shadow-lg group">
+              <img 
+                src={ExperiencedStaff} 
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                alt="Garage main view" 
+              />
+            </div>
+
+            <div className="rounded-xl overflow-hidden shadow-lg group">
+              <img 
+                src={QualityProducts} 
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                alt="Quality products" 
+              />
+            </div>
+            <div className="rounded-xl overflow-hidden shadow-lg group">
+              <img 
+                src={BatteryReplacement} 
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                alt="Battery replacement" 
+              />
+            </div>
+            <div className="md:col-span-2 md:row-span-2 rounded-xl overflow-hidden shadow-lg group">
+              <img 
+                src={ExperiencedStaff} 
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                alt="Garage main view" 
+              />
+            </div>
+            <div className="rounded-xl overflow-hidden shadow-lg group">
+              <img 
+                src={QualityProducts} 
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                alt="Quality products" 
+              />
+            </div>
+            <div className="rounded-xl overflow-hidden shadow-lg group">
+              <img 
+                src={BatteryReplacement} 
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                alt="Battery replacement" 
+              />
+            </div>
+
+            {/* Optional Wide Bottom Image (Spans all 3 columns) */}
+            {/* <div className="md:col-span-3 rounded-xl overflow-hidden shadow-lg group h-[250px] hidden md:block">
+              <img 
+                src={ExperiencedStaff} 
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                alt="Workshop panoramic" 
+              />
+            </div> */}
           </div>
         </div>
       </section>
-
-      {/* Team */}
-      <section className="section-xl mb-pd m-spt">
-        <div className="lg:container px-2 mx-auto lg:flex lg:flex-wrap items-center">
-          <div className="w-full md:w-7/12">
-            <div className="pbmit-heading-subheading animation-style2">
-              <h4 className="pbmit-subtitle"> Our Team </h4>
-              <h2 className="pbmit-title">
-                Meet our <span className="pbmit-global-color">expert</span>{" "}
-                <br />
-                technicians & specialists
-              </h2>
+      <section className="lg:mb-40 mb-20 mb-pd ">
+        <div className="container mx-auto px-0 xl:px-3">
+          <div className="appointment-two-bg bg-blue-600 p-6 rounded-lg">
+            <div className="row flex flex-wrap -mx-4 items-center">
+              <div className="col-md-12 col-xl-8 w-full xl:w-2/3 px-4 mb-6 xl:mb-0">
+                <div className="pbmit-heading-subheading white-text mb-3 animation-style4">
+                  <h4 className="pbmit-subtitle text-white text-lg mb-2">
+                    BOOK APPOINTMENT
+                  </h4>
+                  <h2 className="pbmit-title text-white text-3xl font-bold">
+                   Book your service today and 
+                   <br />
+                   drive with confidence!
+                  </h2>
+                </div>
+                <a
+                  className="pbmit-btn pbmit-btn-hover-white inline-flex items-center mt-4 px-6 py-3 border border-white text-white font-medium rounded hover:bg-white hover:text-blue-600"
+                  href="contact-us.html"
+                >
+                  <span className="pbmit-button-content-wrapper flex items-center">
+                    <span className="pbmit-button-icon mr-2">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="22.76"
+                        height="22.76"
+                        viewBox="0 0 22.76 22.76"
+                      >
+                        <title>black-arrow</title>
+                        <path
+                          d="M22.34,1A14.67,14.67,0,0,1,12,5.3,14.6,14.6,0,0,1,6.08,4.06,14.68,14.68,0,0,1,1.59,1"
+                          transform="translate(-0.29 -0.29)"
+                          fill="none"
+                          stroke="#000"
+                          strokeWidth={2}
+                        />
+                        <path
+                          d="M22.34,1a14.67,14.67,0,0,0,0,20.75"
+                          transform="translate(-0.29 -0.29)"
+                          fill="none"
+                          stroke="#000"
+                          strokeWidth={2}
+                        />
+                        <path
+                          d="M22.34,1,1,22.34"
+                          transform="translate(-0.29 -0.29)"
+                          fill="none"
+                          stroke="#000"
+                          strokeWidth={2}
+                        />
+                      </svg>
+                    </span>
+                    <span className="pbmit-button-text">Book Appointment</span>
+                  </span>
+                </a>
+              </div>
+              <div className="col-md-12 col-xl-4 w-full xl:w-1/3 px-4">
+                <div className="ihbox-style-area e-transform">
+                  <div className="pbmit-ihbox-style-7 bg-white p-4 rounded-lg shadow-md">
+                    <div className="pbmit-ihbox-box flex items-center">
+                      <div className="pbmit-icon-wrapper mr-4">
+                        <div className="pbmit-ihbox-icon">
+                          <div className="pbmit-ihbox-icon-wrapper pbmit-icon-type-icon text-3xl text-blue-600">
+                            <i className="pbmit-karsfix-icon pbmit-karsfix-icon-telephone" />
+                          </div>
+                        </div>
+                      </div>
+                      <h2 className="pbmit-element-title text-lg font-semibold">
+                        <a
+                          href="tel:++255 761 586 464"
+                          className="flex items-center text-gray-800 hover:text-blue-600"
+                        >
+                          <span className="pbmit-button-text mr-2">
+                            +255 761 586 464
+                          </span>
+                          <span className="pbmit-button-icon-wrapper">
+                            <span className="pbmit-button-icon">
+                              <i className="pbmit-base-icon-black-arrow-1" />
+                            </span>
+                          </span>
+                        </a>
+                      </h2>
+                    </div>
+                    <div className="pbmit-content-wrap mt-2" />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <div className="w-full md:w-5/12 text-right"></div>
-        </div>
-
-        <div className="lg:container mx-auto px-4">
-          <div className="pbmit-element-posts-wrapper row flex flex-wrap -mx-4">
-            <article className="pbmit-service-style-1 col-md-4 w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
-              <div className="pbminfotech-post-item bg-white rounded-lg shadow-md overflow-hidden">
-                <div className="pbmit-box-content-wrap">
-                  <div className="pbmit-service-image-wrapper relative">
-                    <div className="pbmit-featured-img-wrapper">
-                      <div className="pbmit-featured-wrapper">
-                        <img
-                          src={ExperiencedStaff}
-                          className="w-full h-auto object-cover"
-                          alt=""
-                        />
-                      </div>
-                    </div>
-                    <a className="pbmit-link absolute inset-0" href="#" />
-                  </div>
-                  <div className="pbmit-content-box p-4 galleryp">
-                    <div className="pbminfotech-box-number text-gray-400 text-xl font-bold">
-                      01
-                    </div>
-                    <div className="pbmit-serv-cat text-sm text-blue-600 my-2">
-                      Lead Mechanic
-                    </div>
-                    <h3 className="pbmit-service-title text-lg font-semibold mb-2">
-                      Senior Technician
-                    </h3>
-                    <div className="pbmit-service-description text-gray-600 text-sm">
-                      Over 10 years of experience in engine diagnostics,
-                      mechanical repairs, and customer service excellence.
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </article>
-
-            <article className="pbmit-service-style-1 col-md-4 w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
-              <div className="pbminfotech-post-item bg-white rounded-lg shadow-md overflow-hidden">
-                <div className="pbmit-box-content-wrap">
-                  <div className="pbmit-service-image-wrapper relative">
-                    <div className="pbmit-featured-img-wrapper">
-                      <div className="pbmit-featured-wrapper">
-                        <img
-                          src={ExperiencedStaff}
-                          className="w-full h-auto object-cover"
-                          alt=""
-                        />
-                      </div>
-                    </div>
-                    <a className="pbmit-link absolute inset-0" href="#" />
-                  </div>
-                  <div className="pbmit-content-box p-4 galleryp">
-                    <div className="pbminfotech-box-number text-gray-400 text-xl font-bold">
-                      02
-                    </div>
-                    <div className="pbmit-serv-cat text-sm text-blue-600 my-2">
-                      AC Specialist
-                    </div>
-                    <h3 className="pbmit-service-title text-lg font-semibold mb-2">
-                      Climate Control Expert
-                    </h3>
-                    <div className="pbmit-service-description text-gray-600 text-sm">
-                      Specializes in air conditioning systems, cooling
-                      performance, and full climate diagnostics.
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </article>
-
-            <article className="pbmit-service-style-1 col-md-4 w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
-              <div className="pbminfotech-post-item bg-white rounded-lg shadow-md overflow-hidden">
-                <div className="pbmit-box-content-wrap">
-                  <div className="pbmit-service-image-wrapper relative">
-                    <div className="pbmit-featured-img-wrapper">
-                      <div className="pbmit-featured-wrapper">
-                        <img
-                          src={QualityProducts}
-                          className="w-full h-auto object-cover"
-                          alt=""
-                        />
-                      </div>
-                    </div>
-                    <a className="pbmit-link absolute inset-0" href="#" />
-                  </div>
-                  <div className="pbmit-content-box p-4 galleryp">
-                    <div className="pbminfotech-box-number text-gray-400 text-xl font-bold">
-                      03
-                    </div>
-                    <div className="pbmit-serv-cat text-sm text-blue-600 my-2">
-                      Engine Specialist
-                    </div>
-                    <h3 className="pbmit-service-title text-lg font-semibold mb-2">
-                      Engine & Oil Expert
-                    </h3>
-                    <div className="pbmit-service-description text-gray-600 text-sm">
-                      Expert in engine servicing, oil systems, and preventive
-                      maintenance for long-lasting performance.
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </article>
-          </div>
         </div>
       </section>
-      <div className=" m-spt">
-
-      </div>
+      
     </>
   );
 };

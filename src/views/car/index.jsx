@@ -7,6 +7,7 @@ import {
   X,
   ChevronLeft,
   ChevronRight,
+  Car // Added for a fallback image
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import toast, { Toaster } from "react-hot-toast";
@@ -28,6 +29,15 @@ export default function Cars() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
+  // Helper to safely format image URLs pointing to the backend
+  const getImageUrl = (path) => {
+    if (!path) return "";
+    if (path.startsWith("http") || path.startsWith("data:")) return path;
+    const baseUrl = import.meta.env.VITE_SERVER_BASE?.replace(/\/$/, "") || "http://localhost:8000";
+    const cleanPath = path.replace(/^\//, "");
+    return `${baseUrl}${cleanPath}`;
+  };
+
   useEffect(() => {
     fetchGarage();
   }, []);
@@ -43,6 +53,7 @@ export default function Cars() {
       setLoading(false);
     }
   };
+
   const fetchMasterCars = async () => {
     try {
       setLoading(true);
@@ -61,11 +72,13 @@ export default function Cars() {
       setLoading(false);
     }
   };
+
   useEffect(() => {
     if (showForm) {
       fetchMasterCars();
     }
   }, [showForm, currentPage, search]);
+
   useEffect(() => {
     setCurrentPage(1);
   }, [search]);
@@ -92,7 +105,7 @@ export default function Cars() {
         handleCloseForm();
       }
     } catch (err) {
-      toast.error(err.response.data.message || "Something went wrong");
+      toast.error(err.response?.data?.message || "Something went wrong");
     } finally {
       fetchGarage();
       setFormSubmitting(false);
@@ -163,7 +176,7 @@ export default function Cars() {
                 className={`group relative p-8 rounded-2xl border transition-all bg-white border-gray-200`}
               >
                 <button
-                  onClick={() => handleDelete(index)}
+                  onClick={() => handleDelete(car._id)}
                   className="absolute bottom-6 right-6 p-2 text-gray-300 hover:text-red-500 transition-colors cursor-pointer"
                 >
                   <Trash2 size={18} />
@@ -178,7 +191,7 @@ export default function Cars() {
                   <div className="w-20 h-20 bg-gray-50 rounded-2xl flex items-center justify-center p-4">
                     {car.car?.logo && (
                       <img
-                        src={car.car.logo}
+                        src={getImageUrl(car.car.logo)}
                         alt={car.car.brandName}
                         className="w-full h-full object-contain"
                       />
@@ -245,7 +258,8 @@ export default function Cars() {
                           className="cursor-pointer max-h-25 group flex flex-col items-center border border-gray-300 rounded-xl p-5 hover:bg-gray-100 transition-all"
                         >
                           {brand.logo && (
-                            <img src={brand.logo} alt="" className="h-8 mb-2" />
+                            // Updated to use getImageUrl
+                            <img src={getImageUrl(brand.logo)} alt={brand.brandName} className="h-8 mb-2 object-contain" />
                           )}
                           <span className="text-[10px] font-black text-center">
                             {brand.brandName}
@@ -309,18 +323,37 @@ export default function Cars() {
                     className="w-full border border-gray-300 rounded-xl px-3 py-2.5 outline-none focus:ring-1 focus:ring-[#b4aa12]"
                   />
                   <div className="grid grid-cols-2 gap-4">
-                    {selectedBrand.models?.map((model, idx) => (
-                      <div
-                        key={idx}
-                        onClick={() => {
-                          setSelectedModel(model);
-                          setOverlayStep("gas");
-                        }}
-                        className="cursor-pointer text-center border border-gray-300 rounded-xl p-3 hover:bg-gray-100 transition-colors"
-                      >
-                        {model}
-                      </div>
-                    ))}
+                    {selectedBrand.models?.map((modelItem, idx) => {
+                      // Extract name and image properly for the Models Map
+                      const modelName = typeof modelItem === 'object' ? modelItem.modelName : modelItem;
+                      const modelImg = typeof modelItem === 'object' ? modelItem.image : null;
+
+                      return (
+                        <div
+                          key={`${selectedBrand._id}-${modelName}-${idx}`}
+                          onClick={() => {
+                            setSelectedModel(modelName);
+                            setOverlayStep("gas");
+                          }}
+                          className="cursor-pointer flex flex-col items-center justify-center text-center border border-gray-300 rounded-xl p-3 hover:bg-gray-100 transition-colors"
+                        >
+                          {modelImg ? (
+                            <img
+                              src={getImageUrl(modelImg)}
+                              alt={modelName}
+                              className="mb-2 h-12 w-auto object-contain"
+                              onError={(e) => {
+                                e.target.onerror = null;
+                                e.target.style.opacity = "0.2";
+                              }}
+                            />
+                          ) : (
+                            <Car className="mb-2 h-10 w-10 text-gray-300" />
+                          )}
+                          <span className="text-sm font-medium">{modelName}</span>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               )}

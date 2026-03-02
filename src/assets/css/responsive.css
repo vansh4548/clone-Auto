@@ -1001,10 +1001,18 @@ body {
   }
 }
 
+
+@media (max-width: 1024px){
+  pbmit-heading-subheading .pbmit-subtitle{
+    font-size: 16px;
+  }
+}
+
+
 @media (max-width: 1024px) {
   /*=== Section Title ===*/
   .pbmit-heading-subheading .pbmit-title {
-    font-size: 44px;
+    font-size: 42px;
     line-height: 46px;
     
   }
@@ -1721,11 +1729,39 @@ body {
   }
 }
 
+/* @media(max-width: 1020px){
+  .pbmit-ihbox-style-4 .pbmit-element-title{
+    font-size: 18px;
+  }
+} */
+
 @media (max-width: 575px) {
   /*=== Section Title ===*/
   .pbmit-heading-subheading .pbmit-title {
-    font-size: 32px;
+    font-size: 24px;
     line-height: 34px;
+  }
+  .pbmit-heading-subheading .pbmit-subtitle{
+    font-size: 13px;
+  }
+  .pbmit-ihbox-style-1 .pbmit-element-title{
+    font-size: 16px;
+  }
+  .pbmit-static-box-style-1 .pbmit-staticbox-title{
+    font-size: 16px;
+  }
+  .pbmit-service-style-1 .pbmit-service-title{
+    font-size: 17px;
+  }
+  .pbmit-service-style-2 .pbmit-service-title{
+    font-size: 16px;
+  }
+  .pbmit-ihbox-style-6 .pbmit-element-title{
+    font-size: 18px;
+  }
+
+  .pbmit-ihbox-style-4 .pbmit-element-title{
+    font-size: 16px;
   }
   .whychoose {
     display: block;
@@ -2441,6 +2477,10 @@ margin-top: 40px;}
   .aboutnew {
     padding-left: 0%;
     padding-right: 0%;
+  }
+    .hnew {
+    padding-left: 10px;
+    padding-right: 10px;
   }
   .gallerypy {
     padding-top: 80px !important;

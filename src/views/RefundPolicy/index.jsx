@@ -16,7 +16,7 @@ const RefundPolicy = () => {
               <div className="pbmit-breadcrumb">
                 <div className="pbmit-breadcrumb-inner">
                   <span><a href="/" className="home text-[#b4aa12] hover:underline">Auto Wrench</a></span>
-                  <span className="sep"></span>
+                  <span className="sep"><ChevronRight className="inline mx-2" size={18} /></span>
                   <span><span className="current-item">Refund Policy</span></span>
                 </div>
               </div>
@@ -33,54 +33,106 @@ const RefundPolicy = () => {
               <div className="mb-12 border-b border-gray-200 pb-8">
                 <h2 className="text-3xl font-bold text-gray-900 mb-4 aboutSize">Refund & Cancellation Policy</h2>
                 <p className="text-gray-700 text-lg leading-relaxed">
-                  We aim to resolve all disputes through fair inspection and mutual agreement. Below are our terms regarding cancellations and service refunds.
+                  At <strong>Auto Wrench Ltd</strong>, we are committed to providing professional and transparent service. This policy outlines how cancellations, refunds, and service concerns are handled.
                 </p>
               </div>
 
-              {/* Cancellations */}
+
               <div className="mb-12">
                 <h4 className="flex items-center gap-3 text-2xl font-bold text-gray-900 mb-6 sizeloginsub">
-                   Cancellations
+                   1. Appointment Cancellations & Rescheduling
                 </h4>
                 <ul className="space-y-4 text-gray-700 text-lg ml-2">
                   <li className="flex gap-2">
                     <span className="text-[#b4aa12] font-bold">•</span>
-                    <span><strong>Notice Period:</strong> We request at least 24 hours' notice for cancellations or rescheduling.</span>
+                    <span>Customers are requested to provide at least 24 hours’ notice for cancellations or rescheduling.</span>
                   </li>
                   <li className="flex gap-2">
                     <span className="text-[#b4aa12] font-bold">•</span>
-                    <span><strong>No-Show:</strong> Repeated "no-shows" without notice may require a non-refundable deposit for future bookings.</span>
+                    <span>Cancellations made less than 24 hours before the appointment may affect priority booking availability.</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="text-[#b4aa12] font-bold">•</span>
+                    <span>Repeated “no-shows” without prior notice may require a non-refundable deposit for future bookings.</span>
                   </li>
                 </ul>
               </div>
 
-              {/* Refunds */}
               <div className="mb-12">
                 <h4 className="flex items-center gap-3 text-2xl font-bold text-gray-900 mb-6 sizeloginsub">
-                 Refunds on Services
+                  2. Deposits
                 </h4>
                 <ul className="space-y-4 text-gray-700 text-lg ml-2">
                   <li className="flex gap-2">
                     <span className="text-[#b4aa12] font-bold">•</span>
-                    <span><strong>Labor:</strong> Labor charges are generally non-refundable once the service has been performed. If you are unsatisfied with the repair, we will re-inspect the vehicle and rectify any errors caused by our workmanship at no additional cost.</span>
+                    <span>Deposits paid for special-order parts or major repairs are generally non-refundable, as these items are procured specifically for your vehicle.</span>
                   </li>
                   <li className="flex gap-2">
                     <span className="text-[#b4aa12] font-bold">•</span>
-                    <span><strong>Parts:</strong> Parts that have been installed and used are non-refundable unless they are found to be defective. Returns for uninstalled "special order" parts may be subject to a restocking fee from our suppliers.</span>
+                    <span>In certain cases, a partial refund may be issued depending on supplier return policies.</span>
                   </li>
                 </ul>
               </div>
 
-              {/* Dispute Resolution */}
               <div className="mb-12">
                 <h4 className="flex items-center gap-3 text-2xl font-bold text-gray-900 mb-6 sizeloginsub">
-                  Dispute Resolution
+                  3. Refunds – Labor Charges
+                </h4>
+                <ul className="space-y-4 text-gray-700 text-lg ml-2">
+                  <li className="flex gap-2">
+                    <span className="text-[#b4aa12] font-bold">•</span>
+                    <span>Labor charges are non-refundable once the service has been completed.</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="text-[#b4aa12] font-bold">•</span>
+                    <span>If you are dissatisfied, you must notify us within 7 days of collection. We will re-inspect the vehicle and correct issues related to our workmanship at no additional labor cost.</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="mb-12">
+                <h4 className="flex items-center gap-3 text-2xl font-bold text-gray-900 mb-6 sizeloginsub">
+                  4. Refunds – Parts
+                </h4>
+                <ul className="space-y-4 text-gray-700 text-lg ml-2">
+                  <li className="flex gap-2">
+                    <span className="text-[#b4aa12] font-bold">•</span>
+                    <span>Installed and used parts are non-refundable unless confirmed defective under manufacturer warranty.</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="text-[#b4aa12] font-bold">•</span>
+                    <span>Special-order parts are generally non-returnable unless defective.</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="mb-12">
+                <h4 className="flex items-center gap-3 text-2xl font-bold text-gray-900 mb-6 sizeloginsub">
+                  5. Service Disputes
                 </h4>
                 <p className="text-gray-700 text-lg leading-relaxed">
-                  If you feel a refund is warranted due to a service failure, please contact our management
-                  team within 7 days of vehicle collection. We aim to resolve all disputes through fair
-                  inspection and mutual agreement.
+                  If you believe a service failure has occurred, contact us immediately to bring the vehicle back for inspection. We aim to resolve all concerns through fair inspection and mutual agreement in accordance with Tanzanian consumer standards.
                 </p>
+              </div>
+
+              <div className="mb-12">
+                <h4 className="flex items-center gap-3 text-2xl font-bold text-gray-900 mb-6 sizeloginsub">
+                  6. Vehicle Collection & Abandonment
+                </h4>
+                <p className="text-gray-700 text-lg leading-relaxed">
+                  Vehicles must be collected within 48 hours after completion notification. Storage charges may apply thereafter in accordance with applicable Tanzanian regulations.
+                </p>
+              </div>
+
+              <div className="mb-12">
+                <h4 className="flex items-center gap-3 text-2xl font-bold text-gray-900 mb-6 sizeloginsub">
+                  7. Limitation
+                </h4>
+                <p className="text-gray-700 text-lg mb-4">Refunds will not be issued for:</p>
+                <ul className="space-y-2 text-gray-700 text-lg ml-2">
+                  <li className="flex gap-2"><span className="text-[#b4aa12] font-bold">•</span><span>Damage caused by misuse or neglect after collection.</span></li>
+                  <li className="flex gap-2"><span className="text-[#b4aa12] font-bold">•</span><span>Repairs declined by the customer or pre-existing unrelated issues.</span></li>
+                </ul>
               </div>
 
             </div>

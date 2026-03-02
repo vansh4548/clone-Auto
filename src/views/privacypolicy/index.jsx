@@ -32,67 +32,106 @@ const PrivacyPolicy = () => {
               
               <div className="mb-12 border-b border-gray-200 pb-8 md:text-center lg:text-left">
                 <h2 className="text-4xl font-bold text-gray-900 mb-4">Privacy & Data Commitment</h2>
-                <p className="text-gray-600 text-lg">Effective Date: February 21, 2026</p>
+                <p className="text-gray-600 text-lg">Effective Date: February 2026</p>
               </div>
 
               <p className="text-gray-700 text-lg leading-relaxed mb-10">
-                At <strong>Auto Wrench</strong>, we value your privacy. This policy explains how we collect and use your
-                information when you book a service through our website.
+                At <strong>Auto Wrench Ltd</strong>, we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you use our website or book services with us.
               </p>
+
+              {/* Section 1 */}
               <div className="mb-12">
                 <h4 className="flex items-center gap-3 text-2xl font-bold text-gray-900 mb-6 sizeloginsub">
-                  Information We Collect
+                  1. Information We Collect
                 </h4>
+                <p className="text-gray-700 text-lg mb-4">When you book a service or contact us, we may collect:</p>
                 <ul className="space-y-4 text-gray-700 text-lg ml-2">
                   <li className="flex gap-2">
                     <span className="text-[#b4aa12] font-bold">•</span>
-                    <span><strong>Personal Details:</strong> Name, email address, and phone number.</span>
+                    <span><strong>Personal Information:</strong> Full name, phone number, and email address.</span>
                   </li>
                   <li className="flex gap-2">
                     <span className="text-[#b4aa12] font-bold">•</span>
-                    <span><strong>Vehicle Information:</strong> Make, model, year, and license plate/VIN.</span>
+                    <span><strong>Vehicle Information:</strong> Make, model, year, registration number / VIN, service history, and requested repairs.</span>
                   </li>
                   <li className="flex gap-2">
                     <span className="text-[#b4aa12] font-bold">•</span>
-                    <span><strong>Booking Data:</strong> Service history, requested repairs, and appointment dates.</span>
+                    <span><strong>Booking Information:</strong> Appointment date and time, service details, and communication records.</span>
                   </li>
                 </ul>
               </div>
 
+              {/* Section 2 */}
               <div className="mb-12">
                 <h4 className="flex items-center gap-3 text-2xl font-bold text-gray-900 mb-6 sizeloginsub">
-                  How We Use Your Information
+                  2. How We Use Your Information
                 </h4>
                 <ul className="space-y-4 text-gray-700 text-lg ml-2">
                   <li className="flex gap-2">
                     <span className="text-[#b4aa12] font-bold">•</span>
-                    <span>To process and confirm your service bookings.</span>
+                    <span>To confirm and manage service bookings.</span>
                   </li>
                   <li className="flex gap-2">
                     <span className="text-[#b4aa12] font-bold">•</span>
-                    <span>To provide updates on your vehicle’s repair status.</span>
+                    <span>To provide repair updates and service reminders.</span>
                   </li>
                   <li className="flex gap-2">
                     <span className="text-[#b4aa12] font-bold">•</span>
-                    <span>To maintain a service history for your vehicle's long-term maintenance.</span>
+                    <span>To maintain vehicle service records.</span>
                   </li>
                   <li className="flex gap-2">
                     <span className="text-[#b4aa12] font-bold">•</span>
-                    <span>To comply with Tanzanian regulatory requirements for automotive businesses.</span>
+                    <span>To improve our services and customer experience.</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="text-[#b4aa12] font-bold">•</span>
+                    <span>To comply with applicable Tanzanian business and regulatory requirements.</span>
                   </li>
                 </ul>
+                <p className="mt-6 text-gray-700 font-bold">We do not sell, rent, or trade your personal information to third parties.</p>
               </div>
 
-              {/* Security */}
+              {/* Section 3 */}
               <div className="mb-12">
                 <h4 className="flex items-center gap-3 text-2xl font-bold text-gray-900 mb-6 sizeloginsub">
-                  Data Security
+                  3. Data Sharing
+                </h4>
+                <p className="text-gray-700 text-lg mb-4">We may share limited information with:</p>
+                <ul className="space-y-4 text-gray-700 text-lg ml-2">
+                  <li className="flex gap-2"><span className="text-[#b4aa12] font-bold">•</span><span>Authorized parts suppliers</span></li>
+                  <li className="flex gap-2"><span className="text-[#b4aa12] font-bold">•</span><span>Diagnostic software providers</span></li>
+                  <li className="flex gap-2"><span className="text-[#b4aa12] font-bold">•</span><span>Payment processing partners</span></li>
+                </ul>
+                <p className="mt-4 text-gray-700 text-lg">This is strictly for completing your repair or service.</p>
+              </div>
+
+              {/* Section 4 */}
+              <div className="mb-12">
+                <h4 className="flex items-center gap-3 text-2xl font-bold text-gray-900 mb-6 sizeloginsub">
+                  4. Data Security
                 </h4>
                 <p className="text-gray-700 text-lg leading-relaxed">
-                  We implement industry-standard security measures to protect your data. We do not sell or
-                  rent your personal information to third parties. We only share data with authorized service
-                  partners (e.g., parts suppliers or diagnostic software providers) when necessary to
-                  complete your repair.
+                  We implement reasonable administrative and technical safeguards to protect your information from unauthorized access, misuse, or disclosure.
+                </p>
+              </div>
+
+              {/* Section 5 */}
+              <div className="mb-12">
+                <h4 className="flex items-center gap-3 text-2xl font-bold text-gray-900 mb-6 sizeloginsub">
+                  5. Your Rights
+                </h4>
+                <p className="text-gray-700 text-lg leading-relaxed">
+                  You may request access, correction, or deletion of your personal data by contacting us directly.
+                </p>
+              </div>
+
+              {/* Section 6 */}
+              <div className="mb-12">
+                <h4 className="flex items-center gap-3 text-2xl font-bold text-gray-900 mb-6 sizeloginsub">
+                  6. Governing Law
+                </h4>
+                <p className="text-gray-700 text-lg leading-relaxed">
+                  This Privacy Policy is governed by the laws of the United Republic of Tanzania.
                 </p>
               </div>
 
